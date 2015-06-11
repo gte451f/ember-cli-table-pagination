@@ -1,0 +1,11 @@
+<div class="row">
+    {{partial "pager/table/widgets/per-page"}}
+    {{partial "pager/table/widgets/quick-search"}}
+    <div class="col-xs-5">
+
+    </div>
+
+    <div class="col-xs-3">
+        {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+    </div>
+</div>

@@ -35,12 +35,25 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "remote pagination",
+    "table",
+    "ember data"
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "ember-cli-babel": "^5.0.0",
+    "ember-cli-pagination": "^0.6.6"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
-  }
+    "configPath": "tests/dummy/config",
+    "after": [
+      "ember-cli-pagination"
+    ]
+  },
+  "maintainers": [
+    {
+      "name": "gte451f",
+      "email": "jim.jenkins.iv@gmail.com"
+    }
+  ]
 }

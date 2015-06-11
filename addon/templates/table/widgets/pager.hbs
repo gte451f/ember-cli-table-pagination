@@ -1,0 +1,10 @@
+<div class="col-xs-2">
+    <label>Per Page:</label>
+    {{view "select"
+    content=pageList
+    optionValuePath="content"
+    optionLabelPath="content"
+    value=perPage
+    class="form-control input-sm"}}
+    <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
+</div>

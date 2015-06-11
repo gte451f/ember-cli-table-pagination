@@ -1,4 +1,5 @@
-# Ember-cli-table-pagination
+# ember-cli-table-pagination
+makes it easy to build remote backed tables w/ ember-cli-pagination and bootstrap
 
 This README outlines the details of collaborating on this Ember addon.
 
