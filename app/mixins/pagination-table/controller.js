@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import Column from 'ember-cli-table-pagination/lib/column';
+import Column from 'ember-cli-pagination/mixins/pagination-table/column';
 
 /**
  * store shared logic to run pager logic
