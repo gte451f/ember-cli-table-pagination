@@ -1,0 +1,13 @@
+<div class="col-xs-5">
+    {{#if quickSearchField}}
+        <label>Search: <br/>
+            <div class="input-group input-group-sm">
+                {{input type="text" class="form-control" value=quickSearch}}
+                <span class="input-group-btn">
+                <button {{action 'runQuickSearch'}}
+                        class="btn btn-primary btn-flat">{{fa-icon 'search'}}</button>
+            </span>
+            </div>
+        </label>
+    {{/if}}
+</div>

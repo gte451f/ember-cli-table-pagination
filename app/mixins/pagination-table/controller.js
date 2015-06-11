@@ -1,5 +1,23 @@
 import Ember from 'ember';
-import Column from 'ember-cli-pagination/mixins/pagination-table/column';
+
+var Column = Ember.Object.extend({
+
+    //the friendly name
+    displayName: null,
+
+    //the model property
+    fieldName: null,
+
+    //list this field in the search component?
+    enableSearch: true,
+
+    //list this field in the main listing?
+    enableDisplay: true,
+
+    //order in which to display the fields
+    order: 0
+});
+
 
 /**
  * store shared logic to run pager logic
