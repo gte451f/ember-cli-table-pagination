@@ -59,8 +59,12 @@ export default Ember.Mixin.create({
         Column.create({'displayName': '#', 'fieldName': 'id'})
     ],
 
+    // display the table title if there is one
     tableTitle: 'set tableTitle in the controller',
 
+    // where should the default open action link-to?
     linkPath: "set linkPath in the controller",
+
+    // not sure what this is
     createPath: "set createPath in the controller"
 });

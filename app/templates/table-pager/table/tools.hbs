@@ -1,11 +1,10 @@
 <div class="row">
-    {{partial "pager/table/widgets/per-page"}}
-    {{partial "pager/table/widgets/quick-search"}}
-    <div class="col-xs-5">
-
+    <div class="col-xs-7">
+        {{partial "table-pager/table/widgets/quick-search"}}
+        {{partial "table-pager/table/widgets/per-page"}}
     </div>
 
-    <div class="col-xs-3">
+    <div class="col-xs-5">
         {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
     </div>
 </div>
