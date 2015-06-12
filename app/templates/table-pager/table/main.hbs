@@ -1,5 +1,7 @@
 <div class="box box-primary box-top">
-    {{ partial "table-pager/table/header"}}
+    {{#if tableTitle}}
+        {{ partial "table-pager/table/header"}}
+    {{/if}}
     <div class="box-body">
         <div role="grid" class="form-inline">
             {{partial "table-pager/table/tools"}}

@@ -4,8 +4,10 @@
         {{#each col in columns}}
             <td>{{pager-loop record col}}</td>
         {{/each}}
-        <td>
-            {{#link-to linkPath record class="btn btn-primary btn-xs pull-right"}} Open {{/link-to}}
+        <td class="clearfix">
+            {{#link-to linkPath record class="btn btn-primary btn-xs pull-right"}} 
+                {{fa-icon 'folder-open'}} 
+            {{/link-to}}
         </td>
     </tr>
 {{else}}
