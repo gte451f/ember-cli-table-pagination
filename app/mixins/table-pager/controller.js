@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
     ],
 
     // display the table title if there is one
-    tableTitle: 'set tableTitle in the controller',
+    tableTitle: 'set tableTitle in controller to NULL to hide otherwise set this to your table title',
 
     // where should the default open action link-to?
     linkPath: "set linkPath in the controller",

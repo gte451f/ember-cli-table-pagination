@@ -43,6 +43,7 @@
   "dependencies": {
     "ember-cli-babel": "^5.0.0",
     "ember-cli-pagination": "^0.6.6",
+    "ember-cli-font-awesome": "0.0.9",
     "ember-cli-htmlbars": "0.7.6"
   },
   "ember-addon": {
