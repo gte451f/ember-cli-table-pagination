@@ -59,6 +59,11 @@ export default Ember.Mixin.create({
         Column.create({'displayName': '#', 'fieldName': 'id'})
     ],
 
+    // bootstrap or adminlte specific classes
+    // color default|success|primary|warning|danger|info
+    box: 'default',
+    button: 'default',
+
     // display the table title if there is one
     tableTitle: 'set tableTitle in controller to NULL to hide otherwise set this to your table title',
 
