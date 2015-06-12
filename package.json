@@ -28,9 +28,10 @@
     "ember-cli-qunit": "0.3.13",
     "ember-cli-uglify": "^1.0.1",
     "ember-data": "1.0.0-beta.18",
+    "ember-disable-prototype-extensions": "^1.0.0",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.2",
-    "ember-disable-prototype-extensions": "^1.0.0",
+    "ember-cli-font-awesome": "0.0.9",
     "ember-try": "0.0.6"
   },
   "keywords": [
@@ -43,13 +44,13 @@
   "dependencies": {
     "ember-cli-babel": "^5.0.0",
     "ember-cli-pagination": "^0.6.6",
-    "ember-cli-font-awesome": "0.0.9",
     "ember-cli-htmlbars": "0.7.6"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "after": [
-      "ember-cli-pagination"
+      "ember-cli-pagination",
+      "ember-cli-font-awesome"
     ]
   },
   "maintainers": [
