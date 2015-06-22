@@ -54,6 +54,14 @@ export default Ember.Mixin.create({
         field: null
     }),
 
+    quickSearchChanged: function(){
+        var self = this;
+        clearTimeout(this.get('keyTimer'));
+        this.set('keyTimer', setTimeout(function(){
+            self.send('runQuickSearch');
+        }, 600));
+    }.observes('quickSearch'),
+
     //load pager specific variables
     columns: [
         Column.create({'displayName': '#', 'fieldName': 'id'})

@@ -80,8 +80,7 @@ export default Ember.Mixin.create(RouteMixin, {
     fetch: function () {
         var controller = this.controller;
         var name = controller.get('quickSearchField');
-        // auto add wildcard for remote API
-        var value = '*' + controller.get('quickSearch') + '*';
+        var value = controller.get('quickSearch');
 
         var params = {
             page: controller.get('page'),
@@ -90,8 +89,7 @@ export default Ember.Mixin.create(RouteMixin, {
         };
 
         if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
-            params[name] = value;
-            params.page = 1;
+            params[name] = '*' + value + '*';
         }
 
         this.findPaged(this.modelName, params).then(function (items) {
