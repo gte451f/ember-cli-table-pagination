@@ -1,6 +1,6 @@
 <thead>
 <tr role="row">
-    {{#each item in columns}}
+    {{#each columns as |item|}}
         <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
             {{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort"></i>
         </th>
@@ -14,7 +14,7 @@
 
 <tfoot>
 <tr>
-    {{#each item in columns}}
+    {{#each columns as |item|}}
         <th rowspan="1" colspan="1">
             {{item.displayName}}
         </th>
