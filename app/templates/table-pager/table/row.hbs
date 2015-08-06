@@ -1,7 +1,7 @@
 <tbody>
-{{#each record in this}}
+{{#each this as |record|}}
     <tr>
-        {{#each col in columns}}
+        {{#each columns as |col|}}
             <td>{{pager-loop record col}}</td>
         {{/each}}
         <td class="clearfix">

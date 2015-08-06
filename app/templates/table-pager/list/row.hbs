@@ -1,7 +1,7 @@
-{{#each record in this}}
+{{#each this as |record|}}
     <li>
     <span class="text">
-        {{#each col in columns}}
+        {{#each columns as |col|}}
             {{pager-loop record col}}
         {{/each}}
     </span>
