@@ -39,6 +39,7 @@ export default Ember.Mixin.create(RouteMixin, {
             field = field.underscore();
             var sortField = this.controller.get('sortField');
             var newSortOrder, sortOrder = this.controller.get('sortOrder');
+            var queryWith = this.controller.get('with');
 
             //sortField hasn't changed so we toggle sortOrder
             //check for the descending and ascending versions
@@ -81,11 +82,13 @@ export default Ember.Mixin.create(RouteMixin, {
         var controller = this.controller;
         var name = controller.get('quickSearchField');
         var value = controller.get('quickSearch');
+        var queryWith = controller.get('queryWith');
 
         var params = {
             page: controller.get('page'),
             perPage: controller.get('perPage'),
-            sortField: controller.get('sortField')
+            sortField: controller.get('sortField'),
+            with: queryWith
         };
 
         if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {

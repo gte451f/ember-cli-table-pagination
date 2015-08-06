@@ -24,7 +24,7 @@ var Column = Ember.Object.extend({
  */
 export default Ember.Mixin.create({
     // setup our query params including custom sortField value
-    queryParams: ["page", "perPage", "sortField"],
+    queryParams: ["page", "perPage", "sortField", "with"],
 
     pageList: [
         5, 10, 25, 50, 100, 250, 500
@@ -39,6 +39,7 @@ export default Ember.Mixin.create({
     //logic to handle sorting a list
     sortField: 'id',
     sortOrder: '', // a - means desc
+    with: '',
 
     // disabled by default
     // set these in the controller to enable and bind to a specific field
