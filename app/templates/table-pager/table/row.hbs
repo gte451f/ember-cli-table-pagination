@@ -2,7 +2,7 @@
 {{#each model as |record|}}
     <tr>
         {{#each columns as |col|}}
-            <td>{{pager-loop record col}}</td>
+            <td>{{pager-loop model=record field=col}}</td>
         {{/each}}
         <td class="clearfix">
             {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}

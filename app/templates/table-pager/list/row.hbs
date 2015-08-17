@@ -2,7 +2,7 @@
     <li>
     <span class="text">
         {{#each columns as |col|}}
-            {{pager-loop record col}}
+            {{pager-loop model=record field=col}}
         {{/each}}
     </span>
         <div class="tools">
