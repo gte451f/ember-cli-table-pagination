@@ -1,11 +1,10 @@
 <div class="pull-right">
     <label>
-        {{x-select
-        content=pageList
-        optionValuePath="content"
-        optionLabelPath="content"
-        value=perPage
-        class="form-control input-sm"}}
+        {{#x-select value=perPage class="form-control input-sm"}}
+            {{#each pageList as |item|}}
+                {{#x-option value=item}}{{item}}{{/x-option}}
+            {{/each}}
+        {{/x-select}}
     </label>
     <button {{action 'refresh'}} class="btn btn-sm btn-{{button}}">{{fa-icon 'refresh'}}</button>
 </div>
