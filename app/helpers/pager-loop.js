@@ -7,7 +7,7 @@ import Ember from 'ember';
  * @param field
  * @returns {*}
  */
-export function pagerLoop(model, field) {
-  return model.get(field.fieldName);
+export function pagerLoop(params, namedArgs) {
+  return namedArgs.model.get(namedArgs.field.fieldName);
 }
 export default Ember.Helper.helper(pagerLoop);
