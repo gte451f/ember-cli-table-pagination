@@ -8,7 +8,6 @@ import Ember from 'ember';
  * @returns {*}
  */
 export function pagerLoop(model, field) {
-    return model.get(field.fieldName);
+  return model.get(field.fieldName);
 }
-
-export default Ember.Handlebars.makeBoundHelper(pagerLoop);
+export default Ember.Helper.helper(pagerLoop);

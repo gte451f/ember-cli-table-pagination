@@ -70,7 +70,7 @@ export default Ember.Mixin.create(RouteMixin, {
         //will use transitionTo by default
         open: function (record) {
             var controller = this.controller;
-            console.log(controller.get('modelName'));
+            //console.log(controller.get('modelName'));
             //my save function
             this.controller.transitionToRoute(controller.get('modelName'), record);
 
