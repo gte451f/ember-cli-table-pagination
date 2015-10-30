@@ -1,28 +1,34 @@
 import Ember from 'ember';
-
-var Column = Ember.Object.extend({
-
-    //the friendly name
-    displayName: null,
-
-    //the model property
-    fieldName: null,
-
-    //list this field in the search component?
-    enableSearch: true,
-
-    //list this field in the main listing?
-    enableDisplay: true,
-
-    //order in which to display the fields
-    order: 0
-});
-
+import Column from './column';
 
 /**
  * store shared logic to run pager logic
  */
 export default Ember.Mixin.create({
+
+    /**
+     * This needs to be dynamic meta programming
+     * for adding observers on each filter per column
+     */
+    configureFilterObservers: function() {
+      var self = this;
+      var observerDefinitions = {};
+      var filterParams = {};
+      this.get('columns').forEach(function (column, index) {
+        var name = 'observer_' + column.get('serverColumnName');
+        observerDefinitions[name] = function() {
+            var that = this;
+            clearTimeout(this.get('keyTimer'+name));
+            this.set('keyTimer'+name, setTimeout(function(){
+              that.send('applyFilter', column.get('serverColumnName'), column.get('filterValue'));
+            }, 600));
+        }.observes('columns.'+index+'.filterValue');
+        filterParams[column.get('serverColumnName')] = null;
+      });
+      self.reopen(observerDefinitions);
+      self.set('filterParams', filterParams);
+    }.on('init'),
+
     // setup our query params including custom sortField value
     queryParams: ["page", "perPage", "sortField", "with"],
 
@@ -80,5 +86,11 @@ export default Ember.Mixin.create({
     linkPath: "set linkPath in the controller",
 
     // not sure what this is
-    createPath: "set createPath in the controller"
+    createPath: "set createPath in the controller",
+
+    actions: {
+      toggleFilter: function(column) {
+        Ember.$('#filter-' + column.fieldName).toggleClass('hidden');
+      }
+    }
 });

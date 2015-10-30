@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
+const {underscore} = Ember.String;
 
 export default Ember.Mixin.create(RouteMixin, {
     /**
@@ -56,6 +57,13 @@ export default Ember.Mixin.create(RouteMixin, {
             this.controller.set('sortField', this.controller.get('sortOrder') + field);
         },
 
+        applyFilter: function(fieldName, filterValue) {
+          var params = this.controller.get('filterParams');
+          params[fieldName] = filterValue;
+          this.controller.set('filterParams', params);
+          this.fetch();
+        },
+
         refresh: function () {
             this.fetch();
         },
@@ -93,6 +101,14 @@ export default Ember.Mixin.create(RouteMixin, {
 
         if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
             params[name] = '*' + value + '*';
+        }
+
+        let filterParams = this.controller.get('filterParams')
+        for(let fieldName in filterParams) {
+          let filterValue = filterParams[fieldName];
+          if (Ember.typeOf(filterValue) !== 'null' && Ember.isPresent(filterValue)) {
+            params[underscore(fieldName)] = '*' + filterValue + '*';
+          }
         }
 
         this.findPaged(this.modelName, params).then(function (items) {
