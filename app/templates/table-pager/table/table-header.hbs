@@ -2,7 +2,18 @@
 <tr role="row">
     {{#each columns as |item|}}
         <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
-            {{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort"></i>
+          {{#if item.enableSearch }}
+          <a {{action 'toggleFilter' item}}><i class="fa fa-search"></i></a>
+          {{/if}}
+          {{item.displayName}}
+          <a {{action 'sortField' item.fieldName}}>
+            <i class="fa fa-sort"></i>
+          </a>
+          <div class="row hidden" id="filter-{{item.fieldName}}">
+            <div class="col-md-12">
+              {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
+            </div>
+          </div>
         </th>
     {{/each}}
 
