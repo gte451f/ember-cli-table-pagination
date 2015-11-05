@@ -24,8 +24,9 @@ export default Ember.Mixin.create(RouteMixin, {
     currentRoute: 'set currentRoute in the route',
 
     actions: {
-        canary: function () {
-            console.log('canary in the coal mine!');
+        // action called from the button at the right of the number per page list
+        refresh: function () {
+            this.refresh();
         },
 
         /**
@@ -40,7 +41,6 @@ export default Ember.Mixin.create(RouteMixin, {
             field = field.underscore();
             var sortField = this.controller.get('sortField');
             var newSortOrder, sortOrder = this.controller.get('sortOrder');
-            var queryWith = this.controller.get('with');
 
             //sortField hasn't changed so we toggle sortOrder
             //check for the descending and ascending versions
@@ -57,21 +57,28 @@ export default Ember.Mixin.create(RouteMixin, {
             this.controller.set('sortField', this.controller.get('sortOrder') + field);
         },
 
+        /**
+         * sets a new param on the filterParams property
+         * of the controller and fetch results with that
+         *
+         * It always return to page 1, because if the table
+         * is in page 3 and set a filter with 1 result,
+         * that page is empty
+         */
         applyFilter: function(fieldName, filterValue) {
           var params = this.controller.get('filterParams');
           params[fieldName] = filterValue;
           this.controller.set('filterParams', params);
-          this.fetch();
-        },
-
-        refresh: function () {
-            this.fetch();
+          if (this.controller.get('page') !== 1) {
+            this.controller.set('page', 1);
+          }
+          this.refresh();
         },
 
 
         // take the supplied search field and ask the api to filter by it
         runQuickSearch: function () {
-            this.fetch();
+            this.refresh();
         },
 
         //general function to open a record from a paginated list
@@ -85,41 +92,43 @@ export default Ember.Mixin.create(RouteMixin, {
         }
     },
 
-    //refresh the current route by rebuilding based on existing pager values
-    fetch: function () {
+    getAllParams: function(params) {
         var controller = this.controller;
-        var name = controller.get('quickSearchField');
-        var value = controller.get('quickSearch');
-        var queryWith = controller.get('queryWith');
-
-        var params = {
+        var allParams = {};
+        if (Ember.isPresent(controller)) {
+          var name = controller.get('quickSearchField');
+          var value = controller.get('quickSearch');
+          var queryWith = controller.get('queryWith');
+          allParams = Ember.merge(params, {
             page: controller.get('page'),
             perPage: controller.get('perPage'),
             sortField: controller.get('sortField'),
             with: queryWith
-        };
+          });
 
-        if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
+          if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
             params[name] = '*' + value + '*';
-        }
-
-        let filterParams = this.controller.get('filterParams')
-        for(let fieldName in filterParams) {
-          let filterValue = filterParams[fieldName];
-          if (Ember.typeOf(filterValue) !== 'null' && Ember.isPresent(filterValue)) {
-            params[underscore(fieldName)] = '*' + filterValue + '*';
           }
-        }
 
-        this.findPaged(this.modelName, params).then(function (items) {
-            controller.set('model', items);
-        });
+          let filterParams = this.controller.get('filterParams');
+          for(let fieldName in filterParams) {
+            let filterValue = filterParams[fieldName];
+            if (Ember.typeOf(filterValue) !== 'null' && Ember.isPresent(filterValue)) {
+              params[underscore(fieldName)] = '*' + filterValue + '*';
+            }
+          }
+        } else {
+          allParams = params;
+        }
+        return allParams;
     },
 
+    /**
+     * check the params passed in the route to introduce
+     * new params to the findPaged method
+     */
     model: function (params) {
-        //console.log('model:params here');
-        //console.log(params);
-        return this.findPaged(this.modelName, params);
+      return this.findPaged(this.modelName, this.getAllParams(params));
     },
 
     //extend to pass route values onto controller for possible use
