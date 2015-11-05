@@ -90,7 +90,7 @@ export default Ember.Mixin.create({
 
     actions: {
       toggleFilter: function(column) {
-        Ember.$('#filter-' + column.fieldName).toggleClass('hidden');
+        column.set('showingFilter', !column.get('showingFilter'));
       }
     }
 });

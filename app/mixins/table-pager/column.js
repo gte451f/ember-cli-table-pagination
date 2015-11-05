@@ -21,6 +21,9 @@ export default Ember.Object.extend({
     //order in which to display the fields
     order: 0,
 
+    // show the quick filter or not
+    showingFilter: false,
+
     // value on the filter for this column
     filterValue: null,
 

@@ -9,7 +9,7 @@
           <a {{action 'sortField' item.fieldName}}>
             <i class="fa fa-sort"></i>
           </a>
-          <div class="row hidden" id="filter-{{item.fieldName}}">
+          <div class="row {{if item.showingFilter '' 'hidden'}}">
             <div class="col-md-12">
               {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
             </div>
