@@ -42,6 +42,10 @@ export default Ember.Mixin.create({
     perPageBinding: "content.perPage",
     totalPagesBinding: "content.totalPages",
 
+    observingPerPage: function() {
+      this.set('page', 1);
+    }.observes('perPage'),
+
     //logic to handle sorting a list
     sortField: 'id',
     sortOrder: '', // a - means desc
