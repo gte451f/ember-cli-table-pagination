@@ -78,7 +78,10 @@ export default Ember.Mixin.create(RouteMixin, {
 
         // take the supplied search field and ask the api to filter by it
         runQuickSearch: function () {
-            this.refresh();
+          if (this.controller.get('page') !== 1) {
+            this.controller.set('page', 1);
+          }
+          this.refresh();
         },
 
         //general function to open a record from a paginated list
