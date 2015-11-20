@@ -69,7 +69,10 @@ export default Ember.Mixin.create({
         var self = this;
         clearTimeout(this.get('keyTimer'));
         this.set('keyTimer', setTimeout(function(){
-            self.send('runQuickSearch');
+            try {
+              self.send('runQuickSearch');
+            } catch (e) {
+            }
         }, 600));
     }.observes('quickSearch'),
 
