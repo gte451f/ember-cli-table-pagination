@@ -6,7 +6,7 @@
           <a {{action 'toggleFilter' item}}><i class="fa fa-search"></i></a>
           {{/if}}
           {{item.displayName}}
-          <a {{action 'sortField' item.fieldName}}>
+          <a {{action 'sortField' item.serverColumnName}}>
             <i class="fa fa-sort"></i>
           </a>
           <div class="row {{if item.showingFilter '' 'hidden'}}">

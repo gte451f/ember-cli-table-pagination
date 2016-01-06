@@ -101,7 +101,7 @@ export default Ember.Mixin.create(RouteMixin, {
         if (Ember.isPresent(controller)) {
           var name = controller.get('quickSearchField');
           var value = controller.get('quickSearch');
-          var queryWith = controller.get('queryWith');
+          var queryWith = controller.get('with');
           allParams = Ember.merge(params, {
             page: controller.get('page'),
             perPage: controller.get('perPage'),
