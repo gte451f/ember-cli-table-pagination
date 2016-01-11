@@ -30,6 +30,9 @@ export default Ember.Object.extend({
     // filter field name in case of a conflict, i.e. id (when joined to another table)
     filterFieldName: null,
 
+    // To make a column not searchable/sortable
+    disableServerInteractions: false,
+
     serverColumnName: computed('fieldName', 'filterFieldName', function() {
       if (Ember.isPresent(this.get('filterFieldName'))) {
         return this.get('filterFieldName');
