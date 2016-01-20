@@ -12,7 +12,7 @@ export default Ember.Mixin.create(RouteMixin, {
             refreshModel: true
         },
         page: {
-            refreshModel: true
+            refreshModel: false
         }
     },
 
