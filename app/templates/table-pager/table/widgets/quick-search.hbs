@@ -1,10 +1,11 @@
 {{#if quickSearchField}}
     <label style="margin-right: 10px;">
-        <div class="input-group input-group-sm">
-            {{input type="text" class="form-control" value=quickSearch}}
+        <div class="input-group input-group-sm" style="width: 250px;">
+            {{input type="text" class="form-control quickSearchInput" value=quickSearch}}
             <span class="input-group-btn">
-                <button {{action 'runQuickSearch'}}
-                        class="btn btn-primary btn-flat">{{fa-icon 'search'}}</button>
+                <button {{action 'runQuickSearch'}} class="btn btn-primary btn-flat">
+                    {{fa-icon 'search'}}
+                </button>
             </span>
         </div>
     </label>
