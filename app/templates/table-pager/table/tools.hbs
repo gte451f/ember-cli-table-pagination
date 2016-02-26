@@ -5,6 +5,11 @@
     </div>
 
     <div class="col-xs-5">
-        {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+        {{!page-numbers currentPage=page totalPages=totalPages numPagesToShow=3 showFL=true}}
+        {{pagination-pager
+            count=totalPages
+            current=page
+            change='changePage'
+            }}
     </div>
 </div>
