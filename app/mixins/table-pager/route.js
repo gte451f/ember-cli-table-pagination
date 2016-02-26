@@ -13,6 +13,9 @@ export default Ember.Mixin.create(RouteMixin, {
         },
         page: {
             refreshModel: false
+        },
+        perPage: {
+            refreshModel: false
         }
     },
 
@@ -92,6 +95,16 @@ export default Ember.Mixin.create(RouteMixin, {
             //my save function
             this.controller.transitionToRoute(controller.get('modelName'), record);
 
+        },
+
+        changePage: function(page) {
+          this.controller.set('page', page);
+          this.refresh();
+        },
+
+        changePerPage: function(perPage) {
+          this.controller.set('perPage', perPage);
+          this.refresh();
         }
     },
 
