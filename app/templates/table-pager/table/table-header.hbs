@@ -2,28 +2,26 @@
 <tr role="row">
     {{#each columns as |item|}}
         <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
-          {{#unless item.disableServerInteractions}}
-          {{#if item.enableSearch }}
-          <a {{action 'toggleFilter' item}}><i class="fa fa-search"></i></a>
-          {{/if}}
-          {{/unless}}
-          {{item.displayName}}
-          {{#unless item.disableServerInteractions}}
-          <a {{action 'sortField' item.serverColumnName}}>
-            <i class="fa fa-sort"></i>
-          </a>
-          {{/unless}}
-          <div class="row {{if item.showingFilter '' 'hidden'}}">
-            <div class="col-md-12">
-              {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
+            {{#unless item.disableServerInteractions}}
+                {{#if item.enableSearch }}
+                    <a {{action 'toggleFilter' item}}><i class="fa fa-search"></i></a>
+                {{/if}}
+            {{/unless}}
+            {{item.displayName}}
+            {{#unless item.disableServerInteractions}}
+                <a {{action 'sortField' item.serverColumnName}}>
+                    <i class="fa fa-sort"></i>
+                </a>
+            {{/unless}}
+            <div class="row {{if item.showingFilter '' 'hidden'}}">
+                <div class="col-md-12">
+                    {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
+                </div>
             </div>
-          </div>
         </th>
     {{/each}}
 
-    <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
-
-    </th>
+    <th role="columnheader" tabindex="0" rowspan="1" colspan="1"></th>
 </tr>
 </thead>
 

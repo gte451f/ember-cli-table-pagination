@@ -108,8 +108,13 @@ export default Ember.Mixin.create(RouteMixin, {
         }
     },
 
+  /**
+   *  gather params from URL or from existing controller
+   * @param params
+   * @returns {{}}
+   */
     getAllParams: function(params) {
-        var controller = this.controller;
+        var controller = this.get('controller');
         var allParams = {};
         if (Ember.isPresent(controller)) {
           var name = controller.get('quickSearchField');
