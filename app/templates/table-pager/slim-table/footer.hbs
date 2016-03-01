@@ -3,6 +3,11 @@
         <div class="">Total: {{totalRecords}}  <br/> {{perPage}} per page</div>
     </div>
     <div class="col-xs-8">
-        {{page-numbers currentPage=page totalPages=totalPages numPagesToShow=2 showFL=true}}
+        {{!page-numbers currentPage=page totalPages=totalPages numPagesToShow=2 showFL=true}}
+        {{pagination-pager
+            count=totalPages
+            current=page
+            change='changePage'
+            }}
     </div>
 </div>
