@@ -1,1 +1,31 @@
-{{yield}}
+{{#if tableTitle}}
+  {{#component titleComponent}}
+    {{tableTitle}}
+  {{/component}}
+{{/if}}
+{{#component bodyComponent}}
+    {{!-- {{partial "table-pager/table/tools"}}
+    <table class="table table-bordered table-striped">
+      {{partial "table-pager/table/table-header"}}
+      {{partial "table-pager/table/row"}}
+    </table>
+    {{partial "table-pager/table/footer"}} --}}
+    {{#component toolbarComponent}}
+      {{component toolsComponent
+        allowQuickSearch=allowQuickSearch
+        searchString=searchString
+        perPage=perPage
+      }}
+      {{!-- pages --}}
+      {{component pagerComponent
+        count=totalPages
+        current=page
+      }}
+      {{!-- TODO add change action handling--}}
+    {{/component}}
+    {{#component contentComponent}}
+      {{#each content as |item|}}
+        {{yield item}}
+      {{/each}}
+    {{/component}}
+{{/component}}
