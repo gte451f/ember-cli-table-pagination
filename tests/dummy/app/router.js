@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('old', { restNamespace: true });
   this.route('item', { path: '/item/:item_id' });
+  this.route('bootstrap');
 });
 
 export default Router;
