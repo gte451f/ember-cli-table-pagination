@@ -3,20 +3,79 @@ import layout from './template';
 
 const {
   Component,
+  Object,
   computed
 } = Ember;
+const {
+  alias,
+  reads,
+  sort
+} = computed;
 
 export default Component.extend({
   // HTML
   layout,
 
   // properties
+
+  /**
+   * @public
+   * @type boolean
+   */
   allowQuickSearch: true,
+  /**
+   * @public
+   * @type Array
+   */
   content: [],
+  /**
+   * @public
+   * @typedef {fieldName: string, displayName: string, disableServerInteractions: boolean, enableSearch: boolean} Field
+   */
+  /**
+   * @public
+   * @type Field
+   */
+  fields: [],
+  /**
+   * @public
+   * @type boolean
+   */
   isRemoteHandled: false,
+  /**
+   * @public
+   * @type boolean
+   */
+  loading: false,
+  /**
+   * @public
+   * @type number
+   */
   page: 1,
+  /**
+   * @public
+   * @type number
+   */
   perPage: 5,
+  /**
+   * @public
+   * @type string
+   */
   searchString: '',
+  /**
+   * @private
+   * @type string
+   */
+  sorting: null,
+  /**
+   * @private
+   * @type string
+   */
+  sortDirection: null,
+  /**
+   * @public
+   * @type string
+   */
   tableTitle: 'title',
   totalPages: 5,
 
