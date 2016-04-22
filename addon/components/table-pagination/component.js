@@ -77,19 +77,16 @@ export default Component.extend({
    * @type string
    */
   tableTitle: 'title',
-  totalPages: 5,
 
   // computed
-  filteredContent: computed('content', 'searchString', 'isRemoteHandled', function() {
+  filteredContent: computed('content', 'searchString', 'isRemoteHandled', 'fields.@each.filterValue', function() {
     let content = this.get('content');
     let isRemoteHandled = this.get('isRemoteHandled');
     if (isRemoteHandled) {
       return content;
     } else {
       let searchString = this.get('searchString');
-      return content.filter(function(item) {
-        Ember.Logger.debug('item -> ', item);
-        Ember.Logger.debug(arguments);
+      let filteredContent = content.filter(function(item) {
         let pattern = new RegExp(searchString, 'i');
         let found = false;
         item.eachAttribute(function(name, meta) {
@@ -97,25 +94,62 @@ export default Component.extend({
             found = found || pattern.test(item.get(name));
           }
         });
-        Ember.Logger.debug('is item %s matching %s ? -> %s', item.get('idNum'), searchString, found);
         return found;
       });
+      let fields = this.get('fields');
+      fields.forEach(function(field) {
+        let {
+          fieldName,
+          filterValue
+        } = field;
+        if (filterValue) {
+          filteredContent = content.filter(function(item) {
+            let pattern = new RegExp(filterValue, 'i');
+            let value = item.get(fieldName);
+            let test = pattern.test(value);
+            return test;
+          });
+        }
+      });
+
+      return filteredContent;
     }
   }),
-  currentContent: computed('filteredContent', 'page', 'perPage', 'isRemoteHandled', function() {
-    let content = this.get('filteredContent');
+  /**
+   * @public
+   * @type Array.<string>
+   */
+  _sorting: computed('sorting', 'sortDirection', function() {
+    let sorting = this.get('sorting');
+    let sortDirection = this.get('sortDirection');
+    if (sortDirection === 'desc') {
+      return [`${sorting}:${sortDirection}`];
+    } else {
+      return [`${sorting}`];
+    }
+  }),
+  sortedContent: sort('filteredContent', '_sorting'),
+  pagedContent: computed('filteredContent', 'sortedContent', 'page', 'perPage', 'isRemoteHandled', function() {
     let isRemoteHandled = this.get('isRemoteHandled');
     if (isRemoteHandled) {
+      let content = this.get('filteredContent');
       return content;
     } else {
       let page = this.get('page');
       let perPage = this.get('perPage');
+      let content = this.get('sortedContent');
 
       // we are handling the data ourself so:
       // we should display only the items on the current page:
       // a.k.a. perPage items starting at perPageItems*page
       return content.slice(perPage * (page - 1), perPage * (page - 1) + perPage);
     }
+  }),
+  currentContent: reads('pagedContent'),
+  totalPages: computed('filteredContent.length', 'perPage', function() {
+    let contentLength = this.get('filteredContent.length');
+    let perPage = this.get('perPage');
+    return Math.ceil(contentLength / perPage);
   }),
   // overwritable components
   bodyComponent: 'table-pagination.table-body',
