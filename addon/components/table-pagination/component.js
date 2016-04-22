@@ -157,5 +157,23 @@ export default Component.extend({
   pagerComponent: 'table-pagination.table-pager',
   titleComponent: 'table-pagination.table-title',
   toolbarComponent: 'table-pagination.table-toolbar',
-  toolsComponent: 'table-pagination.table-tools'
+  toolsComponent: 'table-pagination.table-tools',
+
+  actions: {
+    changeSort(property, direction) {
+      Ember.Logger.debug('changeSort -> property %s, direction %s', property, direction);
+      let isRemoteHandled = this.get('isRemoteHandled');
+      if (isRemoteHandled) {
+        this.attrs.changeSort(property, direction);
+      } else {
+        this.set('sorting', property);
+        if (direction) {
+          this.set('sortDirection', direction);
+        } else {
+          this.set('sortDirection', null);
+        }
+      }
+    },
+    doNothing() {}
+  }
 });
