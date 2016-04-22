@@ -32,33 +32,33 @@ export default Ember.Mixin.create(RouteMixin, {
             this.refresh();
         },
 
-        // /**
-        //  * take in a sortField and store the new sortField in the controller
-        //  * also infer the correct sort order (ASC or DESC)
-        //  * works with query params
-        //  * follows json:api conventions
-        //  *
-        //  * @param field
-        //  */
-        // sortField: function (field) {
-        //     field = field.underscore();
-        //     var sortField = this.controller.get('sortField');
-        //     var newSortOrder, sortOrder = this.controller.get('sortOrder');
-        //
-        //     //sortField hasn't changed so we toggle sortOrder
-        //     //check for the descending and ascending versions
-        //     if (field === sortField || '-' + field === sortField) {
-        //         if (sortOrder === '-') {
-        //             newSortOrder = '';
-        //             this.controller.set('sortOrder', '');
-        //         } else {
-        //             newSortOrder = '-';
-        //             this.controller.set('sortOrder', '-');
-        //         }
-        //     }
-        //     //always update the sortField..either the field changes or the order changes
-        //     this.controller.set('sortField', this.controller.get('sortOrder') + field);
-        // },
+        /**
+         * take in a sortField and store the new sortField in the controller
+         * also infer the correct sort order (ASC or DESC)
+         * works with query params
+         * follows json:api conventions
+         *
+         * @param field
+         */
+        sortField: function (field) {
+            field = field.underscore();
+            var sortField = this.controller.get('sortField');
+            var newSortOrder, sortOrder = this.controller.get('sortOrder');
+
+            //sortField hasn't changed so we toggle sortOrder
+            //check for the descending and ascending versions
+            if (field === sortField || '-' + field === sortField) {
+                if (sortOrder === '-') {
+                    newSortOrder = '';
+                    this.controller.set('sortOrder', '');
+                } else {
+                    newSortOrder = '-';
+                    this.controller.set('sortOrder', '-');
+                }
+            }
+            //always update the sortField..either the field changes or the order changes
+            this.controller.set('sortField', this.controller.get('sortOrder') + field);
+        },
 
         /**
          * sets a new param on the filterParams property
