@@ -38,7 +38,10 @@ module.exports = function(app) {
         { name: 'item 28', idNum: '28', id: '28', description: 'I\'m the item #28' },
         { name: 'item 29', idNum: '29', id: '29', description: 'I\'m the item #29' },
         { name: 'item 30', idNum: '30', id: '30', description: 'I\'m the item #30' }
-      ]
+      ],
+      'meta': {
+        'total_pages': 4
+      }
     });
   });
 

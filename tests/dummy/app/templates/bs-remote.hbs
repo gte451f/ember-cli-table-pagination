@@ -1,0 +1,30 @@
+<div class='content'>
+  <h3> the new way w/ bootstrap and backend goes next: </h3>
+  <div class="container">
+
+    {{#bs-table-pagination
+      content=items
+      tableTitle="item table #3"
+      fields=columns
+      isRemoteHandled=true
+      page=page
+      perPage=perPage
+      totalPages=totalPages
+      sorting=sortProperty
+      sortDirection=sortDirection
+      searchString=quickSearch
+
+      loading=currentlyLoading
+
+      refresh=(route-action 'refresh')
+      changePage=(route-action 'changePage')
+      changeSort=(route-action 'changeSort')
+      runQuickSearch=(route-action 'runQuickSearch')
+      changePerPage=(route-action 'changePerPage')
+      as |item|
+    }}
+      {{bs-table-pagination.table-row item=item columns=columns}}
+    {{/bs-table-pagination}}
+
+  </div>
+</div>

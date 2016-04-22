@@ -11,8 +11,8 @@ export default Controller.extend({
   appController: inject.controller('application'),
   items: reads('appController.items'),
   columns: [
-    { fieldName: 'idNum', displayName: 'id', disableServerInteractions: false, enableSearch: false, showingFilter: false },
-    { fieldName: 'name', displayName: 'name', disableServerInteractions: false, enableSearch: true, showingFilter: false },
-    { fieldName: 'description', displayName: 'description', disableServerInteractions: true, enableSearch: true, showingFilter: false }
+    { fieldName: 'idNum', sortingField: 'idNumInt', displayName: 'id', disableServerInteractions: false, enableSearch: false },
+    { fieldName: 'name',  sortingField: 'name', displayName: 'name', disableServerInteractions: false, enableSearch: true },
+    { fieldName: 'description', sortingField: 'description', displayName: 'description', disableServerInteractions: true, enableSearch: true }
   ]
 });

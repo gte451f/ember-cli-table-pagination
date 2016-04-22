@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('old', { restNamespace: true });
   this.route('item', { path: '/item/:item_id' });
   this.route('bootstrap');
+  this.route('bs-remote');
 });
 
 export default Router;

@@ -6,8 +6,13 @@ const {
   Model
 } = DS;
 
+const { computed } = Ember;
+
 export default Model.extend({
   idNum: attr('number'),
   name: attr('string'),
-  description: attr('string')
+  description: attr('string'),
+  idNumInt: computed('idNum', function() {
+    return parseInt(this.get('idNum'));
+  })
 });
