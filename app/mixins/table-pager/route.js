@@ -32,33 +32,33 @@ export default Ember.Mixin.create(RouteMixin, {
             this.refresh();
         },
 
-        /**
-         * take in a sortField and store the new sortField in the controller
-         * also infer the correct sort order (ASC or DESC)
-         * works with query params
-         * follows json:api conventions
-         *
-         * @param field
-         */
-        sortField: function (field) {
-            field = field.underscore();
-            var sortField = this.controller.get('sortField');
-            var newSortOrder, sortOrder = this.controller.get('sortOrder');
-
-            //sortField hasn't changed so we toggle sortOrder
-            //check for the descending and ascending versions
-            if (field === sortField || '-' + field === sortField) {
-                if (sortOrder === '-') {
-                    newSortOrder = '';
-                    this.controller.set('sortOrder', '');
-                } else {
-                    newSortOrder = '-';
-                    this.controller.set('sortOrder', '-');
-                }
-            }
-            //always update the sortField..either the field changes or the order changes
-            this.controller.set('sortField', this.controller.get('sortOrder') + field);
-        },
+        // /**
+        //  * take in a sortField and store the new sortField in the controller
+        //  * also infer the correct sort order (ASC or DESC)
+        //  * works with query params
+        //  * follows json:api conventions
+        //  *
+        //  * @param field
+        //  */
+        // sortField: function (field) {
+        //     field = field.underscore();
+        //     var sortField = this.controller.get('sortField');
+        //     var newSortOrder, sortOrder = this.controller.get('sortOrder');
+        //
+        //     //sortField hasn't changed so we toggle sortOrder
+        //     //check for the descending and ascending versions
+        //     if (field === sortField || '-' + field === sortField) {
+        //         if (sortOrder === '-') {
+        //             newSortOrder = '';
+        //             this.controller.set('sortOrder', '');
+        //         } else {
+        //             newSortOrder = '-';
+        //             this.controller.set('sortOrder', '-');
+        //         }
+        //     }
+        //     //always update the sortField..either the field changes or the order changes
+        //     this.controller.set('sortField', this.controller.get('sortOrder') + field);
+        // },
 
         /**
          * sets a new param on the filterParams property
@@ -103,9 +103,35 @@ export default Ember.Mixin.create(RouteMixin, {
         },
 
         changePerPage: function(perPage) {
+          Ember.Logger.debug('changePerPage -> %s', perPage);
           this.controller.set('perPage', perPage);
           this.refresh();
+        },
+
+        changeSort: function(property, direction) {
+          Ember.Logger.debug('property -> direction => %s -> %s', property, direction);
+          let order = (direction === 'desc')? '-': '';
+          this.controller.set('sortProperty', property);
+          this.controller.set('sortDirection', direction);
+          this.controller.set('sortField', `${order}${property}`);
+        },
+
+        loading: function(transition, originRoute) {
+          let routeName = this.get('routeName');
+          let controller = this.controllerFor(routeName);
+          // check if the transition is to the same route but with a different "params" value.
+          if (originRoute.routeName === transition.targetName || `${originRoute.routeName}.index` === transition.targetName) {
+            // if so then do not bubble and set the showSpinner property on the controller
+            controller.set('currentlyLoading', true);
+            transition.promise.finally(() => {
+              controller.set('currentlyLoading', false);
+            });
+            // do not bubble is triggered by not returning true
+            return false;
+          }
+          return true;
         }
+
     },
 
   /**
@@ -160,5 +186,16 @@ export default Ember.Mixin.create(RouteMixin, {
         controller.set('modelName', this.modelName);
         controller.set('controllerName', this.controllerName);
         controller.set('totalRecords', model.meta.total_record_count);
+        let { sortField } = this.getAllParams({});
+        if (sortField) {
+          if (sortField.substring(0,1) === '-') {
+            controller.set('sortDirection', 'desc');
+            controller.set('sortProperty', sortField.substring(1));
+          } else {
+            controller.set('sortDirection', 'asc');
+            controller.set('sortProperty', sortField);
+          }
+          controller.set('sortField', sortField);
+        }
     }
 });
