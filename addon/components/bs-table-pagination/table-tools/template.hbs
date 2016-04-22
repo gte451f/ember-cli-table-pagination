@@ -1,0 +1,42 @@
+{{#if allowQuickSearch}}
+<label style="margin-right: 10px;">
+    <div class="input-group input-group-sm" style="width: 250px;">
+        {{input type="text"
+            class="form-control quickSearchInput"
+            value=searchString
+        }}
+        <span class="input-group-btn">
+          {{#if this.attrs.runQuickSearch}}
+          <button {{action (action this.attrs.runQuickSearch) }} class="btn btn-primary btn-flat">
+              {{fa-icon 'search'}}
+          </button>
+          {{else}}
+          <button class="btn btn-primary btn-flat">
+              {{fa-icon 'search'}}
+          </button>
+          {{/if}}
+        </span>
+    </div>
+</label>
+{{/if}}
+
+<label style="margin-right: 10px;">Per Page:
+  <div class="input-group input-group-sm">
+    {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage)}}
+        {{#each perPageOptions as |option|}}
+            {{#x-option value=option}}{{option}}{{/x-option}}
+        {{/each}}
+    {{/x-select}}
+    <span class="input-group-btn">
+      {{#if this.attrs.refresh}}
+      <button {{action (action this.attrs.refresh) }} class="btn btn-sm btn-primary">
+        {{fa-icon 'refresh'}}
+      </button>
+      {{else}}
+      <button class="btn btn-sm btn-primary">
+        {{fa-icon 'refresh'}}
+      </button>
+      {{/if}}
+    </span>
+  </div>
+</label>

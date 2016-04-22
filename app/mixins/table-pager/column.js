@@ -1,5 +1,6 @@
 import Ember from 'ember';
-const {computed} = Ember;
+const { computed } = Ember;
+const { reads } = computed;
 
 /**
  * simple helper to store the columns that will be used to for display & search on a paginate list
@@ -11,6 +12,8 @@ export default Ember.Object.extend({
 
     //the model property
     fieldName: null,
+    //the model property
+    sortingField: reads('fieldName'),
 
     //list this field in the search component?
     enableSearch: true,

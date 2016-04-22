@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import Column from './column';
 
+const { computed } = Ember;
+
 /**
  * store shared logic to run pager logic
  */
@@ -46,9 +48,25 @@ export default Ember.Mixin.create({
       this.set('page', 1);
     }.observes('perPage'),
 
-    //logic to handle sorting a list
-    sortField: 'id',
-    sortOrder: '', // a - means desc
+    // //logic to handle sorting a list
+    // sortField: computed('sortProperty', 'sortDirection', function() {
+    //   let sortProperty = this.get('sortProperty');
+    //   let sortDirection = this.get('sortDirection');
+    //   Ember.Logger.debug('sortField being updated');
+    //   if (sortDirection) {
+    //     return `${sortDirection}${sortProperty}`;
+    //   } else {
+    //     return sortProperty;
+    //   }
+    // }),
+    sortOrder: computed('sortDirection', function() {
+      let sortDirection = this.get('sortDirection');
+      if (sortDirection === 'desc') {
+        return '-';
+      } else {
+        return '';
+      }
+    }),
     with: '',
 
     // disabled by default
@@ -96,8 +114,5 @@ export default Ember.Mixin.create({
     createPath: "set createPath in the controller",
 
     actions: {
-      toggleFilter: function(column) {
-        column.set('showingFilter', !column.get('showingFilter'));
-      }
     }
 });

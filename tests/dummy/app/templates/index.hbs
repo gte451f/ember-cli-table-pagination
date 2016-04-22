@@ -1,0 +1,13 @@
+
+<h3> the new way goes next: </h3>
+
+{{#table-pagination
+  content=items
+  class="box box-12 box-top"
+  tableTitle="item table #1"
+  as |item|
+}}
+  <li>
+    d: {{item.idNum}}, name: {{item.name}}, desc: {{item.description}}
+  </li>
+{{/table-pagination}}
