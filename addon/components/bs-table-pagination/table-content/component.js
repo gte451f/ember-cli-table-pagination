@@ -2,12 +2,17 @@ import Ember from 'ember';
 import layout from './template';
 
 const { computed } = Ember;
-const { alias } = computed;
+const { reads } = computed;
 
 export default Ember.Component.extend({
   layout,
-  tagName: 'table',
-  classNames: ['table', 'table-bordered', 'table-striped'],
+  classNames: ['ember-cli-table-content'],
+  // tagName: '',
 
-  columns: alias('contentParams.columns')
+  showFilter: false,
+
+  columns: reads('contentParams.columns'),
+  sorting: reads('contentParams.sorting'),
+  sortingDirection: reads('contentParams.sortDirection'),
+  loading: reads('contentParams.loading')
 });

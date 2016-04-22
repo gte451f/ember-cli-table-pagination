@@ -1,40 +1,63 @@
-<thead>
-  <tr role="row">
-    {{#each columns as |item|}}
-    <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
-      {{#unless item.disableServerInteractions}}
-      {{#if item.enableSearch }}
-      <a {{action 'toggleFilter' item}}><i class="fa fa-search"></i></a>
-      {{/if}}
-      {{/unless}}
-      {{item.displayName}}
-      {{#unless item.disableServerInteractions}}
-      <a {{action 'sortField' item.serverColumnName}}>
-        <i class="fa fa-sort"></i>
-      </a>
-      {{/unless}}
-      <div class="row {{if item.showingFilter '' 'hidden'}}">
-        <div class="col-md-12">
-          {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr role="row">
+      {{#each columns as |item|}}
+      <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+        {{#unless item.disableServerInteractions}}
+        {{#if item.enableSearch }}
+        <a {{action (toggle 'showFilter' this)}}><i class="fa fa-search"></i></a>
+        {{/if}}
+        {{/unless}}
+        {{item.displayName}}
+        {{#unless item.disableServerInteractions}}
+        {{#if (and (eq sorting item.sortingField) (eq sortingDirection 'asc'))}}
+        <a {{action (action this.attrs.changeSort item.sortingField 'desc')}}>
+          <i class="fa fa-sort-asc"></i>
+        </a>
+        {{else if (and (eq sorting item.sortingField) (eq sortingDirection 'desc'))}}
+        <a {{action (action this.attrs.changeSort '')}}>
+          <i class="fa fa-sort-desc"></i>
+        </a>
+        {{else}}
+        <a {{action (action this.attrs.changeSort item.sortingField 'asc')}}>
+          <i class="fa fa-sort"></i>
+        </a>
+        {{/if}}
+        {{/unless}}
+        <div class="row {{if (and showFilter item.enableSearch (not item.disableServerInteractions)) '' 'hidden'}}">
+          <div class="col-md-12">
+            {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
+          </div>
         </div>
+      </th>
+      {{/each}}
+
+      <th role="columnheader" tabindex="0" rowspan="1" colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tfoot>
+    <tr>
+      {{#each columns as |item|}}
+      <th rowspan="1" colspan="1">
+        {{item.displayName}}
+      </th>
+      {{/each}}
+      <th rowspan="1" colspan="1">Actions</th>
+    </tr>
+  </tfoot>
+  <thead>
+    {{yield}}
+  </thead>
+</table>
+{{#if loading}}
+<div class='table-loading-overlay container'>
+  <div class='table-loading-inner row'>
+    <div class='vertical-center col-xs-12'>
+      <div class='text-center col-xs-12'>
+        <i class="fa fa-cog fa-spin fa-3x"></i>
       </div>
-    </th>
-    {{/each}}
-
-    <th role="columnheader" tabindex="0" rowspan="1" colspan="1"></th>
-  </tr>
-</thead>
-
-<tfoot>
-  <tr>
-    {{#each columns as |item|}}
-    <th rowspan="1" colspan="1">
-      {{item.displayName}}
-    </th>
-    {{/each}}
-    <th rowspan="1" colspan="1">Actions</th>
-  </tr>
-</tfoot>
-<thead>
-  {{yield}}  
-</thead>
+    </div>
+  </div>
+</div>
+{{/if}}

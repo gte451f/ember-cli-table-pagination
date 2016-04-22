@@ -1,18 +1,27 @@
 import Ember from 'ember';
 import TablePagination from 'ember-cli-table-pagination/components/table-pagination/component';
 
-const { computed } = Ember;
+const {
+  computed,
+  Object,
+  observer
+} = Ember;
+const { alias } = computed;
 
 export default TablePagination.extend({
   // ui customization
-  classNames: ['box', 'box-top'],
+  classNames: ['box', 'box-top', 'ember-cli-table-pagination'],
   classNameBindings: ['boxSizeClass'],
 
   // properties
   boxSize: 12,
-  columns: [],
-  contentParams: computed('columns', function() {
-    return { columns: this.get('columns') };
+  contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', function() {
+    return {
+      columns: this.get('fields'),
+      sorting: this.get('sorting'),
+      sortDirection: this.get('sortDirection'),
+      loading: this.get('loading')
+    };
   }),
 
   // override inherited properties
