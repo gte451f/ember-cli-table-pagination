@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/bs-table-pagination';
+import TablePagination from './table-pagination';
 
 const {
   computed,
