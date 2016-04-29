@@ -1,0 +1,46 @@
+{{#if tableTitle}}
+  {{#component titleComponent}}
+    {{tableTitle}}
+  {{/component}}
+{{/if}}
+{{#component bodyComponent}}
+  {{#component toolbarComponent}}
+    {{#if isRemoteHandled}}
+      {{component toolsComponent
+        allowQuickSearch=allowQuickSearch
+        searchString=searchString
+        perPage=perPage
+        refresh=(action this.attrs.refresh)
+        runQuickSearch=(action this.attrs.runQuickSearch)
+        changePerPage=(action this.attrs.changePerPage)
+      }}
+      {{component pagerComponent
+        count=totalPages
+        current=page
+        changePage=(action this.attrs.changePage)
+      }}
+    {{else}}
+      {{component toolsComponent
+        allowQuickSearch=allowQuickSearch
+        searchString=searchString
+        perPage=perPage
+        changePerPage=(action 'doNothing')
+        refresh=(action 'doNothing')
+        runQuickSearch=(action 'doNothing')
+      }}
+      {{component pagerComponent
+        count=totalPages
+        current=page
+        changePage=(action 'doNothing')
+      }}
+    {{/if}}
+  {{/component}}
+  {{#component contentComponent
+    contentParams=contentParams
+    changeSort=(action this.actions.changeSort)
+  }}
+    {{#each currentContent as |item|}}
+      {{yield item}}
+    {{/each}}
+  {{/component}}
+{{/component}}
