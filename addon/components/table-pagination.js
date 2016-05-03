@@ -3,11 +3,9 @@ import layout from '../templates/components/table-pagination';
 
 const {
   Component,
-  Object,
   computed
 } = Ember;
 const {
-  alias,
   reads,
   sort
 } = computed;
