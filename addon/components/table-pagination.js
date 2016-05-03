@@ -78,7 +78,7 @@ export default Component.extend({
   tableTitle: 'title',
 
   // computed
-  numberOfRecords: reads('currentContent.length'),
+  numberOfRecords: reads('filteredContent.length'),
   filteredContent: computed('content', 'searchString', 'fields.@each.filterValue', function() {
     let content = this.get('content');
     let searchString = this.get('searchString');
