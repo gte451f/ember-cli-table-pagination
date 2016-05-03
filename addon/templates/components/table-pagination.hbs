@@ -11,9 +11,14 @@
         searchString=searchString
         totalRecords=numberOfRecords
         perPage=perPage
+
+        toolsParams=toolsParams
+
         refresh=(action this.attrs.refresh)
         runQuickSearch=(action this.attrs.runQuickSearch)
         changePerPage=(action this.attrs.changePerPage)
+        changeSort=(action this.actions.changeSort)
+
       }}
       {{component pagerComponent
         count=totalPages
