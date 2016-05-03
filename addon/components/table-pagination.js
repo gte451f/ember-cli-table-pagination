@@ -6,6 +6,7 @@ const {
   computed
 } = Ember;
 const {
+  alias,
   reads,
   sort
 } = computed;
@@ -77,41 +78,37 @@ export default Component.extend({
   tableTitle: 'title',
 
   // computed
-  filteredContent: computed('content', 'searchString', 'isRemoteHandled', 'fields.@each.filterValue', function() {
+  numberOfRecords: reads('currentContent.length'),
+  filteredContent: computed('content', 'searchString', 'fields.@each.filterValue', function() {
     let content = this.get('content');
-    let isRemoteHandled = this.get('isRemoteHandled');
-    if (isRemoteHandled) {
-      return content;
-    } else {
-      let searchString = this.get('searchString');
-      let filteredContent = content.filter(function(item) {
-        let pattern = new RegExp(searchString, 'i');
-        let found = false;
-        item.eachAttribute(function(name, meta) {
-          if (['number', 'string', 'date'].contains(meta.type)) {
-            found = found || pattern.test(item.get(name));
-          }
-        });
-        return found;
-      });
-      let fields = this.get('fields');
-      fields.forEach(function(field) {
-        let {
-          fieldName,
-          filterValue
-        } = field;
-        if (filterValue) {
-          filteredContent = content.filter(function(item) {
-            let pattern = new RegExp(filterValue, 'i');
-            let value = item.get(fieldName);
-            let test = pattern.test(value);
-            return test;
-          });
+    let searchString = this.get('searchString');
+    let filteredContent = content.filter(function(item) {
+      let pattern = new RegExp(searchString, 'i');
+      let found = false;
+      item.eachAttribute(function(name, meta) {
+        if (['number', 'string', 'date'].contains(meta.type)) {
+          found = found || pattern.test(item.get(name));
         }
       });
+      return found;
+    });
+    let fields = this.get('fields');
+    fields.forEach(function(field) {
+      let {
+        fieldName,
+        filterValue
+      } = field;
+      if (filterValue) {
+        filteredContent = content.filter(function(item) {
+          let pattern = new RegExp(filterValue, 'i');
+          let value = item.get(fieldName);
+          let test = pattern.test(value);
+          return test;
+        });
+      }
+    });
 
-      return filteredContent;
-    }
+    return filteredContent;
   }),
   /**
    * @public
@@ -127,23 +124,27 @@ export default Component.extend({
     }
   }),
   sortedContent: sort('filteredContent', '_sorting'),
-  pagedContent: computed('filteredContent', 'sortedContent', 'page', 'perPage', 'isRemoteHandled', function() {
+  pagedContent: computed('filteredContent', 'sortedContent', 'page', 'perPage', function() {
+    let page = this.get('page');
+    let perPage = this.get('perPage');
+    let content = this.get('sortedContent');
+
+    // we are handling the data ourself so:
+    // we should display only the items on the current page:
+    // a.k.a. perPage items starting at perPageItems*page
+    return content.slice(perPage * (page - 1), perPage * (page - 1) + perPage);
+  }),
+  currentContent: computed('pagedContent', 'content', 'isRemoteHandled', function() {
     let isRemoteHandled = this.get('isRemoteHandled');
     if (isRemoteHandled) {
-      let content = this.get('filteredContent');
-      return content;
+      Ember.Logger.debug('content processing is handled remotely -> ', this.get('content.length'));
+      return this.get('content');
     } else {
-      let page = this.get('page');
-      let perPage = this.get('perPage');
-      let content = this.get('sortedContent');
-
-      // we are handling the data ourself so:
-      // we should display only the items on the current page:
-      // a.k.a. perPage items starting at perPageItems*page
-      return content.slice(perPage * (page - 1), perPage * (page - 1) + perPage);
+      let content = this.get('pagedContent');
+      Ember.Logger.debug('content processing is done manually -> ', this.get('pagedContent.length'));
+      return content;
     }
   }),
-  currentContent: reads('pagedContent'),
   totalPages: computed('filteredContent.length', 'perPage', function() {
     let contentLength = this.get('filteredContent.length');
     let perPage = this.get('perPage');
@@ -152,6 +153,7 @@ export default Component.extend({
   // overwritable components
   bodyComponent: 'table-pagination.table-body',
   contentComponent: 'table-pagination.table-content',
+  footerComponent: 'table-pagination.table-footer',
   pagerComponent: 'table-pagination.table-pager',
   titleComponent: 'table-pagination.table-title',
   toolbarComponent: 'table-pagination.table-toolbar',

@@ -36,6 +36,7 @@ export default TablePagination.extend({
   // override the components:
   bodyComponent: 'bs-table-pagination.table-body',
   contentComponent: 'bs-table-pagination.table-content',
+  footerComponent: 'bs-table-pagination.table-footer',
   pagerComponent: 'bs-table-pagination.table-pager',
   titleComponent: 'bs-table-pagination.table-title',
   toolbarComponent: 'bs-table-pagination.table-toolbar',

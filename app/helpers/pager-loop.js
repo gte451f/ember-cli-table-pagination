@@ -8,6 +8,6 @@ import Ember from 'ember';
  * @returns {*}
  */
 export function pagerLoop(params, namedArgs) {
-  return namedArgs.model.get(namedArgs.field.fieldName);
+  return Ember.get(namedArgs.model, namedArgs.field.fieldName);
 }
 export default Ember.Helper.helper(pagerLoop);
