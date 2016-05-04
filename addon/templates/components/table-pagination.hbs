@@ -1,5 +1,8 @@
 {{#if tableTitle}}
-  {{#component titleComponent titleParams=titleParams}}
+{{#component titleComponent
+  titleParams=titleParams
+  allowQuickSearch=allowQuickSearch
+  }}
     {{tableTitle}}
   {{/component}}
 {{/if}}
