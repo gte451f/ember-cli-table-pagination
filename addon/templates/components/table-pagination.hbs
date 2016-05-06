@@ -52,11 +52,11 @@
       {{yield item}}
     {{/each}}
   {{/component}}
+  {{component footerComponent
+    perPage=perPage
+    page=page
+    totalPages=totalPages
+    totalRecords=numberOfRecords
+    changePage=(action this.attrs.changePage)
+  }}
 {{/component}}
-{{component footerComponent
-  perPage=perPage
-  page=page
-  totalPages=totalPages
-  totalRecords=numberOfRecords
-  changePage=(action this.attrs.changePage)
-}}
