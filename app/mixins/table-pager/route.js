@@ -164,6 +164,12 @@ export default Ember.Mixin.create(RouteMixin, {
               params[underscore(fieldName)] = '*' + filterValue + '*';
             }
           }
+
+          // To pass already formatted params to the query
+          let extraParams = this.controller.get('extraParams');
+          for (let fieldName in extraParams) {
+            params[underscore(fieldName)] = extraParams[fieldName];
+          }
         } else {
           allParams = params;
         }
