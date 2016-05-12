@@ -15,14 +15,7 @@ export default TablePagination.extend({
 
   // properties
   boxSize: 12,
-  contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', function() {
-    return {
-      columns: this.get('fields'),
-      sorting: this.get('sorting'),
-      sortDirection: this.get('sortDirection'),
-      loading: this.get('loading')
-    };
-  }),
+
 
   // override inherited properties
   perPage: 50,

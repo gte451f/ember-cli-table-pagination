@@ -159,6 +159,16 @@ export default Component.extend({
   toolbarComponent: 'table-pagination.table-toolbar',
   toolsComponent: 'table-pagination.table-tools',
 
+  // Params
+  contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', function() {
+    return {
+      columns: this.get('fields'),
+      sorting: this.get('sorting'),
+      sortDirection: this.get('sortDirection'),
+      loading: this.get('loading')
+    };
+  }),
+
   actions: {
     changeSort(property, direction) {
       Ember.Logger.debug('changeSort -> property %s, direction %s', property, direction);
