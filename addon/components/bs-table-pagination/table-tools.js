@@ -6,5 +6,5 @@ export default Ember.Component.extend({
   classNames: ['col-md-7'],
 
   // properties
-  perPageOptions: [5, 10, 25, 50, 100, 250, 500]
+  perPageOptions: [50, 100, 250]
 });

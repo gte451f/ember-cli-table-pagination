@@ -35,7 +35,7 @@ export default Ember.Mixin.create({
     queryParams: ["page", "perPage", "sortField", "with"],
 
     pageList: [
-        5, 10, 25, 50, 100, 250, 500
+        50, 100, 250
     ],
 
     // binding the property on the paged array
@@ -75,7 +75,7 @@ export default Ember.Mixin.create({
     quickSearch: null,
 
     page: 1,
-    perPage: 10,
+    perPage: 50,
     totalRecords: null,
 
     column: Ember.Object.extend({
