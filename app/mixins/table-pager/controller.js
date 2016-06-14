@@ -108,7 +108,8 @@ export default Ember.Mixin.create({
     tableTitle: 'set tableTitle in controller to NULL to hide otherwise set this to your table title',
 
     // where should the default open action link-to?
-    linkPath: "set linkPath in the controller",
+    linkPath: false,
+    editPath: false,
 
     // not sure what this is
     createPath: "set createPath in the controller",
