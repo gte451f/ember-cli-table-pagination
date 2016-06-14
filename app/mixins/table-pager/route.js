@@ -26,6 +26,8 @@ export default Ember.Mixin.create(RouteMixin, {
     //store a reference to the current route, since I don't know how to look this up
     currentRoute: 'set currentRoute in the route',
 
+    currentParams: null,
+
     actions: {
         // action called from the button at the right of the number per page list
         refresh: function () {
@@ -181,7 +183,9 @@ export default Ember.Mixin.create(RouteMixin, {
      * new params to the findPaged method
      */
     model: function (params) {
-      return this.findPaged(this.modelName, this.getAllParams(params));
+      let allParams = this.getAllParams(params);
+      this.currentParams = allParams;
+      return this.findPaged(this.modelName, allParams);
     },
 
     //extend to pass route values onto controller for possible use
@@ -189,6 +193,7 @@ export default Ember.Mixin.create(RouteMixin, {
         this._super(controller, model);
 
         //pass route properties on to controller
+        controller.set('currentParams', this.currentParams);
         controller.set('modelName', this.modelName);
         controller.set('controllerName', this.controllerName);
         controller.set('totalRecords', model.meta.total_record_count);
