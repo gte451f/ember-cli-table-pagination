@@ -2,11 +2,21 @@
     <td>{{pager-loop model=item field=col}}</td>
 {{/each}}
 <td class="clearfix">
+<<<<<<< HEAD
     <span class="pull-right" style="margin-left:5px;">
         {{#link-to linkPath item.id class="btn btn-default btn-xs pull-right"}}
             {{fa-icon 'folder-open'}}
         {{/link-to}}
     </span>
+=======
+    {{#if linkPath}}
+        <span class="pull-right" style="margin-left:5px;">
+            {{#link-to linkPath item.id class="btn btn-default btn-xs pull-right"}}
+                {{fa-icon 'folder-open'}}
+            {{/link-to}}
+        </span>
+    {{/if}}
+>>>>>>> dev
 
     {{#if editPath}}
         {{#link-to editPath item.id class="btn btn-default btn-xs pull-right"}}
