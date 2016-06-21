@@ -15,7 +15,7 @@ export default Controller.extend(Paginate, {
 
   // load pager specific variables
   columns: [
-    Column.create({ 'displayName': '#', 'fieldName': 'idNum', sortingField: 'idNumInt' }),
+    Column.create({ 'displayName': '#', 'fieldName': 'idNum', apiName: 'idNumInt' }),
     Column.create({ 'displayName': 'Name', 'fieldName': 'name' }),
     Column.create({ 'displayName': 'Description', 'fieldName': 'description' })
   ],
