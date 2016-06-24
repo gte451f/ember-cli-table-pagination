@@ -14,5 +14,6 @@ export default Ember.Component.extend({
   columns: reads('contentParams.columns'),
   sorting: reads('contentParams.sorting'),
   sortingDirection: reads('contentParams.sortDirection'),
-  loading: reads('contentParams.loading')
+  loading: reads('contentParams.loading'),
+  numberOfRecords: reads('contentParams.numberOfRecords')
 });

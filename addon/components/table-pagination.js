@@ -160,12 +160,13 @@ export default Component.extend({
   toolsComponent: 'table-pagination.table-tools',
 
   // Params
-  contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', function() {
+  contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', 'numberOfRecords', function() {
     return {
       columns: this.get('fields'),
       sorting: this.get('sorting'),
       sortDirection: this.get('sortDirection'),
-      loading: this.get('loading')
+      loading: this.get('loading'),
+      numberOfRecords: this.get('numberOfRecords')
     };
   }),
 
