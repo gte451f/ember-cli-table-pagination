@@ -17,15 +17,15 @@ export default Ember.Mixin.create({
       var observerDefinitions = {};
       var filterParams = {};
       this.get('columns').forEach(function (column, index) {
-        var name = 'observer_' + column.get('serverColumnName');
+        var name = 'observer_' + column.get('apiInteractionName');
         observerDefinitions[name] = function() {
             var that = this;
             clearTimeout(this.get('keyTimer'+name));
             this.set('keyTimer'+name, setTimeout(function(){
-              that.send('applyFilter', column.get('serverColumnName'), column.get('filterValue'));
+              that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
             }, 600));
         }.observes('columns.'+index+'.filterValue');
-        filterParams[column.get('serverColumnName')] = null;
+        filterParams[column.get('apiInteractionName')] = null;
       });
       self.reopen(observerDefinitions);
       self.set('filterParams', filterParams);
