@@ -2,11 +2,8 @@ import Ember from 'ember';
 import TablePagination from './table-pagination';
 
 const {
-  computed,
-  Object,
-  observer
+  computed
 } = Ember;
-const { alias } = computed;
 
 export default TablePagination.extend({
   // ui customization
