@@ -14,4 +14,9 @@
             {{fa-icon 'pencil'}}
         {{/link-to}}
     {{/if}}
+    {{#if this.attrs.deleteAction}}
+        <a {{action this.attrs.deleteAction item}} class="btn btn-default btn-xs pull-right" href="#">
+            {{fa-icon 'trash'}}
+        </a>
+    {{/if}}
 </td>
