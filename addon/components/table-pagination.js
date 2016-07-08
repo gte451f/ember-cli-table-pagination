@@ -6,7 +6,6 @@ const {
   computed
 } = Ember;
 const {
-  alias,
   reads,
   sort
 } = computed;
