@@ -155,7 +155,7 @@ export default Ember.Mixin.create(RouteMixin, {
             with: queryWith
           });
 
-          if (Ember.typeOf(name) !== 'null' && Ember.typeOf(value) !== 'null') {
+          if (Ember.isPresent(name) && Ember.isPresent(value)) {
             params[name] = '*' + value + '*';
           }
 
