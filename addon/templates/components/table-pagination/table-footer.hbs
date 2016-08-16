@@ -1,1 +1,7 @@
 Total Records: {{totalRecords}}  |  Showing {{perPage}} per page
+
+    {{pagination-pager
+        count=totalPages
+        current=page
+        change=(action this.attrs.changePage)
+        }}
