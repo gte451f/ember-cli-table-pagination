@@ -53,7 +53,7 @@
     {{#each currentContent as |item|}}
       {{yield item}}
     {{else}}
-    {{component noDataComponent}}
+      {{component noDataComponent noDataParams=noDataParams}}
     {{/each}}
   {{/component}}
   {{component footerComponent
