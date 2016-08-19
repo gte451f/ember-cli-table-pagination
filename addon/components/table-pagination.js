@@ -157,6 +157,7 @@ export default Component.extend({
   titleComponent: 'table-pagination.table-title',
   toolbarComponent: 'table-pagination.table-toolbar',
   toolsComponent: 'table-pagination.table-tools',
+  noDataComponent: 'table-pagination.table-no-data',
 
   // Params
   contentParams: computed('fields', 'sorting', 'sortDirection', 'loading', 'numberOfRecords', function() {

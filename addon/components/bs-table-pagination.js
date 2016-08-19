@@ -30,5 +30,6 @@ export default TablePagination.extend({
   pagerComponent: 'bs-table-pagination.table-pager',
   titleComponent: 'bs-table-pagination.table-title',
   toolbarComponent: 'bs-table-pagination.table-toolbar',
-  toolsComponent: 'bs-table-pagination.table-tools'
+  toolsComponent: 'bs-table-pagination.table-tools',
+  noDataComponent: 'bs-table-pagination.table-no-data'
 });

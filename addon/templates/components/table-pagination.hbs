@@ -52,6 +52,8 @@
   }}
     {{#each currentContent as |item|}}
       {{yield item}}
+    {{else}}
+    {{component noDataComponent}}
     {{/each}}
   {{/component}}
   {{component footerComponent
