@@ -11,9 +11,10 @@ export default Ember.Component.extend({
 
   showFilter: false,
 
-  columns: reads('contentParams.columns'),
-  sorting: reads('contentParams.sorting'),
-  sortingDirection: reads('contentParams.sortDirection'),
-  loading: reads('contentParams.loading'),
-  numberOfRecords: reads('contentParams.numberOfRecords')
+  // these should be defined on the main pagination component
+  // columns: reads('contentParams.columns'),
+  // sorting: reads('contentParams.sorting'),
+  // sortingDirection: reads('contentParams.sortDirection'),
+  // loading: reads('contentParams.loading'),
+  // numberOfRecords: reads('contentParams.numberOfRecords')
 });

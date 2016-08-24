@@ -1,66 +1,66 @@
 {{#if tableTitle}}
-{{#component titleComponent
+  {{#component titleComponent
   titleParams=titleParams
-  allowQuickSearch=allowQuickSearch
-  }}
+  contentParams=contentParams
+  allowQuickSearch=allowQuickSearch}}
     {{tableTitle}}
   {{/component}}
 {{/if}}
+
 {{#component bodyComponent}}
   {{#component toolbarComponent}}
     {{#if isRemoteHandled}}
       {{component toolsComponent
-        allowQuickSearch=allowQuickSearch
-        searchString=searchString
-        totalRecords=numberOfRecords
-        perPage=perPage
+      allowQuickSearch=allowQuickSearch
+      searchString=searchString
+      totalRecords=numberOfRecords
+      perPage=perPage
+      toolsParams=toolsParams
+      refresh=(action this.attrs.refresh)
+      runQuickSearch=(action this.attrs.runQuickSearch)
+      changePerPage=(action this.attrs.changePerPage)
+      changeSort=(action this.actions.changeSort)}}
 
-        toolsParams=toolsParams
-
-        refresh=(action this.attrs.refresh)
-        runQuickSearch=(action this.attrs.runQuickSearch)
-        changePerPage=(action this.attrs.changePerPage)
-        changeSort=(action this.actions.changeSort)
-
-      }}
       {{component pagerComponent
-        count=totalPages
-        current=page
-        changePage=(action this.attrs.changePage)
-
-        pagerParams=pagerParams
-      }}
+      count=totalPages
+      current=page
+      changePage=(action this.attrs.changePage)
+      pagerParams=pagerParams}}
     {{else}}
       {{component toolsComponent
-        allowQuickSearch=allowQuickSearch
-        searchString=searchString
-        perPage=perPage
-        changePerPage=(action 'doNothing')
-        refresh=(action 'doNothing')
-        runQuickSearch=(action 'doNothing')
-      }}
+      allowQuickSearch=allowQuickSearch
+      searchString=searchString
+      perPage=perPage
+      changePerPage=(action 'doNothing')
+      refresh=(action 'doNothing')
+      runQuickSearch=(action 'doNothing')}}
+
       {{component pagerComponent
-        count=totalPages
-        current=page
-        changePage=(action 'doNothing')
-      }}
+      count=totalPages
+      current=page
+      changePage=(action 'doNothing')}}
     {{/if}}
   {{/component}}
+
   {{#component contentComponent
-    contentParams=contentParams
-    changeSort=(action this.actions.changeSort)
-  }}
+  contentParams=contentParams
+  columns=columns
+  loading=loading
+  sortDirection=sortDirection
+  sortProperty=sortProperty
+  changeSort=(action this.actions.changeSort)}}
     {{#each currentContent as |item|}}
       {{yield item}}
     {{else}}
       {{component noDataComponent noDataParams=noDataParams}}
     {{/each}}
   {{/component}}
+
   {{component footerComponent
-    perPage=perPage
-    page=page
-    totalPages=totalPages
-    totalRecords=numberOfRecords
-    changePage=(action this.attrs.changePage)
+  perPage=perPage
+  page=page
+  totalPages=totalPages
+  totalRecords=numberOfRecords
+  changePage=(action this.attrs.changePage)
   }}
 {{/component}}
