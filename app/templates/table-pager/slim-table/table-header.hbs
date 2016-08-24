@@ -1,10 +1,10 @@
 <thead>
 <tr role="row">
-    {{#each columns as |item|}}
-        <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
-            {{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort" style="cursor: pointer"></i>
-        </th>
-    {{/each}}
+  {{#each columns as |item|}}
+      <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+        {{item.displayName}} <i {{action "sortField" item.fieldName}} class="fa fa-sort" style="cursor: pointer"></i>
+      </th>
+  {{/each}}
 
     <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
 
@@ -14,11 +14,11 @@
 
 <tfoot>
 <tr>
-    {{#each columns as |item|}}
-        <th rowspan="1" colspan="1">
-            {{item.displayName}}
-        </th>
-    {{/each}}
+  {{#each columns as |item|}}
+      <th rowspan="1" colspan="1">
+        {{item.displayName}}
+      </th>
+  {{/each}}
     <th rowspan="1" colspan="1">Actions</th>
 </tr>
 </tfoot>
