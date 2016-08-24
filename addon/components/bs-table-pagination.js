@@ -18,7 +18,7 @@ export default TablePagination.extend({
   perPage: 50,
 
   // computed:
-  boxSizeClass: computed('boxSize', function() {
+  boxSizeClass: computed('boxSize', function () {
     let boxSize = this.get('boxSize');
     return `box-${boxSize}`;
   }),

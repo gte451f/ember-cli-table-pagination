@@ -1,13 +1,13 @@
 <tbody>
 {{#each model as |record|}}
     <tr>
-        {{#each columns as |col|}}
-            <td>{{pager-loop model=record field=col}}</td>
-        {{/each}}
+      {{#each columns as |col|}}
+          <td>{{pager-loop model=record field=col}}</td>
+      {{/each}}
         <td class="clearfix">
-            {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
-                {{fa-icon 'folder-open'}} 
-            {{/link-to}}
+          {{#link-to linkPath record.id class="btn btn-default btn-xs pull-right"}}
+            {{fa-icon 'folder-open'}}
+          {{/link-to}}
         </td>
     </tr>
 {{else}}
