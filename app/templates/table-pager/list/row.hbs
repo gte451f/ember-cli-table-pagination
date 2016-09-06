@@ -1,12 +1,12 @@
 {{#each model as |record|}}
     <li>
     <span class="text">
-        {{#each columns as |col|}}
-            {{pager-loop model=record field=col}}
-        {{/each}}
+      {{#each columns as |col|}}
+        {{pager-loop model=record field=col}}
+      {{/each}}
     </span>
         <div class="tools">
-            {{#link-to linkPath record}} {{fa-icon "folder-open-o"}} {{/link-to}}
+          {{#link-to linkPath record}} {{fa-icon "folder-open-o"}} {{/link-to}}
         </div>
     </li>
 {{else}}

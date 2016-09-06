@@ -10,11 +10,11 @@
             {{/unless}}
             {{item.displayName}}
             {{#unless item.disableServerInteractions}}
-              {{#if (and (eq sorting item.apiInteractionName) (eq sortingDirection 'asc'))}}
+              {{#if (and (eq sortProperty item.apiInteractionName) (eq sortDirection 'asc'))}}
                   <a {{action (action this.attrs.changeSort item.apiInteractionName 'desc')}}>
                       <i class="fa fa-sort-asc"></i>
                   </a>
-              {{else if (and (eq sorting item.apiInteractionName) (eq sortingDirection 'desc'))}}
+              {{else if (and (eq sortProperty item.apiInteractionName) (eq sortDirection 'desc'))}}
                   <a {{action (action this.attrs.changeSort '')}}>
                       <i class="fa fa-sort-desc"></i>
                   </a>
@@ -31,7 +31,6 @@
               </div>
           </th>
       {{/each}}
-
         <th role="columnheader" tabindex="0" rowspan="1" colspan="1"></th>
     </tr>
     </thead>

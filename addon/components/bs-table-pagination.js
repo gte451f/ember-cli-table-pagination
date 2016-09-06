@@ -18,7 +18,7 @@ export default TablePagination.extend({
   perPage: 50,
 
   // computed:
-  boxSizeClass: computed('boxSize', function() {
+  boxSizeClass: computed('boxSize', function () {
     let boxSize = this.get('boxSize');
     return `box-${boxSize}`;
   }),
@@ -30,5 +30,6 @@ export default TablePagination.extend({
   pagerComponent: 'bs-table-pagination.table-pager',
   titleComponent: 'bs-table-pagination.table-title',
   toolbarComponent: 'bs-table-pagination.table-toolbar',
-  toolsComponent: 'bs-table-pagination.table-tools'
+  toolsComponent: 'bs-table-pagination.table-tools',
+  noDataComponent: 'bs-table-pagination.table-no-data'
 });

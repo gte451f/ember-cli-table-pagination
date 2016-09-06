@@ -1,7 +1,7 @@
 <label>Per Page:</label>
 {{#x-select value=perPage class="form-control input-sm form-control-inline"}}
-    {{#each pageList as |item|}}
-        {{#x-option value=item}}{{item}}{{/x-option}}
-    {{/each}}
+  {{#each pageList as |item|}}
+    {{#x-option value=item}}{{item}}{{/x-option}}
+  {{/each}}
 {{/x-select}}
 <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
