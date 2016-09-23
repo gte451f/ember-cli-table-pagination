@@ -44,10 +44,11 @@
 
   {{#component contentComponent
   contentParams=contentParams
-  columns=columns
+  columns=fields
   loading=loading
   sortDirection=sortDirection
   sortProperty=sortProperty
+  numberOfRecords=numberOfRecords
   changeSort=(action this.actions.changeSort)}}
     {{#each currentContent as |item|}}
       {{yield item}}
