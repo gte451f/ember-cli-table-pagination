@@ -1,4 +1,7 @@
-<table class="table table-bordered table-striped">
+{{log 'scrollMode -> ' scrollMode}}
+{{log 'bodyHeight -> ' bodyHeight}}
+{{log 'contentParams -> ' contentParams}}
+<table class="table table-bordered table-striped {{if scrollMode "scrolling-content" ""}}">
     <thead>
     <tr role="row">
       {{#each columns as |item|}}
@@ -45,7 +48,7 @@
         <th rowspan="1" colspan="1">Actions</th>
     </tr>
     </tfoot>
-    <tbody>
+    <tbody class="row" style="height: {{bodyHeight}}">
     {{yield}}
     </tbody>
 </table>
