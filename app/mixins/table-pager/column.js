@@ -42,5 +42,7 @@ export default Ember.Object.extend({
       // ie lastName >>  last_name
       return this.get('fieldName').underscore();
     }
-  })
+  }),
+
+  width: undefined
 });

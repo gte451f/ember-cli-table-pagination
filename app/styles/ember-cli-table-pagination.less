@@ -3,6 +3,11 @@
   .ember-cli-table-content {
     position: relative;
 
+    tbody tr.hidden-header {
+      visibility: visible;
+      margin-bottom: -100%;
+    }
+
     .scrolling-content {
       &table {
         width: 100%;
@@ -10,8 +15,6 @@
 
       thead, tbody, tfoot { display: block; }
       // , tr, td, th
-
-      thead, tfoot { padding-right: 15px; }
 
       tr:after {
         content: ' ';

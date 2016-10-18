@@ -3,9 +3,9 @@
 {{log 'contentParams -> ' contentParams}}
 <table class="table table-bordered table-striped {{if scrollMode "scrolling-content" ""}}">
     <thead>
-    <tr role="row">
+    <tr role="row" style="width: 100%">
       {{#each columns as |item|}}
-          <th role="columnheader" tabindex="0" rowspan="1" colspan="1">
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">
             {{#unless item.disableServerInteractions}}
               {{#if item.enableSearch }}
                   <a {{action (toggle 'showFilter' this)}}><i class="fa fa-search"></i></a>
@@ -34,9 +34,13 @@
               </div>
           </th>
       {{/each}}
-        <th role="columnheader" tabindex="0" rowspan="1" colspan="1"></th>
+        <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style="{{if actionWidth (concat 'width: ' actionWidth 'px;')}}"></th>
     </tr>
     </thead>
+
+    <tbody class="row" style="height: {{bodyHeight}}">
+    {{yield}}
+    </tbody>
 
     <tfoot>
     <tr>
@@ -48,9 +52,6 @@
         <th rowspan="1" colspan="1">Actions</th>
     </tr>
     </tfoot>
-    <tbody class="row" style="height: {{bodyHeight}}">
-    {{yield}}
-    </tbody>
 </table>
 {{#if loading}}
     <div class='table-loading-overlay container'>
