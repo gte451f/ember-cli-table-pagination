@@ -45,11 +45,11 @@
     <tfoot>
     <tr>
       {{#each columns as |item|}}
-          <th rowspan="1" colspan="1">
+          <th rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">
             {{item.displayName}}
           </th>
       {{/each}}
-        <th rowspan="1" colspan="1">Actions</th>
+        <th rowspan="1" colspan="1" style="{{if actionWidth (concat 'width: ' actionWidth 'px;')}}">Actions</th>
     </tr>
     </tfoot>
 </table>
