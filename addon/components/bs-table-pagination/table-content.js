@@ -2,7 +2,7 @@ import Ember from 'ember';
 import layout from '../../templates/components/bs-table-pagination/table-content';
 import ResizeAware from 'ember-resize/mixins/resize-aware';
 
-const { Component, computed, on, run} = Ember;
+const { Component, computed, observer, on, run} = Ember;
 const { reads } = computed;
 
 export default Component.extend(ResizeAware, {
@@ -22,6 +22,13 @@ export default Component.extend(ResizeAware, {
   onInit: on('didInsertElement', function () {
     console.log('on Init !');
     if (this.get('scrollMode')) {
+      this.adjustTableDimensions();
+    }
+  }),
+  currentContentSizeObserver: observer('currentContentSize', function () {
+    let size = this.get('currentContentSize');
+    if (this.get('scrollMode')) {
+      console.log('adjusting based on the currentContent size');
       this.adjustTableDimensions();
     }
   }),
@@ -55,6 +62,26 @@ export default Component.extend(ResizeAware, {
           self.set('actionWidth', actionWidth);
           console.log('col ', idx, ' width -> ', actionWidth);
         }
+      });
+
+      run.later(() => {
+        self.$('thead > tr:first-of-type > th').each((idx, cell) => {
+          if (idx < columns.length) {
+            let cellWidth = self.$(cell).innerWidth();
+            console.log('adjusting -> col ', idx, ' width -> ', cellWidth);
+            if (columns[ idx ].get('width') < cellWidth) {
+              columns[ idx ].set('width', cellWidth);
+            }
+          } else {
+            // debugger;
+            // self.set('actionWidth', cell.offsetWidth);
+            let actionWidth = self.$(cell).innerWidth();
+            if (self.get('actionWidth') < actionWidth) {
+              self.set('actionWidth', actionWidth);
+            }
+            console.log('adjusting -> col ', idx, ' width -> ', actionWidth);
+          }
+        });
       });
     });
   },
