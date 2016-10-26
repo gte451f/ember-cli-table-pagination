@@ -48,41 +48,25 @@ export default Component.extend(ResizeAware, {
     run.later(() => {
       //in anycase, we need to check the width of each cell in the table's body
       let firstRow = this.$('tbody > tr:first-of-type > td');
+      let headerRow = this.$('thead > tr:first-of-type > th');
+      let contentWidths = [];
+      let headerWidths = [];
       let columns = this.get('columns');
-      let self = this;
+      let actionWidth;
       firstRow.each((idx, cell) => {
-        if (idx < columns.length) {
-          let cellWidth = self.$(cell).outerWidth();
-          console.log('col ', idx, ' width -> ', cellWidth);
-          columns[ idx ].set('width', cellWidth);
-        } else {
-          // debugger;
-          // self.set('actionWidth', cell.offsetWidth);
-          let actionWidth = (self.$('thead').outerWidth() + self.$('thead').offset().left - self.$(cell).offset().left);
-          self.set('actionWidth', actionWidth);
-          console.log('col ', idx, ' width -> ', actionWidth);
+        contentWidths[idx] = this.$(cell).innerWidth();
+        if (idx === columns.length) {
+          actionWidth = (this.$('thead').outerWidth() + this.$('thead').offset().left - this.$(cell).offset().left);
         }
       });
-
-      run.later(() => {
-        self.$('thead > tr:first-of-type > th').each((idx, cell) => {
-          if (idx < columns.length) {
-            let cellWidth = self.$(cell).innerWidth();
-            console.log('adjusting -> col ', idx, ' width -> ', cellWidth);
-            if (columns[ idx ].get('width') < cellWidth) {
-              columns[ idx ].set('width', cellWidth);
-            }
-          } else {
-            // debugger;
-            // self.set('actionWidth', cell.offsetWidth);
-            let actionWidth = self.$(cell).innerWidth();
-            if (self.get('actionWidth') < actionWidth) {
-              self.set('actionWidth', actionWidth);
-            }
-            console.log('adjusting -> col ', idx, ' width -> ', actionWidth);
-          }
-        });
+      headerRow.each((idx, cell) => {
+        headerWidths[idx] = this.$(cell).innerWidth();
       });
+
+      for (let i = 0; i < columns.length; i ++) {
+        columns[i].set('width', (headerWidths[i] > contentWidths[i])? headerWidths[i] : contentWidths[i]);
+      }
+      this.set('actionWidth', Math.max(headerWidths[columns.length], contentWidths[columns.length], actionWidth));
     });
   },
   adjustBodyHeight() {
