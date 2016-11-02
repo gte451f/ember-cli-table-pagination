@@ -1,5 +1,12 @@
 'use strict';
 
 module.exports = function(/* environment, appConfig */) {
-  return { };
+  return {
+    resizeServiceDefaults: {
+      debounceTimeout    : 100,
+      heightSensitive    : true,
+      widthSensitive     : true,
+      injectionFactories : ['component']
+    }
+  };
 };

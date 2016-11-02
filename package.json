@@ -20,7 +20,6 @@
   "devDependencies": {
     "active-model-adapter": "2.1.1",
     "bootstrap": "3.3.6",
-    "ember-font-awesome": "2.1.0",
     "broccoli-asset-rev": "^2.2.0",
     "ember-ajax": "0.7.1",
     "ember-bootstrap": "0.7.0",
@@ -62,8 +61,10 @@
     "ember-cli-less": "1.5.3",
     "ember-cli-pagination": "^2.2.1",
     "ember-composable-helpers": "0.21.1",
+    "ember-font-awesome": "2.1.0",
     "ember-route-action-helper": "0.3.1",
     "ember-truth-helpers": "1.2.0",
+    "ember-resize": "0.0.17",
     "emberx-select": "^2.0.0",
     "pagination-pager": "2.4.1"
   },

@@ -149,6 +149,7 @@ export default Component.extend({
       return content;
     }
   }),
+  currentContentSize: reads('currentContent.length'),
   totalPages: computed('filteredContent.length', 'perPage', function () {
     let contentLength = this.get('filteredContent.length');
     let perPage = this.get('perPage');

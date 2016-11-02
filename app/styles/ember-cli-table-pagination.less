@@ -3,6 +3,48 @@
   .ember-cli-table-content {
     position: relative;
 
+    tbody tr.hidden-header {
+      visibility: visible;
+      margin-bottom: -100%;
+    }
+
+    .scrolling-content {
+      &table {
+        width: 100%;
+      }
+
+      thead, tbody, tfoot { display: block; }
+      // , tr, td, th
+
+      tr:after {
+        content: ' ';
+        display: block;
+        visibility: hidden;
+        clear: both;
+      }
+
+      //thead th {
+      //  height: 30px;
+      //
+      //  /*text-align: left;*/
+      //}
+
+      tbody {
+        //height: 75vh;
+        overflow-y: scroll;
+      }
+
+      thead {
+        /* fallback */
+      }
+
+
+/*      tbody td, thead th {
+        width: 19.2%;
+        float: left;
+      }*/
+    }
+
     .table-loading-overlay {
       position: absolute;
       top: 0;
