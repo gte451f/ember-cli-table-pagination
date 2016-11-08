@@ -1,7 +1,9 @@
 {{log 'currentContentSize -> ' currentContentSize}}
+{{log 'scrollMode -> ' scrollMode}}
+{{log 'mainScroll -> ' mainScroll}}
 <table class="table table-bordered table-striped {{if scrollMode "scrolling-content" ""}}">
     <thead>
-    <tr role="row" style="width: 100%">
+    <tr role="row" style="{{if scrollMode 'min-width: 100%'}}">
       {{#each columns as |item|}}
           <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">
             {{#unless item.disableServerInteractions}}
@@ -26,9 +28,9 @@
               {{/if}}
             {{/unless}}
               <div class="row {{if (and showFilter item.enableSearch (not item.disableServerInteractions)) '' 'hidden'}}">
-                  <div class="col-md-12">
+                  {{!--<div class="col-md-12">--}}
                     {{input type="text" class="form-control" value=item.filterValue name=item.fieldName }}
-                  </div>
+                  {{!--</div>--}}
               </div>
           </th>
       {{/each}}
@@ -37,7 +39,14 @@
     </thead>
 
     <tbody class="row" style="height: {{bodyHeight}}">
-    {{yield}}
+      {{#if scrollMode}}
+        <tr class="ghost-header">
+            {{#each columns as |item|}}
+              <th rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">&nbsp;</th>
+            {{/each}}
+        </tr>
+      {{/if}}
+      {{yield}}
     </tbody>
 
     <tfoot>

@@ -1,5 +1,5 @@
 {{#each columns as |col|}}
-    <td style="{{if col.width (concat 'width: ' col.width 'px;')}}">{{pager-loop model=item field=col}}</td>
+    <td>{{pager-loop model=item field=col}}</td>
 {{/each}}
 <td class="clearfix">
   {{#if linkPath}}
