@@ -67,9 +67,6 @@
     "emberx-select": "^2.0.0",
     "pagination-pager": "2.4.1"
   },
-  "optionalDependencies": {
-    "ember-font-awesome": "^2.1.0"
-  },
   "ember-addon": {
     "configPath": "tests/dummy/config",
     "after": [
