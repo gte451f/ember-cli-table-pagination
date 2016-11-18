@@ -90,7 +90,7 @@ export default Component.extend({
       let pattern = new RegExp(searchString, 'i');
       let found = false;
       item.eachAttribute(function (name, meta) {
-        if (['number', 'string', 'date'].contains(meta.type)) {
+        if (['number', 'string', 'date'].includes(meta.type)) {
           found = found || pattern.test(item.get(name));
         }
       });
