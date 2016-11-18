@@ -5,7 +5,7 @@
     <thead>
     <tr role="row" style="{{if scrollMode 'min-width: 100%'}}">
       {{#each columns as |item|}}
-          <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">
+          <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels item.width}}>
             {{#unless item.disableServerInteractions}}
               {{#if item.enableSearch }}
                   <a {{action (toggle 'showFilter' this)}}><i class="fa fa-search"></i></a>
@@ -34,7 +34,7 @@
               </div>
           </th>
       {{/each}}
-        <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style="{{if actionWidth (concat 'width: ' actionWidth 'px;')}}"></th>
+        <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}></th>
     </tr>
     </thead>
 
@@ -52,11 +52,11 @@
     <tfoot>
     <tr>
       {{#each columns as |item|}}
-          <th rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">
+          <th rowspan="1" colspan="1" style={{width-in-pixels item.width}}>
             {{item.displayName}}
           </th>
       {{/each}}
-        <th rowspan="1" colspan="1" style="{{if actionWidth (concat 'width: ' actionWidth 'px;')}}">Actions</th>
+        <th rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}>Actions</th>
     </tr>
     </tfoot>
 </table>
