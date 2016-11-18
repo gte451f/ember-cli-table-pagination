@@ -3,7 +3,7 @@
 {{log 'mainScroll -> ' mainScroll}}
 <table class="table table-bordered table-striped {{if scrollMode "scrolling-content" ""}}">
     <thead>
-    <tr role="row" style="{{if scrollMode 'min-width: 100%'}}">
+  <tr role="row" style={{min-width-if-true scrollMode 100}}>
       {{#each columns as |item|}}
           <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels item.width}}>
             {{#unless item.disableServerInteractions}}
@@ -42,7 +42,7 @@
       {{#if scrollMode}}
         <tr class="ghost-header">
             {{#each columns as |item|}}
-              <th rowspan="1" colspan="1" style="{{if item.width (concat 'width: ' item.width 'px;')}}">&nbsp;</th>
+              <th rowspan="1" colspan="1" style={{width-in-pixels item.width}}>&nbsp;</th>
             {{/each}}
         </tr>
       {{/if}}
