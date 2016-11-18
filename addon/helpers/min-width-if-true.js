@@ -6,7 +6,7 @@ export function minWidthIfTrue(params/*, hash*/) {
   if (isTrue) {
     return Ember.String.htmlSafe('min-width: ' + percentage + '%');
   }
-  return '';
+  return Ember.String.htmlSafe('');
 }
 
 export default Ember.Helper.helper(minWidthIfTrue);
