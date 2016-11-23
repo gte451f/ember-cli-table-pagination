@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import Column from './column';
 
-const {computed} = Ember;
+const { computed } = Ember;
+const { alias } = computed;
 
 /**
  * store shared logic to run pager logic
@@ -42,7 +43,7 @@ export default Ember.Mixin.create({
   // to the query params on the controller
   //pageBinding: "content.page",
   //perPageBinding: "content.perPage",
-  totalPagesBinding: "content.totalPages",
+  totalPages: alias("content.totalPages"),
 
   observingPerPage: function () {
     this.set('page', 1);
