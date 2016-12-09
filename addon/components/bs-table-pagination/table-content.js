@@ -20,27 +20,23 @@ export default Component.extend(ResizeAware, {
   actionWidth: undefined,
 
   onInit: on('didInsertElement', function () {
-    console.log('on Init !');
     if (this.get('scrollMode')) {
       this.adjustTableDimensions();
     }
   }),
   showFilterObserver: observer('showFilter', function () {
     if (this.get('scrollMode')) {
-      console.log('adjusting based on the currentContent size');
       this.adjustTableDimensions();
     }
   }),
   currentContentSizeObserver: observer('currentContentSize', function () {
     // let size = this.get('currentContentSize');
     if (this.get('scrollMode')) {
-      console.log('adjusting based on the currentContent size');
       this.adjustTableDimensions();
     }
   }),
 
   didResize(width, height) {
-    console.log(`Resized! ${width}x${height}`);
     if (this.get('scrollMode')) {
       this.adjustTableDimensions();
     }
@@ -53,7 +49,6 @@ export default Component.extend(ResizeAware, {
     }
     let columns = this.get('columns');
     run.later(() => {
-      console.log('reset');
       this.set('actionWidth', 0);
       columns.forEach((col) => {
         col.set('width', 0);
@@ -61,7 +56,6 @@ export default Component.extend(ResizeAware, {
 
       let self = this;
       run.later(() => {
-        console.log('first pass');
         //in anycase, we need to check the width of each cell in the table's body
         let showFilter = self.get('showFilter');
         let firstRow = self.$('tbody > tr:nth-of-type(2) > td');
@@ -90,10 +84,10 @@ export default Component.extend(ResizeAware, {
         let delta = 0;
         for (let i = 0; i < columns.length; i ++) {
           maxWidth = Math.max(headerWidths[i], contentWidths[i] - 0, footerWidths[i]);
-          console.log(`headerWidth[${i}] vs contentWidth[${i}] -> `, headerWidths[i], contentWidths[i]);
-          console.log(`footerWidths[${i}] -> `, footerWidths[i]);
-          console.log(`contentWidth[${i}] - delta -> `, contentWidths[i] - delta);
-          console.log(`maxWidth[${i}] -> `, maxWidth);
+          // console.log(`headerWidth[${i}] vs contentWidth[${i}] -> `, headerWidths[i], contentWidths[i]);
+          // console.log(`footerWidths[${i}] -> `, footerWidths[i]);
+          // console.log(`contentWidth[${i}] - delta -> `, contentWidths[i] - delta);
+          // console.log(`maxWidth[${i}] -> `, maxWidth);
           if (showFilter) {
             // the delta business is only for when we show the filters
             if (maxWidth === contentWidths[i] - delta) {
@@ -102,7 +96,7 @@ export default Component.extend(ResizeAware, {
             } else if (maxWidth === headerWidths[i]) {
               // if we didn't we need to add him
               delta += headerWidths[i] - contentWidths[i];
-              console.log('delta -> ', delta);
+              // console.log('delta -> ', delta);
             }
           }
           columnWidths[i] = maxWidth;
@@ -117,13 +111,13 @@ export default Component.extend(ResizeAware, {
         let extra = tableWidth - sum;
         extra = (extra > 0) ? extra: 0;
         extra = extra / columns.length;
-        console.log('we have ', extra, ' extra px / col');
+        // console.log('we have ', extra, ' extra px / col');
         for (let i = 0; i < columns.length; i ++) {
           columns[i].set('width', columnWidths[i] + extra);
           // columns[i].set('width', tableWidth / columns.length);
         }
         run.later(() => {
-          console.log('second pass');
+          // console.log('second pass');
           actionWidth =
             self.$('thead').outerWidth() +
             self.$('thead').offset().left -
