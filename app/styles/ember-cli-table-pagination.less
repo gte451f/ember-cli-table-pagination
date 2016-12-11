@@ -9,12 +9,35 @@
     }
 
     .scrolling-content {
-      &table {
-        width: 100%;
-      }
+      width: 100%;
+      table-layout: fixed;
 
-      thead, tbody, tfoot { display: block; }
+      thead, tbody, tfoot {
+        display: block;
+
+        th:last-of-type {
+          margin-right: 15px;
+        }
+      }
       // , tr, td, th
+
+      tbody .ghost-header {
+        height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        width: 100%;
+        overflow-y: hidden;
+        //visibility: hidden;
+
+        th {
+          height: 0;
+          font-size: 0;
+          padding-top: 0;
+          padding-bottom: 0;
+          border: 0;
+          overflow-y: hidden;
+        }
+      }
 
       tr:after {
         content: ' ';
@@ -38,11 +61,10 @@
         /* fallback */
       }
 
-
-/*      tbody td, thead th {
-        width: 19.2%;
-        float: left;
-      }*/
+      /*      tbody td, thead th {
+              width: 19.2%;
+              float: left;
+            }*/
     }
 
     .table-loading-overlay {
