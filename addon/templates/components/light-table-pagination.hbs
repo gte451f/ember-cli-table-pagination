@@ -1,0 +1,32 @@
+{{#light-table table
+  height='80vh'
+  as |t|}}
+{{t.head
+    onColumnClick=(action 'onColumnClick')
+    iconAscending='fa fa-sort-asc'
+    iconDescending='fa fa-sort-desc'
+    fixed=true
+}}
+
+{{#t.body
+    onRowClick=(action 'rowClicked')
+    as |body|}}
+    {{#body.expanded-row as |row|}}
+      {{row.name}}
+    {{/body.expanded-row}}
+
+    {{#if isLoading}}
+      {{#body.loader}}
+      Loading...
+      {{/body.loader}}
+    {{/if}}
+
+    {{#if table.isEmpty}}
+      {{#body.no-data}}
+      No cases found
+      {{/body.no-data}}
+    {{/if}}
+  {{/t.body}}
+
+  {{t.foot}}
+{{/light-table}}
