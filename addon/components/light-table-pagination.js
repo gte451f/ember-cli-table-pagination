@@ -13,6 +13,16 @@ export default TablePagination.extend({
   // override inherited properties
   perPage: 50,
 
+  // override the components:
+  bodyComponent: 'bs-table-pagination.table-body',
+  contentComponent: 'bs-table-pagination.table-content',
+  footerComponent: 'bs-table-pagination.table-footer',
+  pagerComponent: 'bs-table-pagination.table-pager',
+  titleComponent: 'bs-table-pagination.table-title',
+  toolbarComponent: 'bs-table-pagination.table-toolbar',
+  toolsComponent: 'bs-table-pagination.table-tools',
+  noDataComponent: 'bs-table-pagination.table-no-data',
+
   /** light table columns derived from the columns property*/
   ltColumns: computed('columns', function() {
     return this.get('columns').map((column) => {
@@ -28,10 +38,12 @@ export default TablePagination.extend({
   }),
 
   actions: {
-    onColumnClick() {
-    }
-    ,
-    rowClicked(){
+    onColumnClick(column) {
+      if (column.sorted) {
+        /** get the table pagination column */
+        let tpColumn = this.get('columns').findBy('fieldName', column.get('valuePath'));
+        this.sendAction('changeSort', tpColumn.get('apiInteractionName'), column.get('ascending') ? '' : '-');
+      }
     }
   }
 });

@@ -1,32 +1,103 @@
-{{#light-table table
-  height='80vh'
-  as |t|}}
-{{t.head
-    onColumnClick=(action 'onColumnClick')
-    iconAscending='fa fa-sort-asc'
-    iconDescending='fa fa-sort-desc'
-    fixed=true
-}}
+{{#if tableTitle}}
+  {{#component titleComponent
+  titleParams=titleParams
+  contentParams=contentParams
+  allowQuickSearch=allowQuickSearch}}
+    {{tableTitle}}
+  {{/component}}
+{{/if}}
 
-{{#t.body
-    onRowClick=(action 'rowClicked')
-    as |body|}}
-    {{#body.expanded-row as |row|}}
-      {{row.name}}
-    {{/body.expanded-row}}
+{{#component bodyComponent}}
+  {{#component toolbarComponent}}
+    {{#if isRemoteHandled}}
+      {{component toolsComponent
+      allowQuickSearch=allowQuickSearch
+      searchString=searchString
+      totalRecords=numberOfRecords
+      perPage=perPage
+      toolsParams=toolsParams
+      refresh=(action this.attrs.refresh)
+      runQuickSearch=(action this.attrs.runQuickSearch)
+      changePerPage=(action this.attrs.changePerPage)
+      changeSort=(action this.actions.changeSort)}}
 
-    {{#if isLoading}}
-      {{#body.loader}}
-      Loading...
-      {{/body.loader}}
+      {{component pagerComponent
+      count=totalPages
+      current=page
+      changePage=(action this.attrs.changePage)
+      pagerParams=pagerParams}}
+    {{else}}
+      {{component toolsComponent
+      allowQuickSearch=allowQuickSearch
+      searchString=searchString
+      perPage=perPage
+      changePerPage=(action 'doNothing')
+      refresh=(action 'doNothing')
+      runQuickSearch=(action 'doNothing')}}
+
+      {{component pagerComponent
+      count=totalPages
+      current=page
+      changePage=(action 'doNothing')}}
     {{/if}}
+  {{/component}}
 
-    {{#if table.isEmpty}}
+  {{!--#component contentComponent
+  contentParams=contentParams
+  currentContentSize=currentContentSize
+  columns=columns
+  loading=loading
+  sortDirection=sortDirection
+  sortProperty=sortProperty
+  numberOfRecords=numberOfRecords
+  changeSort=(action this.actions.changeSort)}}
+    {{#each currentContent as |item|}}
+      {{yield item}}
+    {{else}}
+      {{component noDataComponent noDataParams=noDataParams}}
+    {{/each}}
+  {{/component--}}
+
+  {{#light-table table
+    height='80vh'
+    as |t|}}
+
+    {{t.head
+      onColumnClick=(action 'onColumnClick')
+      iconAscending='fa fa-sort-asc'
+      iconDescending='fa fa-sort-desc'
+      fixed=true
+      }}
+
+    {{#t.body as |body|}}
+
+      {{#body.expanded-row as |row|}}
+        Here goes the row expanded{{!row.name}}
+      {{/body.expanded-row}}
+
+      {{#if loading}}
+        {{#body.loader}}
+        Loading...
+        {{/body.loader}}
+      {{/if}}
+
+      {{#if table.isEmpty}}
       {{#body.no-data}}
-      No cases found
+        {{component noDataComponent noDataParams=noDataParams}}
       {{/body.no-data}}
-    {{/if}}
-  {{/t.body}}
+      {{/if}}
 
-  {{t.foot}}
-{{/light-table}}
+    {{/t.body}}
+
+    {{t.foot}}
+  {{/light-table}}
+
+
+  {{component footerComponent
+  perPage=perPage
+  page=page
+  totalPages=totalPages
+  totalRecords=numberOfRecords
+  changePage=(action this.attrs.changePage)
+  }}
+{{/component}}
