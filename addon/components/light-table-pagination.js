@@ -29,7 +29,7 @@ export default TablePagination.extend({
     return [ {
         label: 'Actions',
         sortable: false,
-        width: '50px',
+        width: '100px',
         cellComponent: 'light-table-pagination.table-actions'
       } ].pushObjects(
       this.get('columns').map((column) => {

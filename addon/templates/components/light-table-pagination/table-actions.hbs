@@ -9,7 +9,7 @@
   {{/link-to}}
 {{/if}}
 {{#if tableActions.deleteAction}}
-    <a {{action tableActions.deleteAction row}} class="btn btn-default btn-xs" href="#">
+    <a {{action tableActions.deleteAction row.content}} class="btn btn-default btn-xs" href="#">
       {{fa-icon 'trash'}}
     </a>
 {{/if}}
