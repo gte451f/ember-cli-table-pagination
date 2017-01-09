@@ -61,6 +61,13 @@
   {{#light-table table
     height='80vh'
     tableClassNames='table table-bordered table-striped'
+    responsive=true
+    breakpoints=(hash
+      mobile=3
+      tablet=5
+      desktop=10
+      jumbo=20
+    )
     tableActions=(hash
       linkPath=linkPath
       editPath=editPath
