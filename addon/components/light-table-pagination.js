@@ -44,11 +44,13 @@ export default TablePagination.extend({
     let t = new Table(this.get('ltColumns'), this.get('content'));
 
     let tpColumn = this.get('columns').findBy('apiInteractionName', this.get('sortProperty'));
-    let sortColumn = t.get('allColumns').findBy('valuePath', tpColumn.get('fieldName'));
+    if (tpColumn) {
+      let sortColumn = t.get('allColumns').findBy('valuePath', tpColumn.get('fieldName'));
 
-    if (sortColumn) {
-      sortColumn.set('sorted', true);
-      sortColumn.set('ascending', this.get('sortDirection') === 'asc');
+      if (sortColumn) {
+        sortColumn.set('sorted', true);
+        sortColumn.set('ascending', this.get('sortDirection') === 'asc');
+      }
     }
     return t;
   }),
