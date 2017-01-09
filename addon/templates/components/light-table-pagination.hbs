@@ -60,10 +60,15 @@
 
   {{#light-table table
     height='80vh'
+    tableClassNames='table table-bordered table-striped'
+    tableActions=(hash
+      linkPath=linkPath
+    )
     as |t|}}
 
     {{t.head
       onColumnClick=(action 'onColumnClick')
+      onColumnDoubleClick=(action 'onColumnDoubleClick')
       iconAscending='fa fa-sort-asc'
       iconDescending='fa fa-sort-desc'
       fixed=true
