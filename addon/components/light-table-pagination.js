@@ -39,7 +39,8 @@ export default TablePagination.extend({
         valuePath: column.get('fieldName'),
         sortable: true,
         width: column.get('width'),
-        cellComponent: column.get('cellComponent')
+        cellComponent: column.get('cellComponent'),
+        type: 'base-with-filter'
       };
     }));
   }),

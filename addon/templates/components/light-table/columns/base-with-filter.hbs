@@ -1,0 +1,19 @@
+<i class="fa fa-search"></i>
+{{#unless row.disableServerInteractions}}
+{{#if row.enableSearch }}
+<a {{action (toggle 'showFilter' this)}}><i class="fa fa-search"></i></a>
+{{/if}}
+{{/unless}}
+
+{{#if column.component}}
+  {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
+{{else}}
+  {{label}}
+  {{#if column.sorted}}
+    <span class="lt-sort-icon {{if column.ascending sortIcons.iconAscending sortIcons.iconDescending}}"></span>
+  {{/if}}
+{{/if}}
+
+{{#if isResizable}}
+  {{lt-column-resizer column=column resizeOnDrag=resizeOnDrag columnResized=(action 'columnResized')}}
+{{/if}}
