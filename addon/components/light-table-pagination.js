@@ -4,8 +4,7 @@ import TablePagination from './table-pagination';
 import Table from 'ember-light-table';
 
 const {
-  computed,
-  isEmpty
+  computed
 } = Ember;
 
 export default TablePagination.extend({
@@ -13,6 +12,8 @@ export default TablePagination.extend({
 
   // override inherited properties
   perPage: 50,
+
+  height: '80vh',
 
   // override the components:
   bodyComponent: 'bs-table-pagination.table-body',
@@ -29,14 +30,16 @@ export default TablePagination.extend({
     return [ {
         label: 'Actions',
         sortable: false,
-        width: '100px',
+        width: '67px',
         cellComponent: 'light-table-pagination.table-actions'
       } ].pushObjects(
       this.get('columns').map((column) => {
       return {
         label: column.get('displayName'),
         valuePath: column.get('fieldName'),
-        sortable: true
+        sortable: true,
+        width: column.get('width'),
+        cellComponent: column.get('cellComponent')
       };
     }));
   }),

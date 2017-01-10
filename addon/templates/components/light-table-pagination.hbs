@@ -42,24 +42,21 @@
     {{/if}}
   {{/component}}
 
-  {{!--#component contentComponent
-  contentParams=contentParams
-  currentContentSize=currentContentSize
-  columns=columns
-  loading=loading
-  sortDirection=sortDirection
-  sortProperty=sortProperty
-  numberOfRecords=numberOfRecords
-  changeSort=(action this.actions.changeSort)}}
-    {{#each currentContent as |item|}}
-      {{yield item}}
-    {{else}}
-      {{component noDataComponent noDataParams=noDataParams}}
-    {{/each}}
-  {{/component--}}
+  {{#if loading}}
+  <div class='table-loading-overlay container'>
+    <div class='table-loading-inner row'>
+      <div class='vertical-center col-xs-12'>
+        <div class='text-center col-xs-12'>
+          <i class="fa fa-cog fa-spin fa-3x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+
 
   {{#light-table table
-    height='80vh'
+    height=height
     tableClassNames='table table-bordered table-striped'
     responsive=true
     breakpoints=(hash
@@ -83,10 +80,12 @@
       fixed=true
       }}
 
-    {{#t.body as |body|}}
+      {{#t.body
+        rowComponent=rowComponent
+        as |body|}}
 
       {{#body.expanded-row as |row|}}
-        Here goes the row expanded{{!row.name}}
+        Expanded row
       {{/body.expanded-row}}
 
       {{#if loading}}
@@ -103,9 +102,8 @@
 
     {{/t.body}}
 
-    {{t.foot}}
+    {{t.foot fixed=true}}
   {{/light-table}}
-
 
   {{component footerComponent
   perPage=perPage
