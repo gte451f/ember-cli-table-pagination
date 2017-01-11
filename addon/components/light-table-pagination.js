@@ -40,7 +40,8 @@ export default TablePagination.extend({
         sortable: true,
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
-        type: 'base-with-filter'
+        type: 'base-with-filter',
+        tpColumn: column
       };
     }));
   }),

@@ -1,10 +1,3 @@
-<i class="fa fa-search"></i>
-{{#unless row.disableServerInteractions}}
-{{#if row.enableSearch }}
-<a {{action (toggle 'showFilter' this)}}><i class="fa fa-search"></i></a>
-{{/if}}
-{{/unless}}
-
 {{#if column.component}}
   {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
 {{else}}
@@ -17,3 +10,15 @@
 {{#if isResizable}}
   {{lt-column-resizer column=column resizeOnDrag=resizeOnDrag columnResized=(action 'columnResized')}}
 {{/if}}
+
+{{#unless column.tpColumn.disableServerInteractions}}
+  {{#if column.tpColumn.enableSearch }}
+  <a href="#" {{action (toggle 'showFilter' column.tpColumn) bubbles=false}}>
+    <i class="fa fa-search"></i>
+  </a>
+  {{/if}}
+{{/unless}}
+
+<div class="row {{if (and column.tpColumn.showFilter column.tpColumn.enableSearch (not column.tpColumn.disableServerInteractions)) '' 'hidden'}}">
+  {{light-table.filter-box column=column}}
+</div>
