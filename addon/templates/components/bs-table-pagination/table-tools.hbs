@@ -94,13 +94,12 @@
             {{/power-select}}
           </td>
           <td>
-            {{#if (eq column.advFilterOperator.input 0)}}
+            {{#if (eq column.advFilterOperator.input 2)}}
+                {{input type="text" class="form-control" value=column.advFilterValue}} AND
+                {{input type="text" class="form-control" value=column.advFilterValue2}}
             {{else}}
               {{#if (eq column.advFilterOperator.input 1)}}
                 {{input type="text" class="form-control" value=column.advFilterValue}}
-              {{else}}
-                {{input type="text" class="form-control" value=column.advFilterValue}} AND
-                {{input type="text" class="form-control" value=column.advFilterValue2}}
               {{/if}}
             {{/if}}
           </td>

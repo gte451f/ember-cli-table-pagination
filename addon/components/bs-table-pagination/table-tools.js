@@ -41,8 +41,7 @@ export default Ember.Component.extend({
     },
     applyFilter () {
       let columnsWithFilter = this.get('allColumns').filter((c) => {
-        return Ember.isPresent(c.get('advFilterOperator')) &&
-          Ember.isPresent(c.get('advFilterValue'));
+        return Ember.isPresent(c.get('advFilterOperator'));
       });
 
       let extraParams = {};
