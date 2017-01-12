@@ -17,7 +17,9 @@
       perPage=perPage
       toolsParams=toolsParams
       isInfinite=isInfinite
+      allColumns=allColumns
       refresh=(action this.attrs.refresh)
+      runAdvancedSearch=(action this.attrs.runAdvancedSearch)
       runQuickSearch=(action this.attrs.runQuickSearch)
       changePerPage=(action this.attrs.changePerPage)
       changeSort=(action this.actions.changeSort)}}
@@ -35,6 +37,7 @@
       isInfinite=isInfinite
       changePerPage=(action 'doNothing')
       refresh=(action 'doNothing')
+      runAdvancedSearch=(action 'doNothing')
       runQuickSearch=(action 'doNothing')}}
 
       {{component pagerComponent

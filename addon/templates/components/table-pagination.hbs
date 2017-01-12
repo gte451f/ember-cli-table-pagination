@@ -17,6 +17,8 @@
       perPage=perPage
       toolsParams=toolsParams
       refresh=(action this.attrs.refresh)
+      allColumns=allColumns
+      runAdvancedSearch=(action this.attrs.runAdvancedSearch)
       runQuickSearch=(action this.attrs.runQuickSearch)
       changePerPage=(action this.attrs.changePerPage)
       changeSort=(action this.actions.changeSort)}}
@@ -33,6 +35,7 @@
       perPage=perPage
       changePerPage=(action 'doNothing')
       refresh=(action 'doNothing')
+      runAdvancedSearch=(action 'doNothing')
       runQuickSearch=(action 'doNothing')}}
 
       {{component pagerComponent

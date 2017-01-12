@@ -51,3 +51,64 @@
     </div>
     {{/unless}}
 </label>
+
+{{#if allowAdvancedFilter}}
+<label style="margin-right: 10px;">
+    <div class="input-group input-group-sm">
+      <button class="btn-btn-sm" {{action (toggle 'showFilterDialog' this)}}>
+        {{fa-icon 'filter'}}
+        Filter</button>
+    </div>
+</label>
+
+  {{#if showFilterDialog}}
+    {{#basic-modal
+      title="Filter"
+      okText="Apply new filters"
+      ok=(action 'applyFilter')
+      closeText="Cancel"
+      close=(action (mut showFilterDialog) false)
+    }}
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th>Field</th>
+          <th>Operator</th>
+          <th>Value</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each allColumns as |column|}}
+        <tr>
+          <td>{{column.displayName}}</td>
+          <td>
+            {{#power-select
+              options=operators
+              selected=column.advFilterOperator
+              renderInPlace=true
+              onchange=(action (mut column.advFilterOperator))
+              as |result search|
+              }}
+              {{result.display}}
+            {{/power-select}}
+          </td>
+          <td>
+            {{#if (eq column.advFilterOperator.input 0)}}
+            {{else}}
+              {{#if (eq column.advFilterOperator.input 1)}}
+                {{input type="text" class="form-control" value=column.advFilterValue}}
+              {{else}}
+                {{input type="text" class="form-control" value=column.advFilterValue}} AND
+                {{input type="text" class="form-control" value=column.advFilterValue2}}
+              {{/if}}
+            {{/if}}
+          </td>
+          <td><span {{action 'clearFilter' column}}>{{fa-icon 'remove'}}</span></td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+    {{/basic-modal}}
+  {{/if}}
+{{/if}}

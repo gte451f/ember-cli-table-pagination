@@ -155,6 +155,13 @@ export default Component.extend({
     let perPage = this.get('perPage');
     return Math.ceil(contentLength / perPage);
   }),
+
+  allColumns: computed('columns', 'additionalColumnsForFilter', function() {
+    let tableColumns = this.get('columns').filterBy('enableSearch', true);
+    let additionalColumns = this.get('additionalColumnsForFilter').filterBy('enableSearch', true);
+
+    return tableColumns.concat(additionalColumns);
+  }),
   // overwritable components
   bodyComponent: 'table-pagination.table-body',
   contentComponent: 'table-pagination.table-content',
