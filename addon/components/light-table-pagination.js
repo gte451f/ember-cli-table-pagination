@@ -45,8 +45,17 @@ export default TablePagination.extend({
       };
     }));
   }),
-  table: computed('ltColumns', 'content', function() {
-    let t = new Table(this.get('ltColumns'), this.get('content'));
+  table: computed('ltColumns', 'content.[]', function() {
+    let content;
+    let options = {};
+    if (typeof this.attrs.loadNext === 'function') {
+      content = this.get('content.content');
+      options.enableSync = true;
+    } else {
+      content = this.get('content');
+    }
+    let t = new Table(this.get('ltColumns'), content, options);
+    this.set('isLoading', false);
 
     let tpColumn = this.get('columns').findBy('apiInteractionName', this.get('sortProperty'));
     if (tpColumn) {
@@ -61,6 +70,12 @@ export default TablePagination.extend({
   }),
 
   actions: {
+    onScrolledToBottom() {
+      if (typeof this.attrs.loadNext === 'function') {
+        this.set('isLoading', true);
+        this.attrs.loadNext();
+      }
+    },
     onColumnClick(column) {
       if (column.sorted) {
         /** get the table pagination column */

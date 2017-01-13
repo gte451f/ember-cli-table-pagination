@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
+import pagedArray from 'ember-cli-pagination/computed/paged-array';
 const {underscore} = Ember.String;
 
 export default Ember.Mixin.create(RouteMixin, {
@@ -194,11 +195,17 @@ export default Ember.Mixin.create(RouteMixin, {
   model: function (params) {
     let allParams = this.getAllParams(params);
     this.currentParams = allParams;
+    Ember.Logger.debug(allParams);
     return this.findPaged(this.modelName, allParams);
   },
 
   //extend to pass route values onto controller for possible use
   setupController: function (controller, model) {
+    if (this.currentParams.page === 1) {
+      this.controller.set('content', []);
+      //this.controller.get('infiniteContent.all', []);
+      //this.controller.get('infiniteContent').init();
+    }
     this._super(controller, model);
 
     //pass route properties on to controller

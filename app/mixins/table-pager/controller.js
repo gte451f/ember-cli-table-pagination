@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Column from './column';
+import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 const { computed } = Ember;
 const { alias } = computed;
@@ -79,6 +80,8 @@ export default Ember.Mixin.create({
   perPage: 50,
   totalRecords: null,
 
+  infiniteContent: pagedArray('content', {infinite: true}),
+
   column: Ember.Object.extend({
     display: null,
     field: null
@@ -115,5 +118,10 @@ export default Ember.Mixin.create({
   // not sure what this is
   createPath: "set createPath in the controller",
 
-  actions: {}
+  actions: {
+    loadNext () {
+      this.get('infiniteContent').loadNextPage();
+      this.set('page', this.get('infiniteContent.page'));
+    }
+  }
 });
