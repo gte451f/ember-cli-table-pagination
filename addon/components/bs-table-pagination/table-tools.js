@@ -60,13 +60,13 @@ export default Ember.Component.extend({
             filter = value;
             break;
           case 'not_equal':
-            filter = '!' + value;
+            filter = '!=' + value;
             break;
           case 'blank':
             filter = 'NULL||';
             break;
           case 'not_blank':
-            filter = '!NULL';
+            filter = '!NULL||!=';
             break;
           case 'between':
             filter = '~' + value + '~' + value2;
