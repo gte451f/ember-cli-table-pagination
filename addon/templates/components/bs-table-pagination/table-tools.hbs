@@ -20,7 +20,9 @@
     </label>
 {{/if}}
 
-<label style="margin-right: 10px;">Per Page:
+<label style="margin-right: 10px;">
+  {{#unless showAll}}
+    Per Page:
     <div class="input-group input-group-sm">
       {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage)}}
         {{#each perPageOptions as |option|}}
@@ -39,4 +41,11 @@
           {{/if}}
         </span>
     </div>
+    <a href="javascript:void();" {{action 'showAllRecords'}}>Show all records</a>
+    {{else}}
+    <div class="input-group input-group-sm">
+      Showing all records
+      <a href="javascript:void();" {{action 'showByPageRecords'}}>Go back to per page</a>
+    </div>
+    {{/unless}}
 </label>
