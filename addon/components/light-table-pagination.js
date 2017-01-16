@@ -55,7 +55,6 @@ export default TablePagination.extend({
       content = this.get('content');
     }
     let t = new Table(this.get('ltColumns'), content, options);
-    this.set('isLoading', false);
 
     let tpColumn = this.get('columns').findBy('apiInteractionName', this.get('sortProperty'));
     if (tpColumn) {
@@ -72,7 +71,6 @@ export default TablePagination.extend({
   actions: {
     onScrolledToBottom() {
       if (typeof this.attrs.loadNext === 'function') {
-        this.set('isLoading', true);
         this.attrs.loadNext();
       }
     },
@@ -81,11 +79,6 @@ export default TablePagination.extend({
         /** get the table pagination column */
         let tpColumn = this.get('columns').findBy('fieldName', column.get('valuePath'));
         this.sendAction('changeSort', tpColumn.get('apiInteractionName'), column.get('ascending') ? 'asc' : 'desc');
-      }
-    },
-    onColumnDoubleClick(column) {
-      if (column.sorted) {
-        alert('Here we can put a modal to filter');
       }
     }
   }

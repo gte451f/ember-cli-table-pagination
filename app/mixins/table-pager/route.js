@@ -78,6 +78,7 @@ export default Ember.Mixin.create(RouteMixin, {
       if (this.controller.get('page') !== 1) {
         this.controller.set('page', 1);
       }
+      this.controller.get('infiniteContent').clear();
       this.refresh();
     },
 
@@ -87,6 +88,7 @@ export default Ember.Mixin.create(RouteMixin, {
       if (this.controller.get('page') !== 1) {
         this.controller.set('page', 1);
       }
+      this.controller.get('infiniteContent').clear();
       this.refresh();
     },
 
@@ -201,11 +203,6 @@ export default Ember.Mixin.create(RouteMixin, {
 
   //extend to pass route values onto controller for possible use
   setupController: function (controller, model) {
-    if (this.currentParams.page === 1) {
-      this.controller.set('content', []);
-      //this.controller.get('infiniteContent.all', []);
-      //this.controller.get('infiniteContent').init();
-    }
     this._super(controller, model);
 
     //pass route properties on to controller
@@ -213,6 +210,7 @@ export default Ember.Mixin.create(RouteMixin, {
     controller.set('modelName', this.modelName);
     controller.set('controllerName', this.controllerName);
     controller.set('totalRecords', model.meta.total_record_count);
+    controller.set('canLoadMore', model.meta.returned_record_count === controller.get('perPage'));
     let {sortField} = this.getAllParams({});
     if (sortField) {
       if (sortField.substring(0, 1) === '-') {

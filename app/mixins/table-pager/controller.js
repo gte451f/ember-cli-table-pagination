@@ -118,10 +118,14 @@ export default Ember.Mixin.create({
   // not sure what this is
   createPath: "set createPath in the controller",
 
+  canLoadMore: false,
+
   actions: {
     loadNext () {
-      this.get('infiniteContent').loadNextPage();
-      this.set('page', this.get('infiniteContent.page'));
+      if (this.get('infiniteContent.length') > 0 && this.get('canLoadMore')) {
+        this.get('infiniteContent').loadNextPage();
+        this.set('page', this.get('infiniteContent.page'));
+      }
     }
   }
 });

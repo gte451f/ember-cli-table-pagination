@@ -42,19 +42,6 @@
     {{/if}}
   {{/component}}
 
-  {{#if loading}}
-  <div class='table-loading-overlay container'>
-    <div class='table-loading-inner row'>
-      <div class='vertical-center col-xs-12'>
-        <div class='text-center col-xs-12'>
-          <i class="fa fa-cog fa-spin fa-3x"></i>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{/if}}
-
-
   {{#light-table table
     height=height
     tableClassNames='table table-bordered table-striped'
@@ -74,7 +61,6 @@
 
     {{t.head
       onColumnClick=(action 'onColumnClick')
-      onColumnDoubleClick=(action 'onColumnDoubleClick')
       iconAscending='fa fa-sort-asc'
       iconDescending='fa fa-sort-desc'
       fixed=true
@@ -90,7 +76,7 @@
         Expanded row
       {{/body.expanded-row}}
 
-      {{#if isLoading}}
+      {{#if loading}}
         {{#body.loader}}
         <p class="text-center">
           <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
