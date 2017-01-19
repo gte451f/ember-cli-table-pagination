@@ -15,6 +15,10 @@ export default TablePagination.extend({
 
   height: '80vh',
 
+  isInfinite: Ember.computed(function() {
+    return typeof this.attrs.loadNext === 'function';
+  }),
+
   // override the components:
   bodyComponent: 'bs-table-pagination.table-body',
   contentComponent: 'bs-table-pagination.table-content', // NOT USED anymore

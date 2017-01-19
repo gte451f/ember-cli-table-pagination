@@ -45,7 +45,9 @@
     {{else}}
     <div class="input-group input-group-sm">
       Showing all records
+      {{#unless isInfinite}}
       <a href="javascript:void();" {{action 'showByPageRecords'}}>Go back to per page</a>
+      {{/unless}}
     </div>
     {{/unless}}
 </label>

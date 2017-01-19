@@ -10,6 +10,10 @@ export default Ember.Component.extend({
 
   showAll: false,
 
+  onInitComponent: Ember.on('init', function() {
+    this.set('showAll', this.get('isInfinite'));
+  }),
+
   actions: {
     showAllRecords() {
       this.set('showAll', true);
