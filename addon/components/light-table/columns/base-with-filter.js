@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import layout from '../../../templates/components/light-table/columns/base-with-filter';
 import ColumnsBase from 'ember-light-table/components/columns/base';
 
