@@ -31,7 +31,8 @@ export default TablePagination.extend({
         label: 'Actions',
         sortable: false,
         width: '67px',
-        cellComponent: 'light-table-pagination.table-actions'
+        cellComponent: 'light-table-pagination.table-actions',
+        type: 'quick-filter-toggle'
       } ].pushObjects(
       this.get('columns').map((column) => {
       return {
