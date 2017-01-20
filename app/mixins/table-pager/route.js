@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-import pagedArray from 'ember-cli-pagination/computed/paged-array';
 const {underscore} = Ember.String;
 
 export default Ember.Mixin.create(RouteMixin, {
