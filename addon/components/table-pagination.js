@@ -158,7 +158,11 @@ export default Component.extend({
 
   allColumns: computed('columns', 'additionalColumnsForFilter', function() {
     let tableColumns = this.get('columns').filterBy('enableSearch', true);
-    let additionalColumns = this.get('additionalColumnsForFilter').filterBy('enableSearch', true);
+    let additionalColumnsForFilter = this.get('additionalColumnsForFilter');
+    let additionalColumns = [];
+    if (Ember.isPresent(additionalColumnsForFilter)) {
+      additionalColumns = additionalColumnsForFilter.filterBy('enableSearch', true);
+    }
 
     return tableColumns.concat(additionalColumns);
   }),
