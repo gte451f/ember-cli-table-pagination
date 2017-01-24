@@ -49,6 +49,6 @@ export default Ember.Object.extend({
 
   // Advanced Filter fields
   advFilterOperator: undefined,
-  advFilterValue: undefined
+  advFilterValue: undefined,
   advFilterValue2: undefined
 });
