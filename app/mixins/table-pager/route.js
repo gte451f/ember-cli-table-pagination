@@ -77,6 +77,7 @@ export default Ember.Mixin.create(RouteMixin, {
       if (this.controller.get('page') !== 1) {
         this.controller.set('page', 1);
       }
+      this.controller.get('infiniteContent').clear();
       this.refresh();
     },
 
@@ -86,6 +87,7 @@ export default Ember.Mixin.create(RouteMixin, {
       if (this.controller.get('page') !== 1) {
         this.controller.set('page', 1);
       }
+      this.controller.get('infiniteContent').clear();
       this.refresh();
     },
 
@@ -194,6 +196,7 @@ export default Ember.Mixin.create(RouteMixin, {
   model: function (params) {
     let allParams = this.getAllParams(params);
     this.currentParams = allParams;
+    Ember.Logger.debug(allParams);
     return this.findPaged(this.modelName, allParams);
   },
 
@@ -206,6 +209,7 @@ export default Ember.Mixin.create(RouteMixin, {
     controller.set('modelName', this.modelName);
     controller.set('controllerName', this.controllerName);
     controller.set('totalRecords', model.meta.total_record_count);
+    controller.set('canLoadMore', model.meta.returned_record_count === controller.get('perPage'));
     let {sortField} = this.getAllParams({});
     if (sortField) {
       if (sortField.substring(0, 1) === '-') {

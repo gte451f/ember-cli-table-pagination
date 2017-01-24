@@ -6,5 +6,24 @@ export default Ember.Component.extend({
   classNames: ['col-md-7'],
 
   // properties
-  perPageOptions: [50, 100, 250]
+  perPageOptions: [50, 100, 250],
+
+  showAll: false,
+
+  onInitComponent: Ember.on('init', function() {
+    this.set('showAll', this.get('isInfinite'));
+  }),
+
+  actions: {
+    showAllRecords() {
+      this.set('showAll', true);
+      this.attrs.changePerPage(100000000); // 100 million records
+      this.attrs.refresh();
+    },
+    showByPageRecords() {
+      this.set('showAll', false);
+      this.attrs.changePerPage(this.get('perPageOptions.firstObject'));
+      this.attrs.refresh();
+    }
+  }
 });

@@ -1,6 +1,7 @@
 <table class="table table-bordered table-striped {{if scrollMode "scrolling-content" ""}}">
     <thead>
   <tr role="row" style={{min-width-if-true scrollMode 100}}>
+        <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}></th>
       {{#each columns as |item|}}
           <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels item.width}}>
             {{#unless item.disableServerInteractions}}
@@ -31,7 +32,6 @@
               </div>
           </th>
       {{/each}}
-        <th role="columnheader" tabindex="0" rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}></th>
     </tr>
     </thead>
 
@@ -48,12 +48,12 @@
 
     <tfoot>
     <tr>
+        <th rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}>Actions</th>
       {{#each columns as |item|}}
           <th rowspan="1" colspan="1" style={{width-in-pixels item.width}}>
             {{item.displayName}}
           </th>
       {{/each}}
-        <th rowspan="1" colspan="1" style={{width-in-pixels actionWidth}}>Actions</th>
     </tr>
     </tfoot>
 </table>
