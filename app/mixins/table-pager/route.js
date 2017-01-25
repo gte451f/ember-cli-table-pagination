@@ -91,6 +91,15 @@ export default Ember.Mixin.create(RouteMixin, {
       this.refresh();
     },
 
+    // take the extra parameters
+    runAdvancedSearch (extraParams) {
+      if (this.controller.get('page') !== 1) {
+        this.controller.set('page', 1);
+      }
+      this.controller.set('extraParams', extraParams);
+      this.refresh();
+    },
+
     //general function to open a record from a paginated list
     //will use transitionTo by default
     open: function (record) {

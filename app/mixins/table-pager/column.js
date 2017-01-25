@@ -44,5 +44,11 @@ export default Ember.Object.extend({
     }
   }),
 
-  width: undefined
+  width: undefined,
+
+
+  // Advanced Filter fields
+  advFilterOperator: undefined,
+  advFilterValue: undefined,
+  advFilterValue2: undefined
 });
