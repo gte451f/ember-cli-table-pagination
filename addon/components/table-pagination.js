@@ -197,6 +197,11 @@ export default Component.extend({
       }
     },
     doNothing() {
+    },
+    runAdvancedSearch () {
+      if (typeof this.attrs.runAdvancedSearch === 'function') {
+        this.attrs.runAdvancedSearch();
+      }
     }
   }
 });
