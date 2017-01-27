@@ -1,3 +1,11 @@
+<style type="text/css">
+  .filter-operator .ember-power-select-dropdown,
+  .filter-operator .ember-power-select,
+  .filter-operator .ember-power-select-trigger
+  {
+    width: 180px;
+  }
+</style>
 {{#if allowQuickSearch}}
     <label style="margin-right: 10px;">
         <div class="input-group input-group-sm" style="width: 250px;">
@@ -72,17 +80,17 @@
     <table class="table table-condensed">
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Operator</th>
-          <th>Value</th>
-          <th></th>
+          <th width="25%">Field</th>
+          <th width="25%">Operator</th>
+          <th width="40%">Value</th>
+          <th width="10%"></th>
         </tr>
       </thead>
       <tbody>
       {{#each allColumns as |column|}}
         <tr>
           <td>{{column.displayName}}</td>
-          <td>
+          <td class="filter-operator">
             {{#power-select
               options=operators
               selected=column.advFilterOperator
@@ -103,7 +111,7 @@
               {{/if}}
             {{/if}}
           </td>
-          <td><span {{action 'clearFilter' column}}>{{fa-icon 'remove'}}</span></td>
+          <td><a href="javascript: void();" {{action 'clearFilter' column}}>{{fa-icon 'remove'}}</a></td>
         </tr>
       {{/each}}
       </tbody>
