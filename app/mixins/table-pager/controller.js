@@ -24,7 +24,9 @@ export default Ember.Mixin.create({
         var that = this;
         clearTimeout(this.get('keyTimer' + name));
         this.set('keyTimer' + name, setTimeout(function () {
-          that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
+          if (Ember.typeOf(column.get('filterValue')) !== 'undefined' && Ember.typeOf(column.get('filterValue')) !== 'null') {
+            that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
+          }
         }, 600));
       }.observes('columns.' + index + '.filterValue');
       filterParams[column.get('apiInteractionName')] = null;
