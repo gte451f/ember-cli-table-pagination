@@ -9,6 +9,11 @@ const {
 
 export default TablePagination.extend({
   layout: layout,
+  classNames: ['box', 'box-top', 'ember-cli-table-pagination'],
+  classNameBindings: ['boxSizeClass'],
+
+  // properties
+  boxSize: 12,
 
   // override inherited properties
   perPage: 50,
