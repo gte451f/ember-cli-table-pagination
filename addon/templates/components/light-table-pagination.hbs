@@ -84,15 +84,6 @@
         Expanded row
       {{/body.expanded-row}}
 
-      {{#if loading}}
-        {{#body.loader}}
-        <p class="text-center">
-          <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-          <span class="sr-only">Loading...</span>
-        </p>
-        {{/body.loader}}
-      {{/if}}
-
       {{#if table.isEmpty}}
       {{#body.no-data}}
         {{component noDataComponent noDataParams=noDataParams}}
@@ -105,7 +96,7 @@
   {{/light-table}}
 
   {{#if loading}}
-      <div class='table-loading-overlay container'>
+      <div class='table-loading-overlay'>
           <div class='table-loading-inner row'>
               <div class='vertical-center col-xs-12'>
                   <div class='text-center col-xs-12'>
