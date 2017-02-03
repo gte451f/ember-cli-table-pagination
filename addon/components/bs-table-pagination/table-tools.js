@@ -14,8 +14,8 @@ export default Ember.Component.extend({
     this.set('showAll', this.get('isInfinite'));
   }),
 
-  allowAdvancedFilter: Ember.computed(function() {
-    return this.get('allColumns').get('length') > 0;
+  allowAdvancedFilter: Ember.computed('allowQuickSearch', function() {
+    return this.get('allColumns').get('length') > 0 && this.get('allowQuickSearch');
   }),
 
   operators: [
