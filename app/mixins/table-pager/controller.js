@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Column from './column';
+import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 const { computed } = Ember;
 const { alias } = computed;
@@ -23,7 +24,9 @@ export default Ember.Mixin.create({
         var that = this;
         clearTimeout(this.get('keyTimer' + name));
         this.set('keyTimer' + name, setTimeout(function () {
-          that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
+          if (Ember.typeOf(column.get('filterValue')) !== 'undefined' && Ember.typeOf(column.get('filterValue')) !== 'null') {
+            that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
+          }
         }, 600));
       }.observes('columns.' + index + '.filterValue');
       filterParams[column.get('apiInteractionName')] = null;
@@ -79,6 +82,8 @@ export default Ember.Mixin.create({
   perPage: 50,
   totalRecords: null,
 
+  infiniteContent: pagedArray('content', {infinite: true}),
+
   column: Ember.Object.extend({
     display: null,
     field: null
@@ -115,5 +120,14 @@ export default Ember.Mixin.create({
   // not sure what this is
   createPath: "set createPath in the controller",
 
-  actions: {}
+  canLoadMore: false,
+
+  actions: {
+    loadNext () {
+      if (this.get('infiniteContent.length') > 0 && this.get('canLoadMore')) {
+        this.get('infiniteContent').loadNextPage();
+        this.set('page', this.get('infiniteContent.page'));
+      }
+    }
+  }
 });

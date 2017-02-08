@@ -155,6 +155,17 @@ export default Component.extend({
     let perPage = this.get('perPage');
     return Math.ceil(contentLength / perPage);
   }),
+
+  allColumns: computed('columns', 'additionalColumnsForFilter', function() {
+    let tableColumns = this.get('columns').filterBy('enableSearch', true);
+    let additionalColumnsForFilter = this.get('additionalColumnsForFilter');
+    let additionalColumns = [];
+    if (Ember.isPresent(additionalColumnsForFilter)) {
+      additionalColumns = additionalColumnsForFilter.filterBy('enableSearch', true);
+    }
+
+    return tableColumns.concat(additionalColumns);
+  }),
   // overwritable components
   bodyComponent: 'table-pagination.table-body',
   contentComponent: 'table-pagination.table-content',
@@ -186,6 +197,11 @@ export default Component.extend({
       }
     },
     doNothing() {
+    },
+    runAdvancedSearch () {
+      if (typeof this.attrs.runAdvancedSearch === 'function') {
+        this.attrs.runAdvancedSearch();
+      }
     }
   }
 });

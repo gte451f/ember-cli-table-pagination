@@ -1,3 +1,11 @@
+<style type="text/css">
+  .filter-operator .ember-power-select-dropdown,
+  .filter-operator .ember-power-select,
+  .filter-operator .ember-power-select-trigger
+  {
+    width: 180px;
+  }
+</style>
 {{#if allowQuickSearch}}
     <label style="margin-right: 10px;">
         <div class="input-group input-group-sm" style="width: 250px;">
@@ -20,7 +28,9 @@
     </label>
 {{/if}}
 
-<label style="margin-right: 10px;">Per Page:
+<label style="margin-right: 10px;">
+  {{#unless showAll}}
+    Per Page:
     <div class="input-group input-group-sm">
       {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage)}}
         {{#each perPageOptions as |option|}}
@@ -39,4 +49,73 @@
           {{/if}}
         </span>
     </div>
+    <a href="javascript:void();" {{action 'showAllRecords'}}>Show all records</a>
+    {{else}}
+    <div class="input-group input-group-sm">
+      Showing all records
+      {{#unless isInfinite}}
+      <a href="javascript:void();" {{action 'showByPageRecords'}}>Go back to per page</a>
+      {{/unless}}
+    </div>
+    {{/unless}}
 </label>
+
+{{#if allowAdvancedFilter}}
+<label style="margin-right: 10px;">
+    <div class="input-group input-group-sm">
+      <button class="btn-btn-sm" {{action (toggle 'showFilterDialog' this)}}>
+        {{fa-icon 'filter'}}
+        Filter</button>
+    </div>
+</label>
+
+  {{#if showFilterDialog}}
+    {{#basic-modal
+      title="Filter"
+      okText="Apply new filters"
+      ok=(action 'applyFilter')
+      closeText="Cancel"
+      close=(action (mut showFilterDialog) false)
+    }}
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th width="25%">Field</th>
+          <th width="25%">Operator</th>
+          <th width="40%">Value</th>
+          <th width="10%"></th>
+        </tr>
+      </thead>
+      <tbody>
+      {{#each allColumns as |column|}}
+        <tr>
+          <td>{{column.displayName}}</td>
+          <td class="filter-operator">
+            {{#power-select
+              options=operators
+              selected=column.advFilterOperator
+              renderInPlace=true
+              onchange=(action (mut column.advFilterOperator))
+              as |result search|
+              }}
+              {{result.display}}
+            {{/power-select}}
+          </td>
+          <td>
+            {{#if (eq column.advFilterOperator.input 2)}}
+                {{input type="text" class="form-control" value=column.advFilterValue}} AND
+                {{input type="text" class="form-control" value=column.advFilterValue2}}
+            {{else}}
+              {{#if (eq column.advFilterOperator.input 1)}}
+                {{input type="text" class="form-control" value=column.advFilterValue}}
+              {{/if}}
+            {{/if}}
+          </td>
+          <td><a href="javascript: void();" {{action 'clearFilter' column}}>{{fa-icon 'remove'}}</a></td>
+        </tr>
+      {{/each}}
+      </tbody>
+    </table>
+    {{/basic-modal}}
+  {{/if}}
+{{/if}}
