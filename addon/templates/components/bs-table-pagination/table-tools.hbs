@@ -32,9 +32,9 @@
   {{#unless showAll}}
     Per Page:
     <div class="input-group input-group-sm">
-      {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage)}}
+      {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage) as |xs|}}
         {{#each perPageOptions as |option|}}
-          {{#x-option value=option}}{{option}}{{/x-option}}
+          {{#xs.option value=option}}{{option}}{{/xs.option}}
         {{/each}}
       {{/x-select}}
         <span class="input-group-btn">
