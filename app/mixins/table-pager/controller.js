@@ -3,7 +3,7 @@ import Column from './column';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
 const { computed } = Ember;
-const { alias } = computed;
+const { alias }    = computed;
 
 /**
  * store shared logic to run pager logic
@@ -15,12 +15,12 @@ export default Ember.Mixin.create({
    * for adding observers on each filter per column
    */
   configureFilterObservers: function () {
-    var self = this;
+    var self                = this;
     var observerDefinitions = {};
-    var filterParams = {};
+    var filterParams        = {};
     this.get('columns').forEach(function (column, index) {
-      var name = 'observer_' + column.get('apiInteractionName');
-      observerDefinitions[name] = function () {
+      var name                                       = 'observer_' + column.get('apiInteractionName');
+      observerDefinitions[name]                      = function () {
         var that = this;
         clearTimeout(this.get('keyTimer' + name));
         this.set('keyTimer' + name, setTimeout(function () {
@@ -71,22 +71,22 @@ export default Ember.Mixin.create({
       return '';
     }
   }),
-  with: '',
+  with     : '',
 
   // disabled by default
   // set these in the controller to enable and bind to a specific field
   quickSearchField: null,
-  quickSearch: null,
+  quickSearch     : null,
 
-  page: 1,
-  perPage: 50,
+  page        : 1,
+  perPage     : 50,
   totalRecords: null,
 
-  infiniteContent: pagedArray('content', {infinite: true}),
+  infiniteContent: pagedArray('content', { infinite: true }),
 
   column: Ember.Object.extend({
     display: null,
-    field: null
+    field  : null
   }),
 
   quickSearchChanged: function () {
@@ -102,12 +102,12 @@ export default Ember.Mixin.create({
 
   //load pager specific variables
   columns: [
-    Column.create({'displayName': '#', 'fieldName': 'id'})
+    Column.create({ 'displayName': '#', 'fieldName': 'id' })
   ],
 
   // bootstrap or adminlte specific classes
   // color default|success|primary|warning|danger|info
-  box: 'default',
+  box   : 'default',
   button: 'default',
 
   // display the table title if there is one

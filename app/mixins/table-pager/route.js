@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-const {underscore} = Ember.String;
+const { underscore } = Ember.String;
 
 export default Ember.Mixin.create(RouteMixin, {
   /**
@@ -11,10 +11,10 @@ export default Ember.Mixin.create(RouteMixin, {
     sortField: {
       refreshModel: true
     },
-    page: {
+    page     : {
       refreshModel: false
     },
-    perPage: {
+    perPage  : {
       refreshModel: false
     }
   },
@@ -43,8 +43,8 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param field
      */
     sortField: function (field) {
-      field = field.underscore();
-      var sortField = this.controller.get('sortField');
+      field                       = field.underscore();
+      var sortField               = this.controller.get('sortField');
       var newSortOrder, sortOrder = this.controller.get('sortOrder');
 
       //sortField hasn't changed so we toggle sortOrder
@@ -71,7 +71,7 @@ export default Ember.Mixin.create(RouteMixin, {
      * that page is empty
      */
     applyFilter: function (fieldName, filterValue) {
-      var params = this.controller.get('filterParams');
+      var params        = this.controller.get('filterParams');
       params[fieldName] = filterValue;
       this.controller.set('filterParams', params);
       if (this.controller.get('page') !== 1) {
@@ -139,7 +139,7 @@ export default Ember.Mixin.create(RouteMixin, {
     },
 
     loading: function (transition, originRoute) {
-      let routeName = this.get('routeName');
+      let routeName  = this.get('routeName');
       let controller = this.controllerFor(routeName);
       // check if the transition is to the same route but with a different "params" value.
       if (originRoute.routeName === transition.targetName || `${originRoute.routeName}.index` === transition.targetName) {
@@ -163,17 +163,23 @@ export default Ember.Mixin.create(RouteMixin, {
    */
   getAllParams: function (params) {
     var controller = this.get('controller');
-    var allParams = {};
+    var allParams  = {};
     if (Ember.isPresent(controller)) {
-      var name = controller.get('quickSearchField');
-      var value = controller.get('quickSearch');
+      var name      = controller.get('quickSearchField');
+      var value     = controller.get('quickSearch');
       var queryWith = controller.get('with');
-      allParams = Ember.merge(params, {
-        page: controller.get('page'),
-        perPage: controller.get('perPage'),
+      allParams     = Ember.merge(params, {
+        page     : controller.get('page'),
+        perPage  : controller.get('perPage'),
         sortField: controller.get('sortField'),
-        with: queryWith
       });
+
+      if (!Ember.isEmpty(params.with)) {
+        allParams.with = params.with;
+      } else {
+        allParams.with = queryWith;
+      }
+
 
       if (Ember.isPresent(name) && Ember.isPresent(value)) {
         params[name] = '*' + value + '*';
@@ -203,9 +209,9 @@ export default Ember.Mixin.create(RouteMixin, {
    * new params to the findPaged method
    */
   model: function (params) {
-    let allParams = this.getAllParams(params);
+    let allParams      = this.getAllParams(params);
     this.currentParams = allParams;
-    Ember.Logger.debug(allParams);
+    //Ember.Logger.debug(allParams);
     return this.findPaged(this.modelName, allParams);
   },
 
@@ -219,7 +225,7 @@ export default Ember.Mixin.create(RouteMixin, {
     controller.set('controllerName', this.controllerName);
     controller.set('totalRecords', model.meta.total_record_count);
     controller.set('canLoadMore', model.meta.returned_record_count === controller.get('perPage'));
-    let {sortField} = this.getAllParams({});
+    let { sortField } = this.getAllParams({});
     if (sortField) {
       if (sortField.substring(0, 1) === '-') {
         controller.set('sortDirection', 'desc');
