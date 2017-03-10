@@ -1,3 +1,6 @@
+{{#if tableActions.selectAction}}
+  {{x-checkbox checked=checked on-change=(action tableActions.selectAction row checked)}}
+{{/if}}
 {{#if tableActions.linkPath}}
     {{#link-to tableActions.linkPath row.id class="btn btn-default btn-xs"}}
       {{fa-icon 'folder-open'}}
@@ -13,4 +16,3 @@
       {{fa-icon 'trash'}}
     </a>
 {{/if}}
-
