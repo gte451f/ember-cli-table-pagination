@@ -6,6 +6,11 @@
       {{fa-icon 'folder-open'}}
     {{/link-to}}
 {{/if}}
+{{#if tableActions.editAction}}
+  <a {{action tableActions.editAction row.content}} class="btn btn-default btn-xs" href="#">
+    {{fa-icon 'pencil'}}
+  </a>
+{{/if}}
 {{#if tableActions.editPath}}
   {{#link-to tableActions.editPath row.id class="btn btn-default btn-xs"}}
     {{fa-icon 'pencil'}}
