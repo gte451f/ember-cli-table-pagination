@@ -2,5 +2,6 @@ import layout from '../../../templates/components/light-table/columns/base-with-
 import ColumnsBase from 'ember-light-table/components/columns/base';
 
 export default ColumnsBase.extend({
-  layout
+  layout,
+  classNames: ['lt-column', 'nowrap'],
 });
