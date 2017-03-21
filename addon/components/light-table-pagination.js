@@ -39,7 +39,7 @@ export default TablePagination.extend({
     return [ {
         label: 'Actions',
         sortable: false,
-        width: '67px',
+        width: '115px',
         cellComponent: 'light-table-pagination.table-actions',
         type: 'quick-filter-toggle'
       } ].pushObjects(

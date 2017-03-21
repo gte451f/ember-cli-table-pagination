@@ -1,7 +1,15 @@
+{{#if tableActions.selectAction}}
+  {{x-checkbox checked=checked on-change=(action tableActions.selectAction row checked)}}
+{{/if}}
 {{#if tableActions.linkPath}}
     {{#link-to tableActions.linkPath row.id class="btn btn-default btn-xs"}}
       {{fa-icon 'folder-open'}}
     {{/link-to}}
+{{/if}}
+{{#if tableActions.editAction}}
+  <a {{action tableActions.editAction row.content}} class="btn btn-default btn-xs" href="#">
+    {{fa-icon 'pencil'}}
+  </a>
 {{/if}}
 {{#if tableActions.editPath}}
   {{#link-to tableActions.editPath row.id class="btn btn-default btn-xs"}}
@@ -13,4 +21,3 @@
       {{fa-icon 'trash'}}
     </a>
 {{/if}}
-
