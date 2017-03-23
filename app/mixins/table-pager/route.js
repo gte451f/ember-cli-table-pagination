@@ -152,8 +152,19 @@ export default Ember.Mixin.create(RouteMixin, {
         return false;
       }
       return true;
-    }
+    },
 
+    /**
+     *
+     * @param subject
+     */
+    selectSubject(subject, checked) {
+      if(checked){
+        this.get('controller.selectedSubjects').pushObject(subject.get('content'));
+      } else {
+        this.get('controller.selectedSubjects').removeObject(subject.get('content'));
+      }
+    },
   },
 
   /**
