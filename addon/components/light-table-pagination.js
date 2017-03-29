@@ -33,14 +33,15 @@ export default TablePagination.extend({
   toolbarComponent: 'bs-table-pagination.table-toolbar',
   toolsComponent: 'bs-table-pagination.table-tools',
   noDataComponent: 'bs-table-pagination.table-no-data',
+  tableActionsComponent: 'light-table-pagination.table-actions',
 
   /** light table columns derived from the columns property*/
-  ltColumns: computed('columns', function() {
+  ltColumns: computed('tableActionsComponent', 'columns', function () {
     return [ {
         label: 'Actions',
         sortable: false,
-        width: '67px',
-        cellComponent: 'light-table-pagination.table-actions',
+        width: '115px',
+        cellComponent: this.get('tableActionsComponent'),
         type: 'quick-filter-toggle'
       } ].pushObjects(
       this.get('columns').map((column) => {
