@@ -21,3 +21,12 @@
       {{fa-icon 'trash'}}
     </a>
 {{/if}}
+{{#if tableActions.editFlag}}
+  <a href="#" {{action tableActions.editFlag row}}>
+    {{#if (eq row.flagStatus 'flagged')}}
+      {{fa-icon 'flag' class="icon-red"}}
+    {{else}}
+      {{fa-icon 'flag-o'}}
+    {{/if}}
+  </a>
+{{/if}}
