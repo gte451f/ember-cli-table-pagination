@@ -122,6 +122,8 @@ export default Ember.Mixin.create({
 
   canLoadMore: false,
 
+  selectedRows: [],
+
   actions: {
     loadNext () {
       if (this.get('infiniteContent.length') > 0 && this.get('canLoadMore')) {
