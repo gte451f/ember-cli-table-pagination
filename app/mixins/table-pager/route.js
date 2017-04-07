@@ -158,7 +158,7 @@ export default Ember.Mixin.create(RouteMixin, {
      *
      * @param subject
      */
-    selectSubject(row, checked) {
+    selectRow(row, checked) {
       if(checked){
         this.get('controller.selectedRows').pushObject(row.get('content'));
       } else {
