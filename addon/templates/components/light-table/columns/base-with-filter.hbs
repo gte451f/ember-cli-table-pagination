@@ -12,5 +12,5 @@
 {{/if}}
 
 <div class="row {{if (and column.tpColumn.showFilter column.tpColumn.enableSearch (not column.tpColumn.disableServerInteractions)) '' 'hidden'}}">
-  {{light-table.filter-box column=column}}
+  {{light-table/filter-box column=column}}
 </div>
