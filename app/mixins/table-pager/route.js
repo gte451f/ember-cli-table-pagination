@@ -152,8 +152,23 @@ export default Ember.Mixin.create(RouteMixin, {
         return false;
       }
       return true;
-    }
+    },
 
+    /**
+     *
+     * @param subject
+     */
+    selectRow(row, checked) {
+      if(checked){
+        this.get('controller.selectedRows').pushObject(row.get('content'));
+      } else {
+        this.get('controller.selectedRows').removeObject(row.get('content'));
+      }
+    },
+
+    didTransition(){
+      this.controller.set('selectedRows', []);
+    }
   },
 
   /**

@@ -122,12 +122,50 @@ export default Ember.Mixin.create({
 
   canLoadMore: false,
 
+  selectedRows: [],
+
   actions: {
     loadNext () {
       if (this.get('infiniteContent.length') > 0 && this.get('canLoadMore')) {
         this.get('infiniteContent').loadNextPage();
         this.set('page', this.get('infiniteContent.page'));
       }
-    }
+    },
+
+    editFlag (row) {
+      this.set('isEditingFlagNote', true);
+      this.set('flaggingRecord', row.content);
+    },
+
+    saveFlag(){
+      let row = this.get('flaggingRecord');
+
+      let subject = this.store.peekRecord('subject', row.id);
+
+      subject.set('flagNote', row.flagNote);
+
+      if (Ember.isEmpty(row.get('flagNote'))) {
+        subject.set('flagStatus', 'unflagged');
+      } else {
+        subject.set('flagStatus', 'flagged');
+      }
+      subject.save().then(() => {
+        this.get('notify').success('Saved successfully');
+      }).then((result) => {
+        if (Ember.isEmpty(row.get('flagNote'))) {
+          row.set('flagStatus', 'unflagged');
+        } else {
+          row.set('flagStatus', 'flagged');
+        }
+
+        this.set('isEditingFlagNote', false);
+        this.set('flaggingRecord', null);
+      });
+    },
+
+    cancelFlag () {
+      this.set('isEditingFlagNote', false);
+      this.set('flaggingRecord', null);
+    },
   }
 });
