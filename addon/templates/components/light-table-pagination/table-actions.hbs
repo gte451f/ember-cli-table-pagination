@@ -1,5 +1,5 @@
 {{#if tableActions.selectAction}}
-  {{x-checkbox checked=checked on-change=(action tableActions.selectAction row checked)}}
+  {{x-checkbox checked=row.content.isSelected on-change=(action tableActions.selectAction row row.content.isSelected)}}
 {{/if}}
 {{#if tableActions.linkPath}}
     {{#link-to tableActions.linkPath row.id class="btn btn-default btn-xs"}}

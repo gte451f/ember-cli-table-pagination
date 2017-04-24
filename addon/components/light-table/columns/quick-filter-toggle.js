@@ -5,6 +5,8 @@ import ColumnsBase from 'ember-light-table/components/columns/base';
 export default ColumnsBase.extend({
   layout,
 
+  allChecked: false,
+
   actions: {
     toggleFilters () {
       this.get('table.visibleColumns').forEach((col) => {
