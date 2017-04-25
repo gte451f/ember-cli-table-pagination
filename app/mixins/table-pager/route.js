@@ -159,10 +159,19 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param subject
      */
     selectRow(row, checked) {
+      row.get('content').set('isSelected', checked);
       if(checked){
         this.get('controller.selectedRows').pushObject(row.get('content'));
       } else {
         this.get('controller.selectedRows').removeObject(row.get('content'));
+      }
+    },
+    selectAll(checked) {
+      this.get('controller.model').setEach('isSelected', checked);
+      if(checked){
+        this.set('controller.selectedRows', this.get('controller.model').toArray());
+      } else {
+        this.set('controller.selectedRows', []);
       }
     },
 
