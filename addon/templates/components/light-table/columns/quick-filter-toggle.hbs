@@ -1,3 +1,9 @@
+{{#if tableActions.selectAllAction}}
+<label>
+  {{x-checkbox checked=allChecked on-change=(action tableActions.selectAllAction allChecked) title="Select all on this page"}}
+  All
+</label>
+{{/if}}
 {{#if tableActions.allowQuickSearch}}
 <a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters">
   <i class="fa fa-search"></i>
