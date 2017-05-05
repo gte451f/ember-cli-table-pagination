@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-table-pagination/table-tools';
 
+const { computed: { reads } } = Ember;
+
 export default Ember.Component.extend({
   layout,
   classNames: ['col-md-7'],
@@ -18,6 +20,12 @@ export default Ember.Component.extend({
     return this.get('allColumns').get('length') > 0 && this.get('allowQuickSearch');
   }),
 
+  filters: Ember.computed('allColumns.@each.advFilterOperator', function () {
+    return this.get('allColumns').filter((c) => {
+      return Ember.isPresent(c.get('advFilterOperator'));
+    });
+  }),
+
   operators: [
     Ember.Object.create({display: 'Contains', value: 'contains', input: 1}),
     Ember.Object.create({display: 'Does not contain:', value: 'not_contains', input: 1}),
@@ -27,6 +35,9 @@ export default Ember.Component.extend({
     Ember.Object.create({display: 'Is not blank:', value: 'not_blank', input: 0}),
     Ember.Object.create({display: 'Between:', value: 'between', input: 2})
   ],
+
+  buttonLink: reads('toolsParams.buttonLink'),
+  buttonText: reads('toolsParams.buttonText'),
 
   actions: {
     showAllRecords() {
@@ -87,6 +98,18 @@ export default Ember.Component.extend({
         advFilterValue2: null,
         advFilterOperator:null
       });
+    },
+
+    clearAllFilters () {
+      let columnsWithFilter = this.get('allColumns').filter((c) => {
+        return Ember.isPresent(c.get('advFilterOperator'));
+      });
+
+      columnsWithFilter.setEach('advFilterValue', null);
+      columnsWithFilter.setEach('advFilterValue2', null);
+      columnsWithFilter.setEach('advFilterOperator', null);
+
+      this.send('applyFilter');
     }
   }
 });
