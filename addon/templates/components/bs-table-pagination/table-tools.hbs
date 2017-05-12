@@ -63,11 +63,24 @@
 {{#if allowAdvancedFilter}}
 <label style="margin-right: 10px;">
     <div class="input-group input-group-sm">
-      <button class="btn btn-sm btn-primary" {{action (toggle 'showFilterDialog' this)}}>
+      <button class="btn btn-sm btn-{{if (gt filters.length 0) 'success' 'primary'}}" {{action (toggle 'showFilterDialog' this)}}>
         {{fa-icon 'filter'}}
-        Filter</button>
+        Filter
+        {{#if (gt filters.length 0)}}
+        ({{filters.length}})
+        {{/if}}
+      </button>
     </div>
 </label>
+
+{{#if (gt filters.length 0)}}
+<label style="margin-right: 10px;">
+    <div class="input-group input-group-sm">
+      <button class="btn btn-sm btn-default" {{action 'clearAllFilters'}}>
+        Clear Filters</button>
+    </div>
+</label>
+{{/if}}
 
   {{#if showFilterDialog}}
     {{#basic-modal
@@ -119,3 +132,10 @@
     {{/basic-modal}}
   {{/if}}
 {{/if}}
+
+{{#if buttonLink}}
+  {{#link-to buttonLink class="btn btn-primary pull-right tools-with-button"}}
+    {{buttonText}}
+  {{/link-to}}
+{{/if}}
+
