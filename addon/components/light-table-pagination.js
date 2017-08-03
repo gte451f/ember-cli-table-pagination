@@ -12,6 +12,8 @@ export default TablePagination.extend({
   classNames: ['box', 'box-top', 'ember-cli-table-pagination'],
   classNameBindings: ['boxSizeClass'],
 
+  enableExpandedRows: false,
+
   // properties
   boxSize: 12,
 
@@ -42,6 +44,7 @@ export default TablePagination.extend({
         sortable: false,
         width: '115px',
         cellComponent: this.get('tableActionsComponent'),
+        cellClassNames: 'nowrap',
         type: 'quick-filter-toggle'
       } ].pushObjects(
       this.get('columns').map((column) => {
@@ -51,6 +54,7 @@ export default TablePagination.extend({
         sortable: true,
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
+        cellClassNames: 'nowrap',
         type: 'base-with-filter',
         tpColumn: column
       };

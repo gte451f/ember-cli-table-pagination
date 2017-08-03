@@ -1,3 +1,11 @@
+<style type="text/css">
+    .nowrap {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
 {{#if tableTitle}}
   {{#component titleComponent
   titleParams=titleParams
@@ -83,10 +91,12 @@
         onScrolledToBottom=(action 'onScrolledToBottom')
         canSelect=false
         rowComponent=rowComponent
+        canExpand=enableExpandedRows
+        multipleRowExpansion=false
         as |body|}}
 
       {{#body.expanded-row as |row|}}
-        Expanded row
+        {{component expandedRowComponent row=row}}
       {{/body.expanded-row}}
 
       {{#if table.isEmpty}}
