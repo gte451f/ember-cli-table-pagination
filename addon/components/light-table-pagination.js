@@ -51,7 +51,7 @@ export default TablePagination.extend({
       return {
         label: column.get('displayName'),
         valuePath: column.get('fieldName'),
-        sortable: true,
+        sortable: column.get('disableServerInteractions') ? false : true,
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
         cellClassNames: 'nowrap',
