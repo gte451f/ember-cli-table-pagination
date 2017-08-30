@@ -81,10 +81,15 @@ export default Component.extend({
    */
   tableTitle: 'title',
 
+  noFiltering: false,
+
   // computed
   numberOfRecords: reads('filteredContent.length'),
-  filteredContent: computed('content', 'searchString', 'fields.@each.filterValue', function () {
+  filteredContent: computed('content', 'searchString', 'fields.@each.filterValue', 'noFiltering', function () {
     let content = this.get('content');
+    if (this.get('noFiltering')) {
+      return content;
+    }
     let searchString = this.get('searchString');
     let filteredContent = content.filter(function (item) {
       let pattern = new RegExp(searchString, 'i');
