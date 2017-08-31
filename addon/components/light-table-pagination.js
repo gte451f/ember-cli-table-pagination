@@ -9,8 +9,12 @@ const {
 
 export default TablePagination.extend({
   layout: layout,
-  classNames: ['box', 'box-top', 'ember-cli-table-pagination'],
-  classNameBindings: ['boxSizeClass'],
+
+  // boxClasses: 'box box-top',
+  box: true,
+  boxTop: true,
+  classNames: ['ember-cli-table-pagination'],
+  classNameBindings: ['boxSizeClass', 'box', 'boxTop'],
 
   enableExpandedRows: false,
 
@@ -21,6 +25,8 @@ export default TablePagination.extend({
   perPage: 50,
 
   height: '80vh',
+
+  useNoWrap: true,
 
   isInfinite: Ember.computed(function() {
     return typeof this.attrs.loadNext === 'function';
@@ -51,7 +57,7 @@ export default TablePagination.extend({
       return {
         label: column.get('displayName'),
         valuePath: column.get('fieldName'),
-        sortable: true,
+        sortable: column.get('disableServerInteractions') ? false : true,
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
         cellClassNames: 'nowrap',
