@@ -48,7 +48,7 @@ export default TablePagination.extend({
     return [ {
         label: 'Actions',
         sortable: false,
-        width: '115px',
+        width: '75px',
         cellComponent: this.get('tableActionsComponent'),
         cellClassNames: 'nowrap',
         type: 'quick-filter-toggle'
