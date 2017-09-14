@@ -14,7 +14,7 @@ export default Ember.Mixin.create({
    * This needs to be dynamic meta programming
    * for adding observers on each filter per column
    */
-  configureFilterObservers: function () {
+  configureFilterObservers: Ember.on('init', function () {
     var self = this;
     var observerDefinitions = {};
     var filterParams = {};
@@ -33,7 +33,7 @@ export default Ember.Mixin.create({
     });
     self.reopen(observerDefinitions);
     self.set('filterParams', filterParams);
-  }.on('init'),
+  }),
 
   // setup our query params including custom sortField value
   queryParams: ["page", "perPage", "sortField", "with"],
