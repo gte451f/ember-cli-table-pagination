@@ -1,7 +1,0 @@
-{
-  "name": "ember-cli-table-pagination",
-  "dependencies": {
-    "bootstrap": "~3.3.5",
-    "font-awesome": "~4.5.0"
-  }
-}
