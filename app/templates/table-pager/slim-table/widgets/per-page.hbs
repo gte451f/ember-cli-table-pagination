@@ -1,8 +1,8 @@
 <div class="pull-right">
     <label>
-      {{#x-select value=perPage class="form-control input-sm"}}
+      {{#x-select value=perPage class="form-control input-sm" as |xs|}}
         {{#each pageList as |item|}}
-          {{#x-option value=item}}{{item}}{{/x-option}}
+          {{#xs.option value=item}}{{item}}{{/xs.option}}
         {{/each}}
       {{/x-select}}
     </label>
