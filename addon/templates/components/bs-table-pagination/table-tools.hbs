@@ -28,37 +28,42 @@
     </label>
 {{/if}}
 
-<label style="margin-right: 10px;">
+<span class="m-r-10">
   {{#unless showAll}}
-    Per Page:
+    <label>Per Page:</label>
+            <div class="input-group input-group-sm">
+              {{#power-select
+                searchEnabled=false
+                allowClear=false
+                selected=perPage
+                options=perPageOptions
+                onchange=(action this.attrs.changePerPage)
+                triggerClass="form-control  table-power-select"
+              as |result|}}
+                {{result}}
+              {{/power-select}}
+              <span class="input-group-btn">
+                {{#if this.attrs.refresh}}
+                  <button {{action (action this.attrs.refresh) }} class="btn btn-sm btn-primary">
+                    {{fa-icon 'refresh'}}
+                  </button>
+                {{else}}
+                  <button class="btn btn-sm btn-primary">
+                    {{fa-icon 'refresh'}}
+                  </button>
+                {{/if}}
+              </span>
+            </div>
+            <a class="link" {{action 'showAllRecords'}}>Show all records</a>
+  {{else}}
     <div class="input-group input-group-sm">
-      {{#x-select value=perPage class="form-control input-sm" action=(action this.attrs.changePerPage)}}
-        {{#each perPageOptions as |option|}}
-          {{#x-option value=option}}{{option}}{{/x-option}}
-        {{/each}}
-      {{/x-select}}
-        <span class="input-group-btn">
-          {{#if this.attrs.refresh}}
-              <button {{action (action this.attrs.refresh) }} class="btn btn-sm btn-primary">
-                {{fa-icon 'refresh'}}
-              </button>
-          {{else}}
-              <button class="btn btn-sm btn-primary">
-                {{fa-icon 'refresh'}}
-              </button>
-          {{/if}}
-        </span>
-    </div>
-    <a href="javascript:void();" {{action 'showAllRecords'}}>Show all records</a>
-    {{else}}
-    <div class="input-group input-group-sm">
-      Showing all records
+              Showing all records
       {{#unless isInfinite}}
-      <a href="javascript:void();" {{action 'showByPageRecords'}}>Go back to per page</a>
+        <a class="link" {{action 'showByPageRecords'}}>Go back to per page</a>
       {{/unless}}
-    </div>
-    {{/unless}}
-</label>
+            </div>
+  {{/unless}}
+</span>
 
 {{#if allowAdvancedFilter}}
 <label style="margin-right: 10px;">
