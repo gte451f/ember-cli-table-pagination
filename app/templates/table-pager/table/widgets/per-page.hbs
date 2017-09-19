@@ -1,7 +1,12 @@
 <label>Per Page:</label>
-{{#x-select value=perPage class="form-control input-sm form-control-inline"}}
-  {{#each pageList as |item|}}
-    {{#x-option value=item}}{{item}}{{/x-option}}
-  {{/each}}
-{{/x-select}}
+{{#power-select
+  searchEnabled=false
+  allowClear=false
+  selected=perPage
+  options=pageList
+  onchange=(action (mut perPage))
+  triggerClass="form-control form-control-inline w-sm"
+as |result|}}
+  {{result}}
+{{/power-select}}
 <button {{action 'refresh'}} class="btn btn-sm btn-primary">{{fa-icon 'refresh'}}</button>
