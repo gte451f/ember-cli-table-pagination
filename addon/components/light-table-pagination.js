@@ -43,6 +43,39 @@ export default TablePagination.extend({
   noDataComponent: 'bs-table-pagination.table-no-data',
   tableActionsComponent: 'light-table-pagination.table-actions',
 
+  didInsertElement() {
+    this._super(...arguments);
+
+    // Reposition the scrollbar so that it's always in view
+    const $lightTable = this.$('.ember-light-table');
+    const $container = this.$('.ember-cli-table-content');
+
+    $container.on('mouseenter scroll', () => {
+      const diff = $lightTable.width() - $container.width();
+      const leftDiff = $container.offset().left - $lightTable.offset().left;
+      let right = diff - leftDiff;
+      if (right < 0)
+        right = 0;
+      this.$('.tse-scrollbar.vertical').css('right', right + 'px');
+    });
+
+    Ember.run.later(() => {
+      const scrollbarHeight = this.$('.tse-scrollbar.vertical .drag-handle').height();
+      if (scrollbarHeight > 0) {
+        $container.addClass('table-container--with-scrollbar');
+      }
+
+      $container.trigger('mouseenter')
+    })
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    const $container = this.$('.ember-cli-table-content');
+    $container.off('mouseenter scroll');
+  },
+
   /** light table columns derived from the columns property*/
   ltColumns: computed('tableActionsComponent', 'columns', function () {
     return [ {
