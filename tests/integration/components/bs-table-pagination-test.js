@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{bs-table-pagination}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#bs-table-pagination}}
-      template block text
-    {{/bs-table-pagination}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'title');
 });

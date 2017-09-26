@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{bs-table-pagination/table-tools}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#bs-table-pagination/table-tools}}
-      template block text
-    {{/bs-table-pagination/table-tools}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), '.filter-operator .ember-power-select-dropdown, .filter-operator .ember-power-select, .filter-operator .ember-power-select-trigger { width: 180px; } Per Page:');
 });

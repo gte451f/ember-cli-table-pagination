@@ -11,14 +11,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{table-pagination}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#table-pagination}}
-      template block text
-    {{/table-pagination}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), 'Pager --> You are on the page # of pages Change page: <Toolbar>');
 });
