@@ -10,6 +10,8 @@ export default Component.extend(ResizeAware, {
   resizeHeightSensitive: true,
   resizeWidthSensitive: true,
 
+  resizeService: Ember.inject.service('resize'),
+
   classNames: ['ember-cli-table-content'],
   // tagName: '',
 
@@ -36,6 +38,7 @@ export default Component.extend(ResizeAware, {
     }
   }),
 
+  //eslint-disable-next-line
   didResize(width, height) {
     if (this.get('scrollMode')) {
       this.adjustTableDimensions();

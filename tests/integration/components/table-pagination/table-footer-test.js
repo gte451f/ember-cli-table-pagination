@@ -6,19 +6,9 @@ moduleForComponent('table-pagination/table-footer', 'Integration | Component | t
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+  this.doNothing = function () {}
 
-  this.render(hbs`{{table-pagination/table-footer}}`);
+  this.render(hbs`{{table-pagination/table-footer changePage=(action this.doNothing)}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#table-pagination/table-footer}}
-      template block text
-    {{/table-pagination/table-footer}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), 'Total Records: | Showing per page « »');
 });

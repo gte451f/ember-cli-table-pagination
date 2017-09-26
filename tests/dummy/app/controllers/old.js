@@ -4,11 +4,11 @@ import Paginate from '../mixins/table-pager/controller';
 import Column from '../mixins/table-pager/column';
 
 const {
-  Controller,
+  Controller/*,
   computed,
-  inject
+  inject*/
 } = Ember;
-const { reads } = computed;
+//const { reads } = computed;
 
 export default Controller.extend(Paginate, {
   queryParams: ['quickSearchField', 'q'],

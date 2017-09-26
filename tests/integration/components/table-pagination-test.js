@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -6,19 +7,13 @@ moduleForComponent('table-pagination', 'Integration | Component | table paginati
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+  this.doNothing = function() {};
+  this.set('columns', Ember.A());
 
-  this.render(hbs`{{table-pagination}}`);
+  this.render(hbs`{{table-pagination columns=columns changePage=(action this.doNothing)}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:"
-  this.render(hbs`
-    {{#table-pagination}}
-      template block text
-    {{/table-pagination}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '),
+    'Pager --> You are on the page # of pages Change page: ' +
+    '<Toolbar> tools -> Pager --> You are on the page #1 of 0 pages Change page: </Toolbar> ' +
+    'Content: No records found Total Records: 0 | Showing 5 per page « »');
 });

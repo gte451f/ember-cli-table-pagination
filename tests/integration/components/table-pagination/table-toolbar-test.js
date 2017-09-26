@@ -11,7 +11,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{table-pagination/table-toolbar}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), '<Toolbar> </Toolbar>');
 
   // Template block usage:"
   this.render(hbs`
@@ -20,5 +20,5 @@ test('it renders', function(assert) {
     {{/table-pagination/table-toolbar}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), '<Toolbar> template block text </Toolbar>');
 });

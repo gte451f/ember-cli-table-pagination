@@ -2,11 +2,8 @@ import Ember from 'ember';
 import Paginate from '../mixins/table-pager/route';
 
 const {
-  Route,
-  computed,
-  inject
+  Route
 } = Ember;
-const { reads } = computed;
 
 export default Route.extend(Paginate, {
   modelName: 'item',
@@ -21,7 +18,7 @@ export default Route.extend(Paginate, {
     }
   },
   actions: {
-    save(params) {
+    save() {
       // Do whatever
       this._super(...arguments);
     }
