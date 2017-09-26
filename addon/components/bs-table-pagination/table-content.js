@@ -36,6 +36,7 @@ export default Component.extend(ResizeAware, {
     }
   }),
 
+  //eslint-disable-next-line
   didResize(width, height) {
     if (this.get('scrollMode')) {
       this.adjustTableDimensions();
