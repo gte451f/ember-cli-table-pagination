@@ -6,10 +6,9 @@ moduleForComponent('bs-table-pagination/table-tools', 'Integration | Component |
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+  this.doNothing = function () {}
 
-  this.render(hbs`{{bs-table-pagination/table-tools}}`);
+  this.render(hbs`{{bs-table-pagination/table-tools changePerPage=(action doNothing)}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), '.filter-operator .ember-power-select-dropdown, .filter-operator .ember-power-select, .filter-operator .ember-power-select-trigger { width: 180px; } Per Page:');
+  assert.equal(this.$().text().trim().replace(/\s+/g, ' '), '.filter-operator .ember-power-select-dropdown, .filter-operator .ember-power-select, .filter-operator .ember-power-select-trigger { width: 180px; } Per Page: Show all records');
 });

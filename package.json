@@ -39,6 +39,7 @@
     "ember-disable-prototype-extensions": "^1.1.2",
     "ember-data": "^2.15.0",
     "ember-export-application-global": "^2.0.0",
+    "ember-font-awesome": "^3.0.5",
     "ember-load-initializers": "^1.0.0",
     "ember-resolver": "^4.5.0",
     "ember-source": "~2.15.0",

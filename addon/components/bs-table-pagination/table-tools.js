@@ -17,7 +17,7 @@ export default Ember.Component.extend({
   }),
 
   allowAdvancedFilter: Ember.computed('allowQuickSearch', function() {
-    return this.get('allColumns').get('length') > 0 && this.get('allowQuickSearch');
+    return this.get('allColumns.length') > 0 && this.get('allowQuickSearch');
   }),
 
   filters: Ember.computed('allColumns.@each.advFilterOperator', function () {

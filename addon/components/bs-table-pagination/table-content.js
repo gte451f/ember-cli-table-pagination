@@ -10,6 +10,8 @@ export default Component.extend(ResizeAware, {
   resizeHeightSensitive: true,
   resizeWidthSensitive: true,
 
+  resizeService: Ember.inject.service('resize'),
+
   classNames: ['ember-cli-table-content'],
   // tagName: '',
 

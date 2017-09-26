@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -6,10 +7,11 @@ moduleForComponent('bs-table-pagination', 'Integration | Component | bs table pa
 });
 
 test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });"
+  this.doNothing = function() {};
+  this.set('columns', Ember.A());
 
-  this.render(hbs`{{bs-table-pagination}}`);
+  this.render(hbs`{{bs-table-pagination columns=columns changePage=(action this.doNothing)}}`);
 
-  assert.equal(this.$().text().trim(), 'title');
+  assert.equal(this.$('h3').text().trim(), 'title');
+  assert.equal(this.$('table').text().trim().replace(/\s+/g, ' '), 'No records found Actions');
 });
