@@ -45,7 +45,6 @@ Note: to allow for more flexibility when overriding the component, a special par
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
 ## Running
 
