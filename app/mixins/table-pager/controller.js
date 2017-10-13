@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Column from './column';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
 
-const { computed } = Ember;
+const { computed, isEmpty, isPresent } = Ember;
 const { alias } = computed;
 
 /**
@@ -105,6 +105,8 @@ export default Ember.Mixin.create({
     Column.create({'displayName': '#', 'fieldName': 'id'})
   ],
 
+  additionalColumnsForFilter: [],
+
   // bootstrap or adminlte specific classes
   // color default|success|primary|warning|danger|info
   box: 'default',
@@ -123,6 +125,74 @@ export default Ember.Mixin.create({
   canLoadMore: false,
 
   selectedRows: [],
+
+  /**
+   * @method
+   * @public
+   *
+   * allows serialize the controller state to be able to send it to storage
+   */
+  toTableSettingsState () {
+    // We need to return a json object
+    // that can be used to re-hydrate the controller
+    // after a cold refresh to use saved filters
+    // sorting, page, perPage etc that are not part of
+    // the queryParams
+
+    const mapColumn = (col) => {
+        return {
+          fieldName: col.get('fieldName'),
+          filterValue: col.get('filterValue'),
+          showFilter: col.get('showFilter'),
+          advFilterValue: col.get('advFilterValue'),
+          advFilterValue2: col.get('advFilterValue2'),
+          advFilterOperator: col.get('advFilterOperator')
+        }
+    }
+
+    return {
+      page: this.get('page'),
+      perPage: this.get('perPage'),
+      sortField: this.get('sortField'),
+      quickSearch: this.get('quickSearch'),
+      extraParams: this.get('extraParams'),
+      columns: this.get('columns').map(mapColumn),
+      additionalColumnsForFilter: this.get('additionalColumnsForFilter').map(mapColumn)
+    }
+  },
+
+  /**
+   * @method
+   * @public
+   *
+   * allows deserialize the controller state from a storage
+   */
+  fromTableSettingsState (state) {
+    if (isEmpty(state)) return
+    this.set('page', state.page)
+    this.set('perPage', state.perPage)
+    this.set('sortField', state.sortField)
+    this.set('quickSearch', state.quickSearch)
+    this.set('extraParams', state.extraParams)
+
+    const updateColumn = function (list) {
+      return (col) => {
+        const tableColumn = list.findBy('fieldName', col.fieldName)
+        if (isPresent(tableColumn)) {
+          tableColumn.set('filterValue', col.filterValue)
+          tableColumn.set('showFilter', col.showFilter)
+          tableColumn.set('advFilterValue', col.advFilterValue)
+          tableColumn.set('advFilterValue2', col.advFilterValue2)
+          if (isPresent(col.advFilterOperator)) {
+            tableColumn.set('advFilterOperator', Ember.Object.create(col.advFilterOperator))
+          }
+        }
+      }
+    }
+
+    state.columns.forEach(updateColumn(this.get('columns')))
+    state.additionalColumnsForFilter.forEach(updateColumn(this.get('additionalColumnsForFilter')))
+  },
 
   actions: {
     loadNext () {
