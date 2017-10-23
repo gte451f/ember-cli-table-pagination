@@ -45,16 +45,14 @@ export default Ember.Mixin.create(RouteMixin, {
     sortField: function (field) {
       field = field.underscore();
       var sortField = this.controller.get('sortField');
-      var newSortOrder, sortOrder = this.controller.get('sortOrder');
+      var sortOrder = this.controller.get('sortOrder');
 
       //sortField hasn't changed so we toggle sortOrder
       //check for the descending and ascending versions
       if (field === sortField || '-' + field === sortField) {
         if (sortOrder === '-') {
-          newSortOrder = '';
           this.controller.set('sortOrder', '');
         } else {
-          newSortOrder = '-';
           this.controller.set('sortOrder', '-');
         }
       }

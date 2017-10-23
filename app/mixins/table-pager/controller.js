@@ -96,6 +96,7 @@ export default Ember.Mixin.create({
       try {
         self.send('runQuickSearch');
       } catch (e) {
+        // ignore errors
       }
     }, 600));
   }.observes('quickSearch'),
@@ -221,7 +222,7 @@ export default Ember.Mixin.create({
       }
       subject.save().then(() => {
         this.get('notify').success('Saved successfully');
-      }).then((result) => {
+      }).then(() => {
         if (Ember.isEmpty(row.get('flagNote'))) {
           row.set('flagStatus', 'unflagged');
         } else {

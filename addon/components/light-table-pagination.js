@@ -78,14 +78,14 @@ export default TablePagination.extend({
 
   /** light table columns derived from the columns property*/
   ltColumns: computed('tableActionsComponent', 'columns', function () {
-    return [ {
+    return Ember.A([ {
         label: 'Actions',
         sortable: false,
         width: '75px',
         cellComponent: this.get('tableActionsComponent'),
         cellClassNames: 'nowrap',
         type: 'quick-filter-toggle'
-      } ].pushObjects(
+      } ]).pushObjects(
       this.get('columns').map((column) => {
       return {
         label: column.get('displayName'),
