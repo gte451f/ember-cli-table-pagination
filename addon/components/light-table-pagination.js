@@ -28,6 +28,8 @@ export default TablePagination.extend({
 
   useNoWrap: true,
 
+  hideActionsColumn: false,
+
   isInfinite: Ember.computed(function() {
     return typeof this.attrs.loadNext === 'function';
   }),
@@ -78,15 +80,18 @@ export default TablePagination.extend({
 
   /** light table columns derived from the columns property*/
   ltColumns: computed('tableActionsComponent', 'columns', function () {
-    return Ember.A([ {
+    const columns = Ember.A([]);
+    if (!this.get('hideActionsColumn')) {
+      columns.pushObject({
         label: 'Actions',
         sortable: false,
         width: '75px',
         cellComponent: this.get('tableActionsComponent'),
         cellClassNames: 'nowrap',
         type: 'quick-filter-toggle'
-      } ]).pushObjects(
-      this.get('columns').map((column) => {
+      });
+    }
+    columns.pushObjects(this.get('columns').map((column) => {
       return {
         label: column.get('displayName'),
         valuePath: column.get('fieldName'),
@@ -98,6 +103,7 @@ export default TablePagination.extend({
         tpColumn: column
       };
     }));
+    return columns;
   }),
   table: computed('ltColumns', 'content.[]', function() {
     let content;
