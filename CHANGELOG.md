@@ -1,5 +1,9 @@
 # Ember-cli-table-pagination Changelog
 
+### 0.8.2 ()
+- [#43](https://github.com/gte451f/ember-cli-table-pagination/pull/43) [FEATURE] Add actionsCellWidth paramter to customize actions width for light-table-pagination component
+- [#42](https://github.com/gte451f/ember-cli-table-pagination/pull/42) [FEATURE] Add option to hide actions column to light-table-pagination component
+
 ### 0.8.1 (October 23, 2017)
 - [#38](https://github.com/gte451f/ember-cli-table-pagination/pull/38) [FEATURE] Serialize/Deserialize table paging state
 
