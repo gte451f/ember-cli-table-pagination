@@ -21,14 +21,16 @@ export default TablePagination.extend({
   // properties
   boxSize: 12,
 
-  // override inherited properties
-  perPage: 50,
+  actionsCellWidth: '75px',
 
   height: '80vh',
 
   useNoWrap: true,
 
   hideActionsColumn: false,
+
+  // override inherited properties
+  perPage: 50,
 
   isInfinite: Ember.computed(function() {
     return typeof this.attrs.loadNext === 'function';
@@ -85,7 +87,7 @@ export default TablePagination.extend({
       columns.pushObject({
         label: 'Actions',
         sortable: false,
-        width: '75px',
+        width: this.get('actionsCellWidth'),
         cellComponent: this.get('tableActionsComponent'),
         cellClassNames: 'nowrap',
         type: 'quick-filter-toggle'
