@@ -49,3 +49,10 @@ test('it renders with custom action-cell width', function(assert) {
   assert.equal($headerRow.find('td').length, 3, 'Three cells in first row (1 for actions, next 2 for content)');
   assert.equal($headerRow.find('td:first').width(), 120, 'Action cell is 120px');
 });
+
+test('it renders without action columns', function(assert) {
+  this.render(hbs`{{light-table-pagination hideActionsColumn=true content=items columns=columns noFiltering=true changePage=(action this.doNothing)}}`);
+
+  const $headerRow = this.$(`${contentTableSelector} tr:first`);
+  assert.equal($headerRow.find('td').length, 2, 'Two cells in first row (no actions)');
+});
