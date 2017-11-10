@@ -141,14 +141,14 @@ export default Ember.Mixin.create({
     // the queryParams
 
     const mapColumn = (col) => {
-        return {
-          fieldName: col.get('fieldName'),
-          filterValue: col.get('filterValue'),
-          showFilter: col.get('showFilter'),
-          advFilterValue: col.get('advFilterValue'),
-          advFilterValue2: col.get('advFilterValue2'),
-          advFilterOperator: col.get('advFilterOperator')
-        }
+      return {
+        fieldName: col.get('fieldName'),
+        filterValue: col.get('filterValue'),
+        showFilter: col.get('showFilter'),
+        advFilterValue: col.get('advFilterValue'),
+        advFilterValue2: col.get('advFilterValue2'),
+        advFilterOperator: col.get('advFilterOperator')
+      }
     }
 
     return {
@@ -175,7 +175,9 @@ export default Ember.Mixin.create({
     this.set('sortField', state.sortField)
     this.set('quickSearch', state.quickSearch)
     this.set('extraParams', state.extraParams)
+  },
 
+  updateColumnsFromTableSettingState (state) {
     const updateColumn = function (list) {
       return (col) => {
         const tableColumn = list.findBy('fieldName', col.fieldName)
@@ -191,8 +193,10 @@ export default Ember.Mixin.create({
       }
     }
 
-    state.columns.forEach(updateColumn(this.get('columns')))
-    state.additionalColumnsForFilter.forEach(updateColumn(this.get('additionalColumnsForFilter')))
+    if (state) {
+      state.columns.forEach(updateColumn(this.get('columns')))
+      state.additionalColumnsForFilter.forEach(updateColumn(this.get('additionalColumnsForFilter')))
+    }
   },
 
   actions: {
