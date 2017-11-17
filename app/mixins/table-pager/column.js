@@ -48,7 +48,7 @@ export default Ember.Object.extend({
 
 
   // Advanced Filter fields
-  advFilterOperator: undefined,
+  advFilterOperator: Ember.Object.create({display: 'Contains', value: 'contains', input: 1}),
   advFilterValue: undefined,
   advFilterValue2: undefined
 });

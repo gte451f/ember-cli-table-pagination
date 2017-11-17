@@ -1,7 +1,23 @@
 import Ember from 'ember';
 import layout from '../../templates/components/bs-table-pagination/table-tools';
 
-const { computed: { reads } } = Ember;
+const { computed: { reads }, isPresent } = Ember;
+
+const hasFilter = function (c) {
+  let hasValues = false
+  switch (c.get('advFilterOperator.input')) {
+    case 0:
+      hasValues = true;
+      break;
+    case 1:
+      hasValues = isPresent(c.get('advFilterValue'));
+      break;
+    case 2:
+      hasValues = isPresent(c.get('advFilterValue')) && isPresent(c.get('advFilterValue2'));
+      break;
+  }
+  return isPresent(c.get('advFilterOperator')) && hasValues;
+}
 
 export default Ember.Component.extend({
   layout,
@@ -20,10 +36,8 @@ export default Ember.Component.extend({
     return this.get('allColumns.length') > 0 && this.get('allowQuickSearch');
   }),
 
-  filters: Ember.computed('allColumns.@each.advFilterOperator', function () {
-    return this.get('allColumns').filter((c) => {
-      return Ember.isPresent(c.get('advFilterOperator'));
-    });
+  filters: Ember.computed('allColumns.@each.{advFilterOperator,advFilterValue,advFilterValue2}', function () {
+    return this.get('allColumns').filter(hasFilter);
   }),
 
   operators: [
@@ -51,9 +65,7 @@ export default Ember.Component.extend({
       this.attrs.refresh();
     },
     applyFilter () {
-      let columnsWithFilter = this.get('allColumns').filter((c) => {
-        return Ember.isPresent(c.get('advFilterOperator'));
-      });
+      let columnsWithFilter = this.get('allColumns').filter(hasFilter);
 
       let extraParams = {};
       columnsWithFilter.forEach((c) => {
@@ -96,18 +108,16 @@ export default Ember.Component.extend({
       column.setProperties({
         advFilterValue: null,
         advFilterValue2: null,
-        advFilterOperator:null
+        advFilterOperator: this.get('operators.firstObject')
       });
     },
 
     clearAllFilters () {
-      let columnsWithFilter = this.get('allColumns').filter((c) => {
-        return Ember.isPresent(c.get('advFilterOperator'));
-      });
+      let columnsWithFilter = this.get('allColumns').filter(hasFilter);
 
       columnsWithFilter.setEach('advFilterValue', null);
       columnsWithFilter.setEach('advFilterValue2', null);
-      columnsWithFilter.setEach('advFilterOperator', null);
+      columnsWithFilter.setEach('advFilterOperator', this.get('operators.firstObject'));
 
       this.send('applyFilter');
     }
