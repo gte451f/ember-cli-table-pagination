@@ -198,7 +198,7 @@ export default Ember.Mixin.create(RouteMixin, {
       });
 
       if (Ember.isPresent(name) && Ember.isPresent(value)) {
-        params[name] = '*' + value + '*';
+        params[name] = '*' + value.trim() + '*';
       }
 
       let filterParams = this.controller.get('filterParams');
