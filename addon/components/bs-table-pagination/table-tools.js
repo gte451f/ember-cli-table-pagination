@@ -21,7 +21,7 @@ const hasFilter = function (c) {
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['col-md-7'],
+  classNames: ['col-xs-8', 'col-md-8'],
 
   // properties
   perPageOptions: [50, 100, 250],
