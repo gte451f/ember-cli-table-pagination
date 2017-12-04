@@ -9,5 +9,10 @@ const { reads } = computed;
 
 export default Controller.extend({
   appController: inject.controller('application'),
-  items: reads('appController.items')
+  items: reads('appController.items'),
+
+  actions: {
+    changePage() {
+    }
+  }
 });

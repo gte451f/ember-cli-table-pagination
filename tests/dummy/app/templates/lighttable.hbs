@@ -1,16 +1,15 @@
 <div class='content'>
-  <h3> bs-table-pagination </h3>
+  <h3> light-table-pagination </h3>
   <div class="container">
 
-    {{#bs-table-pagination
+    {{#light-table-pagination
       content=items
       tableTitle="item table #1"
-      fields=columns
+      columns=columns
       changePage=(action 'changePage')
       as |item|
     }}
-      {{bs-table-pagination/table-row item=item columns=columns}}
-    {{/bs-table-pagination}}
+    {{/light-table-pagination}}
 
   </div>
 </div>
