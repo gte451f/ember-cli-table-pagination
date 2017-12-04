@@ -1,1 +1,22 @@
+@import 'node_modules/bootstrap/less/bootstrap.less';
 @import "ember-cli-table-pagination";
+
+.container--with-lighttable {
+    position: absolute;
+    top: 180px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    // width: 100%;
+    overflow: hidden;
+}
+
+.bs-table-pagination-footer {
+  margin: 0;
+}
+
+@media (max-width: 425px) {
+  #title {
+    font-size: 23px;
+  }
+}
