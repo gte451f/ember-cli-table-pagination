@@ -98,3 +98,39 @@
     }
   }
 }
+
+@media (min-width: @screen-sm) {
+  .ember-cli-table-pagination--flex {
+    overflow: hidden;
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+
+    >.box-header {
+      flex: 0 0 auto;
+    }
+
+    >.box-body {
+      flex: 1 0 0;
+      height: 0;
+      >div {
+        height: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: column;
+      }
+    }
+
+    .table-container {
+      overflow-y: hidden !important;
+      flex: 1 0;
+    }
+
+    .ember-light-table {
+      height: 100% !important;
+    }
+  }
+
+}
