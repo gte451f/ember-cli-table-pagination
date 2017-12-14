@@ -1,0 +1,16 @@
+<div class='content'>
+  <h3> light-table-pagination </h3>
+  <div class="container container--with-lighttable">
+
+    {{#light-table-pagination
+      content=items
+      tableTitle="item table #1"
+      columns=columns
+      flex=true
+      changePage=(action 'changePage')
+      as |item|
+    }}
+    {{/light-table-pagination}}
+
+  </div>
+</div>

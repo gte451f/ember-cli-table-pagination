@@ -47,7 +47,7 @@ test('it renders with custom action-cell width', function(assert) {
 
   const $headerRow = this.$(`${contentTableSelector} tr:first`);
   assert.equal($headerRow.find('td').length, 3, 'Three cells in first row (1 for actions, next 2 for content)');
-  assert.equal($headerRow.find('td:first').width(), 120, 'Action cell is 120px');
+  assert.equal($headerRow.find('td:first').outerWidth(), 120, 'Action cell is 120px');
 });
 
 test('it renders without action columns', function(assert) {

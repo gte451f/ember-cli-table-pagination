@@ -162,7 +162,7 @@ export default Component.extend({
   }),
 
   allColumns: computed('columns', 'additionalColumnsForFilter', function() {
-    let tableColumns = this.get('columns').filterBy('enableSearch', true);
+    let tableColumns = Ember.A(this.get('columns')).filterBy('enableSearch', true);
     let additionalColumnsForFilter = this.get('additionalColumnsForFilter');
     let additionalColumns = [];
     if (Ember.isPresent(additionalColumnsForFilter)) {

@@ -10,6 +10,7 @@ Router.map(function() {
   this.route('old', { resetNamespace: true });
   this.route('item', { path: '/item/:item_id' });
   this.route('bootstrap');
+  this.route('lighttable');
   this.route('bs-remote');
 });
 

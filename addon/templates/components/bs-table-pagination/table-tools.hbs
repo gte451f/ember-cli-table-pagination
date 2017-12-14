@@ -12,6 +12,7 @@
           {{input type="text"
           class="form-control quickSearchInput"
           value=searchString
+          placeholder='Narrow Results'
           }}
             <span class="input-group-btn">
               {{#if this.attrs.runQuickSearch}}
@@ -32,16 +33,23 @@
   {{#unless showAll}}
     <label>Per Page:</label>
             <div class="input-group input-group-sm">
-              {{#power-select
-                searchEnabled=false
-                allowClear=false
-                selected=perPage
-                options=perPageOptions
-                onchange=(action this.attrs.changePerPage)
-                triggerClass="form-control  table-power-select"
-              as |result|}}
-                {{result}}
-              {{/power-select}}
+                {{#if (eq perPageFormat 'select')}}
+                    {{#power-select
+                            searchEnabled=false
+                            allowClear=false
+                            selected=perPage
+                            options=perPageOptions
+                            onchange=(action this.attrs.changePerPage)
+                            triggerClass="form-control  table-power-select"
+                    as |result|}}
+                        {{result}}
+                    {{/power-select}}
+                {{/if}}
+
+                {{#if (eq perPageFormat 'input')}}
+                    {{input class="form-control per-page-input" value=perPage type=number action=this.attrs.changePerPage on='key-up'}}
+                {{/if}}
+
               <span class="input-group-btn">
                 {{#if this.attrs.refresh}}
                   <button {{action (action this.attrs.refresh) }} class="btn btn-sm btn-primary">

@@ -21,7 +21,7 @@ const hasFilter = function (c) {
 
 export default Ember.Component.extend({
   layout,
-  classNames: ['col-md-7'],
+  classNames: ['col-xs-8', 'col-md-8'],
 
   // properties
   perPageOptions: [50, 100, 250],
@@ -29,7 +29,12 @@ export default Ember.Component.extend({
   showAll: false,
 
   onInitComponent: Ember.on('init', function() {
-    this.set('showAll', this.get('isInfinite'));
+    if(this.get('toolsParams')){
+      this.set('perPageFormat', (this.get('toolsParams.perPageFormat')) ? this.get('toolsParams.perPageFormat') : 'select')
+      this.set('showAll', this.get('toolsParams.showAll') ? this.get('toolsParams.showAll') : this.get('isInfinite'));
+    } else {
+      this.set('showAll', this.get('isInfinite'));
+    }
   }),
 
   allowAdvancedFilter: Ember.computed('allowQuickSearch', function() {
@@ -39,6 +44,8 @@ export default Ember.Component.extend({
   filters: Ember.computed('allColumns.@each.{advFilterOperator,advFilterValue,advFilterValue2}', function () {
     return this.get('allColumns').filter(hasFilter);
   }),
+
+  perPageFormat: 'select',
 
   operators: [
     Ember.Object.create({display: 'Contains', value: 'contains', input: 1}),

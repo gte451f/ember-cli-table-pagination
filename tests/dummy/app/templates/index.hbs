@@ -1,8 +1,9 @@
 
-<h3> the new way goes next: </h3>
+<h3> table-pagination </h3>
 
 {{#table-pagination
   content=items
+  changePage=(action 'changePage')
   class="box box-12 box-top"
   tableTitle="item table #1"
   as |item|

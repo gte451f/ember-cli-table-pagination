@@ -14,7 +14,7 @@ export default TablePagination.extend({
   box: true,
   boxTop: true,
   classNames: ['ember-cli-table-pagination'],
-  classNameBindings: ['boxSizeClass', 'box', 'boxTop'],
+  classNameBindings: ['boxSizeClass', 'box', 'boxTop', 'flex:ember-cli-table-pagination--flex'],
 
   enableExpandedRows: false,
 
@@ -24,6 +24,8 @@ export default TablePagination.extend({
   actionsCellWidth: '75px',
 
   height: '80vh',
+
+  flex: false,
 
   useNoWrap: true,
 

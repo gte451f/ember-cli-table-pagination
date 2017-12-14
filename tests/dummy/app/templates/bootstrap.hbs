@@ -1,14 +1,15 @@
 <div class='content'>
-  <h3> the new way w/ bootstrap goes next: </h3>
+  <h3> bs-table-pagination </h3>
   <div class="container">
 
     {{#bs-table-pagination
       content=items
       tableTitle="item table #1"
       fields=columns
+      changePage=(action 'changePage')
       as |item|
     }}
-      {{bs-table-pagination.table-row item=item columns=columns}}
+      {{bs-table-pagination/table-row item=item columns=columns}}
     {{/bs-table-pagination}}
 
   </div>
