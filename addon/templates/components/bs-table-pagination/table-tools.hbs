@@ -47,7 +47,7 @@
                 {{/if}}
 
                 {{#if (eq perPageFormat 'input')}}
-                    {{input class="form-control per-page-input" value=perPage type=number action=this.attrs.changePerPage on='key-up'}}
+                    {{input class="form-control per-page-input" value=perPage type=number key-up=this.attrs.changePerPage}}
                 {{/if}}
 
               <span class="input-group-btn">
