@@ -102,6 +102,7 @@ export default TablePagination.extend({
         sortable: column.get('disableServerInteractions') ? false : true,
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
+        cellType: column.get('cellType') ? column.get('cellType') : 'base',
         cellClassNames: 'nowrap',
         type: 'base-with-filter',
         tpColumn: column
