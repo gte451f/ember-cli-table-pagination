@@ -1,5 +1,8 @@
 # Ember-cli-table-pagination Changelog
 
+### 0.8.7 (December 27, 2017)
+- [#48](https://github.com/gte451f/ember-cli-table-pagination/pull/48) [BUGFIX] Fix transform-input-on-to-onEvent deprecation
+
 ### 0.8.6 (December 15, 2017)
 - Add toolParams and perPageFormat (either select or input) options to bs-table-pagination/table-tools component
 - [#47](https://github.com/gte451f/ember-cli-table-pagination/pull/47) [FEATURE] Add flex option to {{light-table-pagination}}
