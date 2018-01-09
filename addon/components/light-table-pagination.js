@@ -17,6 +17,7 @@ export default TablePagination.extend({
   classNameBindings: ['boxSizeClass', 'box', 'boxTop', 'flex:ember-cli-table-pagination--flex'],
 
   enableExpandedRows: false,
+  searchIsOpen: false,
 
   // properties
   boxSize: 12,
@@ -83,7 +84,8 @@ export default TablePagination.extend({
   },
 
   /** light table columns derived from the columns property*/
-  ltColumns: computed('tableActionsComponent', 'columns', function () {
+  ltColumns: computed('tableActionsComponent', 'columns', 'searchIsOpen', function () {
+    const searchIsOpen = this.get('searchIsOpen')
     const columns = Ember.A([]);
     if (!this.get('hideActionsColumn')) {
       columns.pushObject({
@@ -96,6 +98,7 @@ export default TablePagination.extend({
       });
     }
     columns.pushObjects(this.get('columns').map((column) => {
+      column.set('showFilter', searchIsOpen)
       return {
         label: column.get('displayName'),
         valuePath: column.get('fieldName'),
