@@ -4,7 +4,8 @@ import TablePagination from './table-pagination';
 import Table from 'ember-light-table';
 
 const {
-  computed
+  computed,
+  isEmpty
 } = Ember;
 
 export default TablePagination.extend({
@@ -121,6 +122,9 @@ export default TablePagination.extend({
       options.enableSync = true;
     } else {
       content = this.get('content');
+    }
+    if (isEmpty(content)) {
+      content = []
     }
     let t = new Table(this.get('ltColumns'), content, options);
 
