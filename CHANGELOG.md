@@ -1,5 +1,11 @@
 # Ember-cli-table-pagination Changelog
 
+### 0.8.9 (Unreleased)
+- [#54](https://github.com/gte451f/ember-cli-table-pagination/pull/54) [FEATURE] Add per row ability to show/hide open/edit/delete actions
+
+### 0.8.8 (January 18, 2018)
+- [#51](https://github.com/gte451f/ember-cli-table-pagination/pull/51) [FEATURE] Add flag to determine if column header filter should be open
+
 ### 0.8.7 (December 27, 2017)
 - [#48](https://github.com/gte451f/ember-cli-table-pagination/pull/48) [BUGFIX] Fix transform-input-on-to-onEvent deprecation
 
