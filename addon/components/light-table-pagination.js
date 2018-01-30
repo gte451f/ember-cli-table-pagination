@@ -68,6 +68,9 @@ export default TablePagination.extend({
     });
 
     Ember.run.later(() => {
+      if (this.isDestroyed) {
+        return;
+      }
       const scrollbarHeight = this.$('.tse-scrollbar.vertical .drag-handle').height();
       if (scrollbarHeight > 0) {
         $container.addClass('table-container--with-scrollbar');
