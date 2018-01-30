@@ -56,3 +56,22 @@ test('it renders without action columns', function(assert) {
   const $headerRow = this.$(`${contentTableSelector} tr:first`);
   assert.equal($headerRow.find('td').length, 2, 'Two cells in first row (no actions)');
 });
+
+test('it renders with edit actions in all rows', function(assert) {
+  this.set('editCondition', function() {
+    return true;
+  });
+  this.render(hbs`{{light-table-pagination content=items columns=columns noFiltering=true editAction=(action this.doNothing) editCondition=(action this.editCondition) changePage=(action this.doNothing)}}`);
+
+  assert.equal(this.$(contentTableSelector).find('.fa-pencil').length, 2, 'Two edit buttons');
+
+});
+
+test('it renders with edit actions in first row', function(assert) {
+  this.set('editCondition', function(row) {
+    return row.id == 1;
+  });
+  this.render(hbs`{{light-table-pagination content=items columns=columns noFiltering=true editAction=(action this.doNothing) editCondition=(action this.editCondition) changePage=(action this.doNothing)}}`);
+
+  assert.equal(this.$(contentTableSelector).find('.fa-pencil').length, 1, 'Edit buttons only in first row');
+});
