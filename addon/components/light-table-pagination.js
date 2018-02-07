@@ -88,7 +88,7 @@ export default TablePagination.extend({
   },
 
   /** light table columns derived from the columns property*/
-  ltColumns: computed('tableActionsComponent', 'columns', 'searchIsOpen', function () {
+  ltColumns: computed('tableActionsComponent', 'columns.[]', 'searchIsOpen', function () {
     const searchIsOpen = this.get('searchIsOpen')
     const columns = Ember.A([]);
     if (!this.get('hideActionsColumn')) {
@@ -117,7 +117,7 @@ export default TablePagination.extend({
     }));
     return columns;
   }),
-  table: computed('ltColumns', 'content.[]', function() {
+  table: computed('ltColumns.[]', 'content.[]', function() {
     let content;
     let options = {};
     if (typeof this.attrs.loadNext === 'function') {
