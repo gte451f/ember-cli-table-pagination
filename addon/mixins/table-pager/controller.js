@@ -42,11 +42,7 @@ export default Ember.Mixin.create({
     50, 100, 250
   ],
 
-  // binding the property on the paged array
-  // to the query params on the controller
-  //pageBinding: "content.page",
-  //perPageBinding: "content.perPage",
-  totalPages: alias("content.totalPages"),
+  totalPages: alias("model.totalPages"),
 
   observingPerPage: function () {
     this.set('page', 1);
@@ -82,7 +78,7 @@ export default Ember.Mixin.create({
   perPage: 50,
   totalRecords: null,
 
-  infiniteContent: pagedArray('content', {infinite: true}),
+  infiniteContent: pagedArray('model', {infinite: true}),
 
   column: Ember.Object.extend({
     display: null,
