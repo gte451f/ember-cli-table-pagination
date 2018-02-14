@@ -52,7 +52,6 @@ export default Ember.Mixin.create({
   // sortField: computed('sortProperty', 'sortDirection', function() {
   //   let sortProperty = this.get('sortProperty');
   //   let sortDirection = this.get('sortDirection');
-  //   Ember.Logger.debug('sortField being updated');
   //   if (sortDirection) {
   //     return `${sortDirection}${sortProperty}`;
   //   } else {

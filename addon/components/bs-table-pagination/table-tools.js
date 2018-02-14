@@ -105,7 +105,6 @@ export default Ember.Component.extend({
         extraParams[c.get('apiInteractionName')] = filter;
       });
 
-      Ember.Logger.debug('Parameters for advanced filter', extraParams);
       this.attrs.runAdvancedSearch(extraParams);
 
       this.set('showFilterDialog', false);

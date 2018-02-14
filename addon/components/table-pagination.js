@@ -146,12 +146,9 @@ export default Component.extend({
   currentContent: computed('pagedContent', 'content', 'isRemoteHandled', function () {
     let isRemoteHandled = this.get('isRemoteHandled');
     if (isRemoteHandled) {
-      Ember.Logger.debug('content processing is handled remotely -> ', this.get('content.length'));
       return this.get('content');
     } else {
-      let content = this.get('pagedContent');
-      Ember.Logger.debug('content processing is done manually -> ', this.get('pagedContent.length'));
-      return content;
+      return this.get('pagedContent');
     }
   }),
   currentContentSize: reads('currentContent.length'),
@@ -188,7 +185,6 @@ export default Component.extend({
 
   actions: {
     changeSort(property, direction) {
-      Ember.Logger.debug('Component: changeSort -> property %s, direction %s', property, direction);
       let isRemoteHandled = this.get('isRemoteHandled');
       if (isRemoteHandled) {
         this.attrs.changeSort(property, direction);

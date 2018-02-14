@@ -118,7 +118,6 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param perPage
      */
     changePerPage: function (perPage) {
-      Ember.Logger.debug('changePerPage -> %s', perPage);
       this.controller.set('perPage', perPage);
       this.refresh();
     },
@@ -129,7 +128,6 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param direction
      */
     changeSort: function (property, direction) {
-      Ember.Logger.debug('ROUTE: property -> direction => %s -> %s', property, direction);
       let order = (direction === 'desc') ? '-' : '';
       this.controller.set('sortProperty', property);
       this.controller.set('sortDirection', direction);
@@ -227,7 +225,6 @@ export default Ember.Mixin.create(RouteMixin, {
   model: function (params) {
     let allParams = this.getAllParams(params);
     this.currentParams = allParams;
-    Ember.Logger.debug(allParams);
     return this.findPaged(this.modelName, allParams);
   },
 
