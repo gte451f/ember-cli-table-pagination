@@ -1,9 +1,5 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 import Paginate from '../mixins/table-pager/route';
-
-const {
-  Route
-} = Ember;
 
 export default Route.extend(Paginate, {
   modelName: 'item',

@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from '../../templates/components/bs-table-pagination/table-pager';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['col-xs-4', 'col-md-4'],
   actions: {

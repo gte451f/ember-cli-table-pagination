@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/string';
 
 export function minWidthIfTrue([isTrue, percentage]) {
   if (isTrue) {
     let percentageNumber = parseFloat(percentage);
-    return Ember.String.htmlSafe(`min-width: ${percentageNumber}%`);
+    return htmlSafe(`min-width: ${percentageNumber}%`);
   }
-  return Ember.String.htmlSafe('');
+  return htmlSafe('');
 }
 
-export default Ember.Helper.helper(minWidthIfTrue);
+export default helper(minWidthIfTrue);

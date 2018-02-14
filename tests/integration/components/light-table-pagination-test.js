@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import { A } from '@ember/array';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -10,18 +11,18 @@ moduleForComponent('light-table-pagination', 'Integration | Component | light ta
 
   beforeEach() {
     this.doNothing = function() {};
-    this.set('columns', Ember.A([
-      Ember.Object.create({
+    this.set('columns', A([
+      EmberObject.create({
         displayName: 'Product Name',
         fieldName: 'name',
         order: 0
-      }), Ember.Object.create({
+      }), EmberObject.create({
         displayName: 'Price',
         fieldName: 'price',
         order: 1
       })
     ]));
-    this.set('items', Ember.A([
+    this.set('items', A([
       {
         id: 1,
         name: 'Watch 1',

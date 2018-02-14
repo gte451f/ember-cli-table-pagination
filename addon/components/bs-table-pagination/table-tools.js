@@ -1,7 +1,9 @@
-import Ember from 'ember';
+import EmberObject, { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import Component from '@ember/component';
+import { reads } from '@ember/object/computed';
+import { isPresent } from '@ember/utils';
 import layout from '../../templates/components/bs-table-pagination/table-tools';
-
-const { computed: { reads }, isPresent } = Ember;
 
 const hasFilter = function (c) {
   let hasValues = false
@@ -19,7 +21,7 @@ const hasFilter = function (c) {
   return isPresent(c.get('advFilterOperator')) && hasValues;
 }
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   classNames: ['col-xs-8', 'col-md-8'],
 
@@ -28,7 +30,7 @@ export default Ember.Component.extend({
 
   showAll: false,
 
-  onInitComponent: Ember.on('init', function() {
+  onInitComponent: on('init', function() {
     if(this.get('toolsParams')){
       this.set('perPageFormat', (this.get('toolsParams.perPageFormat')) ? this.get('toolsParams.perPageFormat') : 'select')
       this.set('showAll', this.get('toolsParams.showAll') ? this.get('toolsParams.showAll') : this.get('isInfinite'));
@@ -37,24 +39,24 @@ export default Ember.Component.extend({
     }
   }),
 
-  allowAdvancedFilter: Ember.computed('allowQuickSearch', function() {
+  allowAdvancedFilter: computed('allowQuickSearch', function() {
     return this.get('allColumns.length') > 0 && this.get('allowQuickSearch');
   }),
 
-  filters: Ember.computed('allColumns.@each.{advFilterOperator,advFilterValue,advFilterValue2}', function () {
+  filters: computed('allColumns.@each.{advFilterOperator,advFilterValue,advFilterValue2}', function () {
     return this.get('allColumns').filter(hasFilter);
   }),
 
   perPageFormat: 'select',
 
   operators: [
-    Ember.Object.create({display: 'Contains', value: 'contains', input: 1}),
-    Ember.Object.create({display: 'Does not contain:', value: 'not_contains', input: 1}),
-    Ember.Object.create({display: 'Is equal to:', value: 'equal', input: 1}),
-    Ember.Object.create({display: 'Is not equal to:', value: 'not_equal', input: 1}),
-    Ember.Object.create({display: 'Is blank:', value: 'blank', input: 0}),
-    Ember.Object.create({display: 'Is not blank:', value: 'not_blank', input: 0}),
-    Ember.Object.create({display: 'Between:', value: 'between', input: 2})
+    EmberObject.create({display: 'Contains', value: 'contains', input: 1}),
+    EmberObject.create({display: 'Does not contain:', value: 'not_contains', input: 1}),
+    EmberObject.create({display: 'Is equal to:', value: 'equal', input: 1}),
+    EmberObject.create({display: 'Is not equal to:', value: 'not_equal', input: 1}),
+    EmberObject.create({display: 'Is blank:', value: 'blank', input: 0}),
+    EmberObject.create({display: 'Is not blank:', value: 'not_blank', input: 0}),
+    EmberObject.create({display: 'Between:', value: 'between', input: 2})
   ],
 
   buttonLink: reads('toolsParams.buttonLink'),
