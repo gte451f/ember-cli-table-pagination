@@ -1,5 +1,11 @@
 # Ember-cli-table-pagination Changelog
 
+### 0.9.0 (February 15, 2018)
+- [BUGFIX] Correct computed column dependencies
+- [#36](https://github.com/gte451f/ember-cli-table-pagination/issues/36) [CHORE] [BREAKING] Don't expose mixins/table-pager into application namespace
+- [#58](https://github.com/gte451f/ember-cli-table-pagination/issues/58) [BUGFIX] Replace usage of content in controller mixin
+- [#60](https://github.com/gte451f/ember-cli-table-pagination/pull/60) [CHORE] Upgrade to ember#2.18
+
 ### 0.8.9 (February 3, 2018)
 - [#54](https://github.com/gte451f/ember-cli-table-pagination/pull/54) [FEATURE] Add per row ability to show/hide open/edit/delete actions
 
