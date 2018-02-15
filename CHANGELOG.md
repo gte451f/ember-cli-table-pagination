@@ -1,6 +1,6 @@
 # Ember-cli-table-pagination Changelog
 
-### 0.8.9 (Unreleased)
+### 0.8.9 (February 3, 2018)
 - [#54](https://github.com/gte451f/ember-cli-table-pagination/pull/54) [FEATURE] Add per row ability to show/hide open/edit/delete actions
 
 ### 0.8.8 (January 18, 2018)

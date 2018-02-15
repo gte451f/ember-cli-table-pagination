@@ -1,10 +1,10 @@
-import Ember from 'ember';
-const {computed} = Ember;
+import { isPresent } from '@ember/utils';
+import EmberObject, { computed } from '@ember/object';
 
 /**
  * simple helper to store the columns that will be used to for display & search on a paginate list
  */
-export default Ember.Object.extend({
+export default EmberObject.extend({
 
   //the friendly name
   displayName: null,
@@ -36,7 +36,7 @@ export default Ember.Object.extend({
 
   // calculate to pull either the apiName or fieldName
   apiInteractionName: computed('fieldName', 'apiName', function () {
-    if (Ember.isPresent(this.get('apiName'))) {
+    if (isPresent(this.get('apiName'))) {
       return this.get('apiName');
     } else {
       // ie lastName >>  last_name
@@ -48,7 +48,7 @@ export default Ember.Object.extend({
 
 
   // Advanced Filter fields
-  advFilterOperator: Ember.Object.create({display: 'Contains', value: 'contains', input: 1}),
+  advFilterOperator: EmberObject.create({display: 'Contains', value: 'contains', input: 1}),
   advFilterValue: undefined,
   advFilterValue2: undefined
 });

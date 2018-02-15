@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -8,7 +8,7 @@ moduleForComponent('table-pagination', 'Integration | Component | table paginati
 
 test('it renders', function(assert) {
   this.doNothing = function() {};
-  this.set('columns', Ember.A());
+  this.set('columns', A());
 
   this.render(hbs`{{table-pagination columns=columns changePage=(action this.doNothing)}}`);
 

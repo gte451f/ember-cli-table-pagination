@@ -1,15 +1,10 @@
-import Ember from 'ember';
+import Controller, { inject as controller } from '@ember/controller';
+import { reads } from '@ember/object/computed';
+
 import Column from '../mixins/table-pager/column'
 
-const {
-  Controller,
-  computed,
-  inject
-} = Ember;
-const { reads } = computed;
-
 export default Controller.extend({
-  appController: inject.controller('application'),
+  appController: controller('application'),
   items: reads('appController.items'),
   columns: [
     Column.create({ fieldName: 'idNum', apiName: 'idNumInt', displayName: 'id', disableServerInteractions: false, enableSearch: false }),

@@ -1,14 +1,8 @@
-import Ember from 'ember';
-
-const {
-  Controller,
-  computed,
-  inject
-} = Ember;
-const { reads } = computed;
+import Controller, { inject as controller } from '@ember/controller';
+import { reads } from '@ember/object/computed';
 
 export default Controller.extend({
-  appController: inject.controller('application'),
+  appController: controller('application'),
   items: reads('appController.items'),
   columns: [
     { fieldName: 'idNum', apiName: 'idNumInt', displayName: 'id', disableServerInteractions: false, enableSearch: false },

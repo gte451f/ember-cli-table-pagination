@@ -1,14 +1,9 @@
-import Ember from 'ember';
+import { isPresent } from '@ember/utils';
+import { A } from '@ember/array';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { reads, sort } from '@ember/object/computed';
 import layout from '../templates/components/table-pagination';
-
-const {
-  Component,
-  computed
-} = Ember;
-const {
-  reads,
-  sort
-} = computed;
 
 export default Component.extend({
   // HTML
@@ -146,12 +141,9 @@ export default Component.extend({
   currentContent: computed('pagedContent', 'content', 'isRemoteHandled', function () {
     let isRemoteHandled = this.get('isRemoteHandled');
     if (isRemoteHandled) {
-      Ember.Logger.debug('content processing is handled remotely -> ', this.get('content.length'));
       return this.get('content');
     } else {
-      let content = this.get('pagedContent');
-      Ember.Logger.debug('content processing is done manually -> ', this.get('pagedContent.length'));
-      return content;
+      return this.get('pagedContent');
     }
   }),
   currentContentSize: reads('currentContent.length'),
@@ -162,10 +154,10 @@ export default Component.extend({
   }),
 
   allColumns: computed('columns', 'additionalColumnsForFilter', function() {
-    let tableColumns = Ember.A(this.get('columns')).filterBy('enableSearch', true);
+    let tableColumns = A(this.get('columns')).filterBy('enableSearch', true);
     let additionalColumnsForFilter = this.get('additionalColumnsForFilter');
     let additionalColumns = [];
-    if (Ember.isPresent(additionalColumnsForFilter)) {
+    if (isPresent(additionalColumnsForFilter)) {
       additionalColumns = additionalColumnsForFilter.filterBy('enableSearch', true);
     }
 
@@ -188,7 +180,6 @@ export default Component.extend({
 
   actions: {
     changeSort(property, direction) {
-      Ember.Logger.debug('Component: changeSort -> property %s, direction %s', property, direction);
       let isRemoteHandled = this.get('isRemoteHandled');
       if (isRemoteHandled) {
         this.attrs.changeSort(property, direction);

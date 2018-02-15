@@ -1,8 +1,8 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/string';
 
-export function heightValue(params/*, hash*/) {
-  let height = params[0];
-  return Ember.String.htmlSafe('height: ' + height);
+export function heightValue([height]) {
+  return htmlSafe(`height: ${height}`);
 }
 
-export default Ember.Helper.helper(heightValue);
+export default helper(heightValue);

@@ -1,12 +1,6 @@
-import DS from 'ember-data';
-import Ember from 'ember';
-
-const {
-  attr,
-  Model
-} = DS;
-
-const { computed } = Ember;
+import { computed } from '@ember/object';
+import Model from 'ember-data/model';
+import attr from 'ember-data/attr';
 
 export default Model.extend({
   idNum: attr('number'),

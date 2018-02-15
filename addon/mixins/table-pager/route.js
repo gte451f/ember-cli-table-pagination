@@ -1,8 +1,10 @@
-import Ember from 'ember';
+import { merge } from '@ember/polyfills';
+import { isPresent, typeOf } from '@ember/utils';
+import Mixin from '@ember/object/mixin';
+import { underscore } from '@ember/string';
 import RouteMixin from 'ember-cli-pagination/remote/route-mixin';
-const {underscore} = Ember.String;
 
-export default Ember.Mixin.create(RouteMixin, {
+export default Mixin.create(RouteMixin, {
   /**
    * set the sortField property as a query param so it will show up in the url
    * refreshModel affects route behavior when the value changes
@@ -118,7 +120,6 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param perPage
      */
     changePerPage: function (perPage) {
-      Ember.Logger.debug('changePerPage -> %s', perPage);
       this.controller.set('perPage', perPage);
       this.refresh();
     },
@@ -129,7 +130,6 @@ export default Ember.Mixin.create(RouteMixin, {
      * @param direction
      */
     changeSort: function (property, direction) {
-      Ember.Logger.debug('ROUTE: property -> direction => %s -> %s', property, direction);
       let order = (direction === 'desc') ? '-' : '';
       this.controller.set('sortProperty', property);
       this.controller.set('sortDirection', direction);
@@ -186,25 +186,25 @@ export default Ember.Mixin.create(RouteMixin, {
   getAllParams: function (params) {
     var controller = this.get('controller');
     var allParams = {};
-    if (Ember.isPresent(controller)) {
+    if (isPresent(controller)) {
       var name = controller.get('quickSearchField');
       var value = controller.get('quickSearch');
       var queryWith = controller.get('with');
-      allParams = Ember.merge(params, {
+      allParams = merge(params, {
         page: controller.get('page'),
         perPage: controller.get('perPage'),
         sortField: controller.get('sortField'),
         with: queryWith
       });
 
-      if (Ember.isPresent(name) && Ember.isPresent(value)) {
+      if (isPresent(name) && isPresent(value)) {
         params[name] = '*' + value.trim() + '*';
       }
 
       let filterParams = this.controller.get('filterParams');
       for (let fieldName in filterParams) {
         let filterValue = filterParams[fieldName];
-        if (Ember.typeOf(filterValue) !== 'null' && Ember.isPresent(filterValue)) {
+        if (typeOf(filterValue) !== 'null' && isPresent(filterValue)) {
           params[underscore(fieldName)] = '*' + filterValue + '*';
         }
       }
@@ -227,7 +227,6 @@ export default Ember.Mixin.create(RouteMixin, {
   model: function (params) {
     let allParams = this.getAllParams(params);
     this.currentParams = allParams;
-    Ember.Logger.debug(allParams);
     return this.findPaged(this.modelName, allParams);
   },
 
