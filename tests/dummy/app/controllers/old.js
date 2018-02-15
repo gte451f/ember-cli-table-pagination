@@ -1,14 +1,8 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+// import { reads } from '@ember/object/computed';
 
 import Paginate from '../mixins/table-pager/controller';
 import Column from '../mixins/table-pager/column';
-
-const {
-  Controller/*,
-  computed,
-  inject*/
-} = Ember;
-//const { reads } = computed;
 
 export default Controller.extend(Paginate, {
   queryParams: ['quickSearchField', 'q'],

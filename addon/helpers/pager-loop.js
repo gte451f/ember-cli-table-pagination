@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { get } from '@ember/object';
 
 /**
  * for a given model and pager object
@@ -8,6 +9,6 @@ import Ember from 'ember';
  * @returns {*}
  */
 export function pagerLoop(params, namedArgs) {
-  return Ember.get(namedArgs.model, namedArgs.field.fieldName);
+  return get(namedArgs.model, namedArgs.field.fieldName);
 }
-export default Ember.Helper.helper(pagerLoop);
+export default helper(pagerLoop);

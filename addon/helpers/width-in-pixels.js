@@ -1,11 +1,13 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
+import { htmlSafe } from '@ember/string';
+import { isNone } from '@ember/utils';
 
 export function widthInPixels([width]) {
-  if (Ember.isNone(width)) {
-    return Ember.String.htmlSafe('');
+  if (isNone(width)) {
+    return htmlSafe('');
   }
 
-  return Ember.String.htmlSafe(`width: ${width}px;`);
+  return htmlSafe(`width: ${width}px;`);
 }
 
-export default Ember.Helper.helper(widthInPixels);
+export default helper(widthInPixels);

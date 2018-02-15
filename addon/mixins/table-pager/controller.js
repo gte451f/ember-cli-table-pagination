@@ -1,20 +1,21 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import Mixin from '@ember/object/mixin';
+import EmberObject, { computed } from '@ember/object';
+import { isPresent, isEmpty, typeOf } from '@ember/utils';
+import { alias } from '@ember/object/computed';
 import Column from './column';
 import pagedArray from 'ember-cli-pagination/computed/paged-array';
-
-const { computed, isEmpty, isPresent } = Ember;
-const { alias } = computed;
 
 /**
  * store shared logic to run pager logic
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
    * This needs to be dynamic meta programming
    * for adding observers on each filter per column
    */
-  configureFilterObservers: Ember.on('init', function () {
+  configureFilterObservers: on('init', function () {
     var self = this;
     var observerDefinitions = {};
     var filterParams = {};
@@ -24,7 +25,7 @@ export default Ember.Mixin.create({
         var that = this;
         clearTimeout(this.get('keyTimer' + name));
         this.set('keyTimer' + name, setTimeout(function () {
-          if (Ember.typeOf(column.get('filterValue')) !== 'undefined' && Ember.typeOf(column.get('filterValue')) !== 'null') {
+          if (typeOf(column.get('filterValue')) !== 'undefined' && typeOf(column.get('filterValue')) !== 'null') {
             that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
           }
         }, 600));
@@ -52,7 +53,6 @@ export default Ember.Mixin.create({
   // sortField: computed('sortProperty', 'sortDirection', function() {
   //   let sortProperty = this.get('sortProperty');
   //   let sortDirection = this.get('sortDirection');
-  //   Ember.Logger.debug('sortField being updated');
   //   if (sortDirection) {
   //     return `${sortDirection}${sortProperty}`;
   //   } else {
@@ -80,7 +80,7 @@ export default Ember.Mixin.create({
 
   infiniteContent: pagedArray('model', {infinite: true}),
 
-  column: Ember.Object.extend({
+  column: EmberObject.extend({
     display: null,
     field: null
   }),
@@ -183,10 +183,10 @@ export default Ember.Mixin.create({
           tableColumn.set('advFilterValue', col.advFilterValue)
           tableColumn.set('advFilterValue2', col.advFilterValue2)
           if (isPresent(col.advFilterOperator)) {
-            tableColumn.set('advFilterOperator', Ember.Object.create(col.advFilterOperator))
+            tableColumn.set('advFilterOperator', EmberObject.create(col.advFilterOperator))
           }
         }
-      }
+      };
     }
 
     if (state) {
@@ -215,7 +215,7 @@ export default Ember.Mixin.create({
 
       subject.set('flagNote', row.flagNote);
 
-      if (Ember.isEmpty(row.get('flagNote'))) {
+      if (isEmpty(row.get('flagNote'))) {
         subject.set('flagStatus', 'unflagged');
       } else {
         subject.set('flagStatus', 'flagged');
@@ -223,7 +223,7 @@ export default Ember.Mixin.create({
       subject.save().then(() => {
         this.get('notify').success('Saved successfully');
       }).then(() => {
-        if (Ember.isEmpty(row.get('flagNote'))) {
+        if (isEmpty(row.get('flagNote'))) {
           row.set('flagStatus', 'unflagged');
         } else {
           row.set('flagStatus', 'flagged');

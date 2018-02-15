@@ -1,16 +1,18 @@
-import Ember from 'ember';
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { observer } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { run } from '@ember/runloop';
+import { reads } from '@ember/object/computed';
 import layout from '../../templates/components/bs-table-pagination/table-content';
 import ResizeAware from 'ember-resize/mixins/resize-aware';
-
-const { Component, computed, observer, on, run} = Ember;
-const { reads } = computed;
 
 export default Component.extend(ResizeAware, {
   layout,
   resizeHeightSensitive: true,
   resizeWidthSensitive: true,
 
-  resizeService: Ember.inject.service('resize'),
+  resizeService: service('resize'),
 
   classNames: ['ember-cli-table-content'],
   // tagName: '',

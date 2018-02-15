@@ -1,12 +1,10 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import { later } from '@ember/runloop';
+import { computed } from '@ember/object';
+import { isEmpty } from '@ember/utils';
 import layout from '../templates/components/light-table-pagination';
 import TablePagination from './table-pagination';
 import Table from 'ember-light-table';
-
-const {
-  computed,
-  isEmpty
-} = Ember;
 
 export default TablePagination.extend({
   layout: layout,
@@ -36,7 +34,7 @@ export default TablePagination.extend({
   // override inherited properties
   perPage: 50,
 
-  isInfinite: Ember.computed(function() {
+  isInfinite: computed(function() {
     return typeof this.attrs.loadNext === 'function';
   }),
 
@@ -67,7 +65,7 @@ export default TablePagination.extend({
       this.$('.tse-scrollbar.vertical').css('right', right + 'px');
     });
 
-    Ember.run.later(() => {
+    later(() => {
       if (this.isDestroyed) {
         return;
       }
@@ -90,7 +88,7 @@ export default TablePagination.extend({
   /** light table columns derived from the columns property*/
   ltColumns: computed('tableActionsComponent', 'columns.[]', 'searchIsOpen', function () {
     const searchIsOpen = this.get('searchIsOpen')
-    const columns = Ember.A([]);
+    const columns = A([]);
     if (!this.get('hideActionsColumn')) {
       columns.pushObject({
         label: 'Actions',
