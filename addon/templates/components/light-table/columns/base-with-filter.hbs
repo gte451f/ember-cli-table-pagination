@@ -1,10 +1,19 @@
 {{#if column.component}}
   {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
 {{else}}
-  {{label}}
-  {{#if column.sorted}}
-    <span class="lt-sort-icon {{if column.ascending sortIcons.iconAscending sortIcons.iconDescending}}"></span>
-  {{/if}}
+    {{#if column.showIcon}}
+        <div class="table-header-icon">
+            {{fa-icon column.showIcon class="table-header-icon"}}
+        </div>
+    {{else}}
+        <div class="table-header-label">
+            {{label}}
+        </div>
+    {{/if}}
+
+    {{#if column.sorted}}
+        <span class="lt-sort-icon {{if column.ascending sortIcons.iconAscending sortIcons.iconDescending}}"></span>
+    {{/if}}
 {{/if}}
 
 {{#if isResizable}}

@@ -31,6 +31,8 @@ export default TablePagination.extend({
 
   hideActionsColumn: false,
 
+  customSelectAll: false,
+
   breakpoints: {
     mobile: 3,
     tablet: 5,
@@ -110,6 +112,7 @@ export default TablePagination.extend({
       column.set('showFilter', searchIsOpen)
       return {
         label: column.get('displayName'),
+        showIcon: (column.get('showIcon')) ? column.get('showIcon') : false,
         valuePath: column.get('fieldName'),
         sortable: column.get('disableServerInteractions') ? false : true,
         width: column.get('width'),
