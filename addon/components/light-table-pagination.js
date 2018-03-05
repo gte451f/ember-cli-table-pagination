@@ -31,6 +31,13 @@ export default TablePagination.extend({
 
   hideActionsColumn: false,
 
+  breakpoints: {
+    mobile: 3,
+    tablet: 5,
+    desktop: 10,
+    jumbo: 20
+  },
+
   // override inherited properties
   perPage: 50,
 
