@@ -1,11 +1,16 @@
 {{#if tableActions.selectAllAction}}
-<label>
-  {{x-checkbox checked=allChecked on-change=(action tableActions.selectAllAction allChecked) title="Select all on this page"}}
-  All
-</label>
+    {{#if tableActions.customSelectAll}}
+        <div style="margin-top:5px;">
+            {{custom-checkbox checked=allChecked on-change=(action tableActions.selectAllAction allChecked) title="Select all on this page"}}
+        </div>
+    {{else}}
+        <label>
+            {{x-checkbox checked=allChecked on-change=(action tableActions.selectAllAction allChecked) title="Select all on this page"}}
+        </label>
+    {{/if}}
 {{/if}}
 {{#if tableActions.allowQuickSearch}}
-<a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters">
+<a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters" class=" table-action-buttons">
   <i class="fa fa-search"></i>
 </a>
 {{/if}}
