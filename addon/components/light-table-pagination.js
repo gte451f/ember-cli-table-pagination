@@ -57,6 +57,7 @@ export default TablePagination.extend({
   toolsComponent: 'bs-table-pagination.table-tools',
   noDataComponent: 'bs-table-pagination.table-no-data',
   tableActionsComponent: 'light-table-pagination.table-actions',
+  tfootComponent: null,
 
   didInsertElement() {
     this._super(...arguments);

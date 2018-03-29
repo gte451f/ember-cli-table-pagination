@@ -109,7 +109,11 @@
 
     {{/t.body}}
 
-    {{!t.foot fixed=true}}
+    {{#if tfootComponent}}
+    {{#t.foot fixed=true as |columns table|}}
+      {{component tfootComponent columns=columns table=table}}
+    {{/t.foot}}
+    {{/if}}
   {{/light-table}}
 
   {{#if loading}}
