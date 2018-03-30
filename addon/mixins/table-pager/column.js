@@ -1,5 +1,6 @@
 import { isPresent } from '@ember/utils';
 import EmberObject, { computed } from '@ember/object';
+import { underscore } from '@ember/string';
 
 /**
  * simple helper to store the columns that will be used to for display & search on a paginate list
@@ -38,9 +39,8 @@ export default EmberObject.extend({
   apiInteractionName: computed('fieldName', 'apiName', function () {
     if (isPresent(this.get('apiName'))) {
       return this.get('apiName');
-    } else {
-      // ie lastName >>  last_name
-      return this.get('fieldName').underscore();
+    } else if (isPresent(this.get('fieldName'))) {
+      return underscore(this.get('fieldName'));
     }
   }),
 

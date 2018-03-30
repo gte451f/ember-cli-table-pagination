@@ -45,7 +45,7 @@ export default Mixin.create(RouteMixin, {
      * @param field
      */
     sortField: function (field) {
-      field = field.underscore();
+      field = underscore(field);
       var sortField = this.controller.get('sortField');
       var sortOrder = this.controller.get('sortOrder');
 
