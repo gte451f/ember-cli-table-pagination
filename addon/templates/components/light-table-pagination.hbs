@@ -81,12 +81,14 @@
     )
     as |t|}}
 
+    {{#unless hideHeader}}
     {{t.head
       onColumnClick=(action 'onColumnClick')
       iconAscending='fa fa-sort-asc'
       iconDescending='fa fa-sort-desc'
       fixed=true
       }}
+    {{/unless}}
 
       {{#t.body
         onScrolledToBottom=(action 'onScrolledToBottom')
