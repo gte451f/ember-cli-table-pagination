@@ -33,6 +33,8 @@ export default TablePagination.extend({
 
   customSelectAll: false,
 
+  hideHeader: false,
+
   breakpoints: {
     mobile: 3,
     tablet: 5,
