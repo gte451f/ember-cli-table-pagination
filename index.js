@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 
 module.exports = {
   name: 'ember-cli-table-pagination',
-  isDevelopingAddon: function() {
-    return true;
+  isDevelopingAddon: function () {
+    return true
   }
-};
+}

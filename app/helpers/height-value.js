@@ -1,1 +1,1 @@
-export { default, heightValue } from 'ember-cli-table-pagination/helpers/height-value';
+export { default, heightValue } from 'ember-cli-table-pagination/helpers/height-value'

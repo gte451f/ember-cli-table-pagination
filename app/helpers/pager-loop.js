@@ -1,1 +1,1 @@
-export { default, pagerLoop } from 'ember-cli-table-pagination/helpers/pager-loop';
+export { default, pagerLoop } from 'ember-cli-table-pagination/helpers/pager-loop'

@@ -1,5 +1,5 @@
-import { computed } from '@ember/object';
-import TablePagination from './table-pagination';
+import { computed } from '@ember/object'
+import TablePagination from './table-pagination'
 
 export default TablePagination.extend({
   // ui customization
@@ -9,14 +9,13 @@ export default TablePagination.extend({
   // properties
   boxSize: 12,
 
-
   // override inherited properties
   perPage: 50,
 
   // computed:
   boxSizeClass: computed('boxSize', function () {
-    let boxSize = this.get('boxSize');
-    return `box-${boxSize}`;
+    let boxSize = this.get('boxSize')
+    return `box-${boxSize}`
   }),
 
   // override the components:
@@ -28,4 +27,4 @@ export default TablePagination.extend({
   toolbarComponent: 'bs-table-pagination.table-toolbar',
   toolsComponent: 'bs-table-pagination.table-tools',
   noDataComponent: 'bs-table-pagination.table-no-data'
-});
+})
