@@ -1,7 +1,7 @@
-import Route from '@ember/routing/route';
+import Route from '@ember/routing/route'
 
 export default Route.extend({
-  model() {
+  model () {
     let items = [
       { name: 'item 0', idNum: '0', description: 'I\'m the item #0' },
       { name: 'item 1', idNum: '1', description: 'I\'m the item #1' },
@@ -34,10 +34,10 @@ export default Route.extend({
       { name: 'item 28', idNum: '28', description: 'I\'m the item #28' },
       { name: 'item 29', idNum: '29', description: 'I\'m the item #29' },
       { name: 'item 30', idNum: '30', description: 'I\'m the item #30' }
-    ];
+    ]
 
     return items.map((item) => {
-      return this.store.createRecord('item', item);
-    });
+      return this.store.createRecord('item', item)
+    })
   }
-});
+})

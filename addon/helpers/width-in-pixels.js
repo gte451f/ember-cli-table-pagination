@@ -1,13 +1,13 @@
-import { helper } from '@ember/component/helper';
-import { htmlSafe } from '@ember/string';
-import { isNone } from '@ember/utils';
+import { helper } from '@ember/component/helper'
+import { htmlSafe } from '@ember/string'
+import { isNone } from '@ember/utils'
 
-export function widthInPixels([width]) {
+export function widthInPixels ([width]) {
   if (isNone(width)) {
-    return htmlSafe('');
+    return htmlSafe('')
   }
 
-  return htmlSafe(`width: ${width}px;`);
+  return htmlSafe(`width: ${width}px;`)
 }
 
-export default helper(widthInPixels);
+export default helper(widthInPixels)

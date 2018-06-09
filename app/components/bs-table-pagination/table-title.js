@@ -1,1 +1,1 @@
-export {default} from 'ember-cli-table-pagination/components/bs-table-pagination/table-title';
+export {default} from 'ember-cli-table-pagination/components/bs-table-pagination/table-title'
