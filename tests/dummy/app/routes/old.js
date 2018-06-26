@@ -1,5 +1,5 @@
-import Route from '@ember/routing/route';
-import Paginate from '../mixins/table-pager/route';
+import Route from '@ember/routing/route'
+import Paginate from '../mixins/table-pager/route'
 
 export default Route.extend(Paginate, {
   modelName: 'item',
@@ -13,4 +13,4 @@ export default Route.extend(Paginate, {
       refreshModel: true
     }
   }
-});
+})

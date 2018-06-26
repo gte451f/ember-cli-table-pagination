@@ -1,10 +1,10 @@
-/*jshint node:true*/
-'use strict';
-module.exports = function(app) {
-  let express = require('express');
-  let itemsRouter = express.Router();
+/* jshint node:true */
+'use strict'
+module.exports = function (app) {
+  let express = require('express')
+  let itemsRouter = express.Router()
 
-  itemsRouter.get('/', function(req, res) {
+  itemsRouter.get('/', function (req, res) {
     res.send({
       'items': [
         { name: 'item 0', idNum: '0', id: '0', description: 'I\'m the item #0' },
@@ -42,32 +42,32 @@ module.exports = function(app) {
       'meta': {
         'total_pages': 4
       }
-    });
-  });
+    })
+  })
 
-  itemsRouter.post('/', function(req, res) {
-    res.status(201).end();
-  });
+  itemsRouter.post('/', function (req, res) {
+    res.status(201).end()
+  })
 
-  itemsRouter.get('/:id', function(req, res) {
+  itemsRouter.get('/:id', function (req, res) {
     res.send({
       'items': {
         id: req.params.id
       }
-    });
-  });
+    })
+  })
 
-  itemsRouter.put('/:id', function(req, res) {
+  itemsRouter.put('/:id', function (req, res) {
     res.send({
       'items': {
         id: req.params.id
       }
-    });
-  });
+    })
+  })
 
-  itemsRouter.delete('/:id', function(req, res) {
-    res.status(204).end();
-  });
+  itemsRouter.delete('/:id', function (req, res) {
+    res.status(204).end()
+  })
 
   // The POST and PUT call will not contain a request body
   // because the body-parser is not included by default.
@@ -79,5 +79,5 @@ module.exports = function(app) {
   // this mock uncommenting the following line:
   //
   // app.use('/api/items', require('body-parser').json());
-  app.use('/api/items', itemsRouter);
-};
+  app.use('/api/items', itemsRouter)
+}
