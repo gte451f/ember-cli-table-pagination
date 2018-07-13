@@ -3,9 +3,9 @@
 {{/if}}
 {{#if (and tableActions.linkPath (or (not tableActions.linkCondition)
   (and tableActions.linkCondition (compute (action (optional tableActions.linkCondition) row.content)))))}}
-  {{#link-to tableActions.linkPath row.id class="btn btn-default btn-xs table-action-buttons"}}
+  <a href="{{href-to tableActions.linkPath row.id}}" class="btn btn-default btn-xs table-action-buttons">
     {{fa-icon 'folder-open'}}
-  {{/link-to}}
+  </a>
 {{/if}}
 
 {{#if (and tableActions.editAction (or (not tableActions.editCondition)
@@ -17,9 +17,9 @@
 
 {{#if (and tableActions.editPath (or (not tableActions.editCondition)
   (and tableActions.editCondition (compute (action (optional tableActions.editCondition) row.content)))))}}
-  {{#link-to tableActions.editPath row.id class="btn btn-default btn-xs table-action-buttons"}}
+  <a href="{{href-to tableActions.editPath row.id}}" class="btn btn-default btn-xs table-action-buttons">
     {{fa-icon 'pencil'}}
-  {{/link-to}}
+  </a>
 {{/if}}
 {{#if (and tableActions.deleteAction (or (not tableActions.deleteCondition)
   (and tableActions.deleteCondition (compute (action (optional tableActions.deleteCondition) row.content)))))}}
