@@ -12,7 +12,7 @@
           {{input type="text"
           class="form-control quickSearchInput"
           value=searchString
-          placeholder='Narrow Results'
+          placeholder='Narrow results'
           }}
             <span class="input-group-btn">
               {{#if this.attrs.runQuickSearch}}
@@ -31,7 +31,7 @@
 
 <span class="m-r-10">
   {{#unless showAll}}
-    <label>Per Page:</label>
+    <span>Per page:</span>
             <div class="input-group input-group-sm">
                 {{#if (eq perPageFormat 'select')}}
                     {{#power-select
