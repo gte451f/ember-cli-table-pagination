@@ -1,10 +1,10 @@
-import { on } from '@ember/object/evented';
-import Mixin from '@ember/object/mixin';
-import EmberObject, { computed } from '@ember/object';
-import { isPresent, isEmpty, typeOf } from '@ember/utils';
-import { alias } from '@ember/object/computed';
-import Column from './column';
-import pagedArray from 'ember-cli-pagination/computed/paged-array';
+import { on } from '@ember/object/evented'
+import Mixin from '@ember/object/mixin'
+import EmberObject, { computed } from '@ember/object'
+import { isPresent, isEmpty, typeOf } from '@ember/utils'
+import { alias } from '@ember/object/computed'
+import Column from './column'
+import pagedArray from 'ember-cli-pagination/computed/paged-array'
 
 /**
  * store shared logic to run pager logic
@@ -16,37 +16,37 @@ export default Mixin.create({
    * for adding observers on each filter per column
    */
   configureFilterObservers: on('init', function () {
-    var self = this;
-    var observerDefinitions = {};
-    var filterParams = {};
+    var self = this
+    var observerDefinitions = {}
+    var filterParams = {}
     this.get('columns').forEach(function (column, index) {
-      var name = 'observer_' + column.get('apiInteractionName');
+      var name = 'observer_' + column.get('apiInteractionName')
       observerDefinitions[name] = function () {
-        var that = this;
-        clearTimeout(this.get('keyTimer' + name));
+        var that = this
+        clearTimeout(this.get('keyTimer' + name))
         this.set('keyTimer' + name, setTimeout(function () {
           if (typeOf(column.get('filterValue')) !== 'undefined' && typeOf(column.get('filterValue')) !== 'null') {
-            that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'));
+            that.send('applyFilter', column.get('apiInteractionName'), column.get('filterValue'))
           }
-        }, 600));
-      }.observes('columns.' + index + '.filterValue');
-      filterParams[column.get('apiInteractionName')] = null;
-    });
-    self.reopen(observerDefinitions);
-    self.set('filterParams', filterParams);
+        }, 600))
+      }.observes('columns.' + index + '.filterValue')
+      filterParams[column.get('apiInteractionName')] = null
+    })
+    self.reopen(observerDefinitions)
+    self.set('filterParams', filterParams)
   }),
 
   // setup our query params including custom sortField value
-  queryParams: ["page", "perPage", "sortField", "with"],
+  queryParams: ['page', 'perPage', 'sortField', 'with'],
 
   pageList: [
     50, 100, 250
   ],
 
-  totalPages: alias("model.totalPages"),
+  totalPages: alias('model.totalPages'),
 
   observingPerPage: function () {
-    this.set('page', 1);
+    this.set('page', 1)
   }.observes('perPage'),
 
   // //logic to handle sorting a list
@@ -60,11 +60,11 @@ export default Mixin.create({
   //   }
   // }),
   sortOrder: computed('sortDirection', function () {
-    let sortDirection = this.get('sortDirection');
+    let sortDirection = this.get('sortDirection')
     if (sortDirection === 'desc') {
-      return '-';
+      return '-'
     } else {
-      return '';
+      return ''
     }
   }),
   with: '',
@@ -86,18 +86,18 @@ export default Mixin.create({
   }),
 
   quickSearchChanged: function () {
-    var self = this;
-    clearTimeout(this.get('keyTimer'));
+    var self = this
+    clearTimeout(this.get('keyTimer'))
     this.set('keyTimer', setTimeout(function () {
       try {
-        self.send('runQuickSearch');
+        self.send('runQuickSearch')
       } catch (e) {
         // ignore errors
       }
-    }, 600));
+    }, 600))
   }.observes('quickSearch'),
 
-  //load pager specific variables
+  // load pager specific variables
   columns: [
     Column.create({'displayName': '#', 'fieldName': 'id'})
   ],
@@ -117,7 +117,7 @@ export default Mixin.create({
   editPath: false,
 
   // not sure what this is
-  createPath: "set createPath in the controller",
+  createPath: 'set createPath in the controller',
 
   canLoadMore: false,
 
@@ -186,7 +186,7 @@ export default Mixin.create({
             tableColumn.set('advFilterOperator', EmberObject.create(col.advFilterOperator))
           }
         }
-      };
+      }
     }
 
     if (state) {
@@ -198,45 +198,45 @@ export default Mixin.create({
   actions: {
     loadNext () {
       if (this.get('infiniteContent.length') > 0 && this.get('canLoadMore')) {
-        this.get('infiniteContent').loadNextPage();
-        this.set('page', this.get('infiniteContent.page'));
+        this.get('infiniteContent').loadNextPage()
+        this.set('page', this.get('infiniteContent.page'))
       }
     },
 
     editFlag (row) {
-      this.set('isEditingFlagNote', true);
-      this.set('flaggingRecord', row.content);
+      this.set('isEditingFlagNote', true)
+      this.set('flaggingRecord', row.content)
     },
 
-    saveFlag(){
-      let row = this.get('flaggingRecord');
+    saveFlag () {
+      let row = this.get('flaggingRecord')
 
-      let subject = this.store.peekRecord('subject', row.id);
+      let subject = this.store.peekRecord('subject', row.id)
 
-      subject.set('flagNote', row.flagNote);
+      subject.set('flagNote', row.flagNote)
 
       if (isEmpty(row.get('flagNote'))) {
-        subject.set('flagStatus', 'unflagged');
+        subject.set('flagStatus', 'unflagged')
       } else {
-        subject.set('flagStatus', 'flagged');
+        subject.set('flagStatus', 'flagged')
       }
       subject.save().then(() => {
-        this.get('notify').success('Saved successfully');
+        this.get('notify').success('Saved successfully')
       }).then(() => {
         if (isEmpty(row.get('flagNote'))) {
-          row.set('flagStatus', 'unflagged');
+          row.set('flagStatus', 'unflagged')
         } else {
-          row.set('flagStatus', 'flagged');
+          row.set('flagStatus', 'flagged')
         }
 
-        this.set('isEditingFlagNote', false);
-        this.set('flaggingRecord', null);
-      });
+        this.set('isEditingFlagNote', false)
+        this.set('flaggingRecord', null)
+      })
     },
 
     cancelFlag () {
-      this.set('isEditingFlagNote', false);
-      this.set('flaggingRecord', null);
-    },
+      this.set('isEditingFlagNote', false)
+      this.set('flaggingRecord', null)
+    }
   }
-});
+})

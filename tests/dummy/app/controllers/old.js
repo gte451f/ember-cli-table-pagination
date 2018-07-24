@@ -1,8 +1,8 @@
-import Controller from '@ember/controller';
+import Controller from '@ember/controller'
 // import { reads } from '@ember/object/computed';
 
-import Paginate from '../mixins/table-pager/controller';
-import Column from '../mixins/table-pager/column';
+import Paginate from '../mixins/table-pager/controller'
+import Column from '../mixins/table-pager/column'
 
 export default Controller.extend(Paginate, {
   queryParams: ['quickSearchField', 'q'],
@@ -20,4 +20,4 @@ export default Controller.extend(Paginate, {
 
   // appController: inject.controller('application'),
   // items: reads('appController.items')
-});
+})

@@ -1,4 +1,8 @@
 # Ember-cli-table-pagination Changelog
+### 0.9.1 (March 12, 2018)
+- [#61](https://github.com/gte451f/ember-cli-table-pagination/issues/61) Add breakpoints parameter to light-table-pagination
+- [#62](https://github.com/gte451f/ember-cli-table-pagination/issues/62) Allow breakpoints as light-table-pagination parameter
+ 
 
 ### 0.9.0 (February 15, 2018)
 - [BUGFIX] Correct computed column dependencies

@@ -81,12 +81,14 @@
     )
     as |t|}}
 
+    {{#unless hideHeader}}
     {{t.head
       onColumnClick=(action 'onColumnClick')
       iconAscending='fa fa-sort-asc'
       iconDescending='fa fa-sort-desc'
       fixed=true
       }}
+    {{/unless}}
 
       {{#t.body
         onScrolledToBottom=(action 'onScrolledToBottom')
@@ -109,7 +111,11 @@
 
     {{/t.body}}
 
-    {{!t.foot fixed=true}}
+    {{#if tfootComponent}}
+    {{#t.foot fixed=true as |columns|}}
+      {{component tfootComponent columns=columns table=table}}
+    {{/t.foot}}
+    {{/if}}
   {{/light-table}}
 
   {{#if loading}}
