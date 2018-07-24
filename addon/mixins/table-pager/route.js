@@ -72,6 +72,9 @@ export default Mixin.create(RouteMixin, {
      */
     applyFilter: function (fieldName, filterValue) {
       var params = this.controller.get('filterParams');
+      if (params[fieldName] == filterValue) {
+        return;
+      }
       params[fieldName] = filterValue;
       this.controller.set('filterParams', params);
       if (this.controller.get('page') !== 1) {
