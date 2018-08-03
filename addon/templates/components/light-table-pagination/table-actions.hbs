@@ -6,6 +6,11 @@
   {{#link-to tableActions.linkPath row.id class="btn btn-default btn-xs table-action-buttons"}}
     {{fa-icon 'folder-open'}}
   {{/link-to}}
+  {{!-- TODO disable this until we use only subdomains for all the apps in all envs
+  <a href="{{href-to tableActions.linkPath row.id}}" class="btn btn-default btn-xs table-action-buttons">
+    {{fa-icon 'folder-open'}}
+  </a>
+  --}}
 {{/if}}
 
 {{#if (and tableActions.editAction (or (not tableActions.editCondition)
@@ -20,6 +25,11 @@
   {{#link-to tableActions.editPath row.id class="btn btn-default btn-xs table-action-buttons"}}
     {{fa-icon 'pencil'}}
   {{/link-to}}
+  {{!-- TODO disable this until we use only subdomains for all the apps in all envs
+  <a href="{{href-to tableActions.editPath row.id}}" class="btn btn-default btn-xs table-action-buttons">
+    {{fa-icon 'pencil'}}
+  </a>
+  --}}
 {{/if}}
 {{#if (and tableActions.deleteAction (or (not tableActions.deleteCondition)
   (and tableActions.deleteCondition (compute (action (optional tableActions.deleteCondition) row.content)))))}}
