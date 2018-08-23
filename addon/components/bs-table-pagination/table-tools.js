@@ -81,6 +81,7 @@ export default Component.extend({
         let filter = ''
         let value = c.get('advFilterValue')
         let value2 = c.get('advFilterValue2')
+        c.set('filterValue', value)
         switch (c.get('advFilterOperator.value')) {
           case 'contains':
             filter = '*' + value + '*'
@@ -114,6 +115,7 @@ export default Component.extend({
 
     clearFilter (column) {
       column.setProperties({
+        filterValue: null,
         advFilterValue: null,
         advFilterValue2: null,
         advFilterOperator: this.get('operators.firstObject')
@@ -123,6 +125,7 @@ export default Component.extend({
     clearAllFilters () {
       let columnsWithFilter = this.get('allColumns').filter(hasFilter)
 
+      columnsWithFilter.setEach('filterValue', null)
       columnsWithFilter.setEach('advFilterValue', null)
       columnsWithFilter.setEach('advFilterValue2', null)
       columnsWithFilter.setEach('advFilterOperator', this.get('operators.firstObject'))

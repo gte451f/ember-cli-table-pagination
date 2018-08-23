@@ -1,5 +1,5 @@
 import { isPresent } from '@ember/utils'
-import EmberObject, { computed } from '@ember/object'
+import EmberObject, { computed, observer } from '@ember/object'
 import { underscore } from '@ember/string'
 
 /**
@@ -49,5 +49,9 @@ export default EmberObject.extend({
   // Advanced Filter fields
   advFilterOperator: EmberObject.create({display: 'Contains', value: 'contains', input: 1}),
   advFilterValue: undefined,
-  advFilterValue2: undefined
+  advFilterValue2: undefined,
+
+  observeHeader: observer('filterValue', function () {
+    this.set('advFilterValue', this.get('filterValue'))
+  })
 })
