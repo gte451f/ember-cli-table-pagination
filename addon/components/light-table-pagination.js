@@ -96,6 +96,35 @@ export default TablePagination.extend({
     $container.off('mouseenter scroll')
   },
 
+  /**
+   * We let all the past individual actions be defined as always + user can define any number of custom actions via the extraActions parameter
+   */
+  allActions: computed('extraActions', 'customSelectAll', 'selectAction', 'selectAllAction',
+      'linkPath', 'linkCondition', 'editPath', 'editCondition', 'editAction',
+      'deleteAction', 'deleteCondition', 'editFlag', 'allowQuickSearch', function () {
+    const actions = {
+      customSelectAll: this.get('customSelectAll'),
+      selectAction: this.get('selectAction'),
+      selectAllAction: this.get('selectAllAction'),
+      linkPath: this.get('linkPath'),
+      linkCondition: this.get('linkCondition'),
+      editPath: this.get('editPath'),
+      editCondition: this.get('editCondition'),
+      editAction: this.get('editAction'),
+      deleteAction: this.get('deleteAction'),
+      deleteCondition: this.get('deleteCondition'),
+      editFlag: this.get('editFlag'),
+      allowQuickSearch: this.get('allowQuickSearch')
+    }
+
+    const extraActions = this.get('extraActions')
+    for (let key in extraActions) {
+      actions[key] = extraActions[key]
+    }
+
+    return actions
+  }),
+
   /** light table columns derived from the columns property */
   ltColumns: computed('tableActionsComponent', 'columns.[]', 'searchIsOpen', function () {
     const searchIsOpen = this.get('searchIsOpen')
