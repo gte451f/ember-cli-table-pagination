@@ -122,7 +122,8 @@ export default TablePagination.extend({
         cellType: column.get('cellType') ? column.get('cellType') : 'base',
         cellClassNames: 'nowrap',
         type: 'base-with-filter',
-        tpColumn: column
+        tpColumn: column,
+        align: column.get('align')
       }
     }))
     return columns
