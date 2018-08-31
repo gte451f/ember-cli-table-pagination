@@ -1,6 +1,6 @@
 {{#if tableActions.selectAllAction}}
     {{#if tableActions.customSelectAll}}
-        <div style="margin-top:5px;">
+        <div style="margin-top:5px; display: inline-block; height:20px;">
             {{custom-checkbox checked=allChecked on-change=(action tableActions.selectAllAction allChecked) title="Select all on this page"}}
         </div>
     {{else}}
