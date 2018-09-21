@@ -100,13 +100,14 @@ export default TablePagination.extend({
    * We let all the past individual actions be defined as always + user can define any number of custom actions via the extraActions parameter
    */
   allActions: computed('extraActions', 'customSelectAll', 'selectAction', 'selectAllAction',
-      'linkPath', 'linkCondition', 'editPath', 'editCondition', 'editAction',
+      'linkPath', 'linkAction', 'linkCondition', 'editPath', 'editCondition', 'editAction',
       'deleteAction', 'deleteCondition', 'editFlag', 'allowQuickSearch', function () {
     const actions = {
       customSelectAll: this.get('customSelectAll'),
       selectAction: this.get('selectAction'),
       selectAllAction: this.get('selectAllAction'),
       linkPath: this.get('linkPath'),
+      linkAction: this.get('linkAction'),
       linkCondition: this.get('linkCondition'),
       editPath: this.get('editPath'),
       editCondition: this.get('editCondition'),
