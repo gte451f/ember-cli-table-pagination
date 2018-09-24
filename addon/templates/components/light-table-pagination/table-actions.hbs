@@ -7,6 +7,12 @@
     {{fa-icon 'folder-open'}}
   </a>
 {{/if}}
+{{#if (and tableActions.linkAction (or (not tableActions.linkCondition)
+  (and tableActions.linkCondition (compute (action (optional tableActions.linkCondition) row.content)))))}}
+  <a {{action tableActions.linkAction row.id}} class="btn btn-default btn-xs table-action-buttons" href="#">
+    {{fa-icon 'folder-open'}}
+  </a>
+{{/if}}
 
 {{#if (and tableActions.editAction (or (not tableActions.editCondition)
   (and tableActions.editCondition (compute (action (optional tableActions.editCondition) row.content)))))}}
