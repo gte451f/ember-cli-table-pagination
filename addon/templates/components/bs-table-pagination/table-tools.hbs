@@ -76,7 +76,7 @@
 {{#if allowAdvancedFilter}}
 <label style="margin-right: 10px;">
     <div class="input-group input-group-sm">
-      <button class="btn btn-sm btn-{{if (gt filters.length 0) 'success' 'primary'}}" {{action (toggle 'showFilterDialog' this)}}>
+      <button class="btn btn-sm adv-filter-modal btn-{{if (gt filters.length 0) 'success' 'primary'}}" {{action (toggle 'showFilterDialog' this)}}>
         {{fa-icon 'filter'}}
         Filter
         {{#if (gt filters.length 0)}}

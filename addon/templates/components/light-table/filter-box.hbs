@@ -1,6 +1,6 @@
-{{#if column.tpColumn.workflowAssignedColumn}}
+{{#if column.tpColumn.usesPowerSelect}}
 <a class="link" href="javascript:void();" {{action 'openModal'}}>
-  {{if column.tpColumn.user column.tpColumn.user.fullName 'Select'}}
+  {{if (get column.tpColumn column.tpColumn.valuePath) (get column.tpColumn column.tpColumn.displayPath) 'Select'}}
 </a>
 {{else}}
 {{input type="text" class="form-control inline-column-filter" value=column.tpColumn.filterValue name=column.tpColumn.fieldName }}
