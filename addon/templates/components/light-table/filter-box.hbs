@@ -1,1 +1,8 @@
+{{#if column.tpColumn.workflowAssignedColumn}}
+<a class="link" href="javascript:void();" {{action 'openModal'}}>
+  {{if column.tpColumn.user column.tpColumn.user.fullName 'Select'}}
+</a>
+  {{ column.tpColumn.filterValue }}
+{{else}}
 {{input type="text" class="form-control inline-column-filter" value=column.tpColumn.filterValue name=column.tpColumn.fieldName }}
+{{/if}}
