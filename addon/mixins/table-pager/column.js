@@ -48,6 +48,10 @@ export default EmberObject.extend({
 
   align: 'left',
 
+  usesPowerSelect: false,
+  displayPath: null,
+  valuePath: null,
+
   // Advanced Filter fields
   advFilterOperator: EmberObject.create({display: 'Contains', value: 'contains', input: 1}),
   advFilterValue: undefined,
