@@ -134,3 +134,31 @@
   }
 
 }
+
+
+/** new rules from JSI-599 for table colors */
+
+.ember-light-table {
+  table {
+    th.lt-column {
+      background-color: #EBF3FE;
+      border: 1px solid #D0DADF;
+
+      .table-header-label {
+        color: #4e96db;
+        font-size: 14px;
+        font-weight: normal;
+      }
+
+      &.table-bordered {
+        border: 1px solid #D0DADF;
+        td, th {
+          border: 1px solid #D0DADF;
+        }
+        tr {
+          border: 1px solid #D0DADF;
+        }
+      }
+    }
+  }
+}
