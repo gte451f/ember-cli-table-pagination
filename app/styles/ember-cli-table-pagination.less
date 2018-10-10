@@ -149,14 +149,17 @@
         font-size: 14px;
         font-weight: normal;
       }
+    }
 
-      &.table-bordered {
+    &.table-bordered {
+      border: 1px solid #D0DADF;
+      td, th {
         border: 1px solid #D0DADF;
-        td, th {
-          border: 1px solid #D0DADF;
-        }
-        tr {
-          border: 1px solid #D0DADF;
+      }
+      tr {
+        border: 1px solid #D0DADF;
+        &:hover {
+          background-color: #EBF3FE;
         }
       }
     }
