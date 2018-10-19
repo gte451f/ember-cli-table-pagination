@@ -1,4 +1,3 @@
-import { on } from '@ember/object/evented'
 import Mixin from '@ember/object/mixin'
 import EmberObject, { computed, observer } from '@ember/object'
 import { isPresent, isEmpty, typeOf } from '@ember/utils'
@@ -54,7 +53,6 @@ export default Mixin.create({
       this.updateColumnsFromTableSettingState(this.get('currentControllerState'))
       this.set('loadedFromTableSettings', true)
     }
-
   }),
 
   loadTableData: task(function * () {
@@ -124,7 +122,6 @@ export default Mixin.create({
   },
 
   getAllParams: function (params) {
-
     const name = this.get('quickSearchField')
     const value = this.get('quickSearch')
     const queryWith = this.get('with')
@@ -163,10 +160,10 @@ export default Mixin.create({
   },
   configureFilterObservers () {
     const controller = this
-    const filterParams = {}
+    // const filterParams = {}
     const useTableSettings = this.get('useTableSettings')
     this.get('columns').forEach(function (column, index) {
-      column.set('filterValueChanged', function (col) {return controller.columnFilterValueChanged(col)})
+      column.set('filterValueChanged', function (col) { return controller.columnFilterValueChanged(col) })
       if (!useTableSettings) {
         // const key = column.get('apiInteractionName')
         // filterParams[key] = null
