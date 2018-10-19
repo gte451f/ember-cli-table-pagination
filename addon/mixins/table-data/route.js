@@ -190,7 +190,6 @@ export default Mixin.create(RouteMixin, {
     controller.set('modelName', this.modelName)
     controller.set('controllerName', this.controllerName)
     controller.set('currentRoute', this.get('currentRoute'))
-    controller.configureFilterObservers()
     controller.set('routeKey', this.router.generate(this.get('currentRoute'), ...this.getCurrentRouteParams()))
     controller.get('loadTableData').perform()
   },

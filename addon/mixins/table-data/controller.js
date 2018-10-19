@@ -78,10 +78,14 @@ export default Mixin.create({
     }
     // process table data
     const processedTableData = this.processTableData(tableData)
-    // store the result in tableData
-    this.set('tableData', processedTableData)
     // process extra data
     const processedExtraData = this.processExtraData(results.extraData)
+
+    // hook the column filters observers
+    this.configureFilterObservers()
+
+    // store the result in tableData
+    this.set('tableData', processedTableData)
     // store the result in extraData
     this.set('extraData', processedExtraData)
 
@@ -159,20 +163,7 @@ export default Mixin.create({
     }
   },
   configureFilterObservers () {
-    const controller = this
-    // const filterParams = {}
-    const useTableSettings = this.get('useTableSettings')
-    this.get('columns').forEach(function (column, index) {
-      column.set('filterValueChanged', function (col) { return controller.columnFilterValueChanged(col) })
-      if (!useTableSettings) {
-        // const key = column.get('apiInteractionName')
-        // filterParams[key] = null
-      }
-    })
-    if (!useTableSettings) {
-      // this.set('filterParams', filterParams)
-    }
-    return null
+    this.get('columns').setEach('filterValueChanged', (col) => this.columnFilterValueChanged(col))
   },
 
   // setup our query params including custom sortField value
