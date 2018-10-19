@@ -5,7 +5,8 @@ import { isPresent, isEmpty, typeOf } from '@ember/utils'
 import { alias } from '@ember/object/computed'
 import { merge } from '@ember/polyfills'
 import { underscore } from '@ember/string'
-import { task, timeout } from 'ember-concurrency'
+import { task, hash } from 'ember-concurrency'
+import { Promise } from 'rsvp'
 import Column from './column'
 
 /**
@@ -67,7 +68,13 @@ export default Mixin.create({
     const allParams = this.getAllParams(params)
 
     const tableData = []
-    let records = yield this.get('store').query(this.get('modelName'), allParams)
+    const tableDataPromise = this.get('store').query(this.get('modelName'), allParams)
+    const extraDataPromise = this.loadExtraData()
+    const results = yield hash({
+      tableData: tableDataPromise,
+      extraData: extraDataPromise
+    })
+    let records = results.tableData
     if (records) {
       tableData.pushObjects(records.toArray())
     }
@@ -75,6 +82,10 @@ export default Mixin.create({
     const processedTableData = this.processTableData(tableData)
     // store the result in tableData
     this.set('tableData', processedTableData)
+    // process extra data
+    const processedExtraData = this.processExtraData(results.extraData)
+    // store the result in extraData
+    this.set('extraData', processedExtraData)
 
     // store properties on to controller
     this.set('currentParams', allParams)
@@ -95,10 +106,21 @@ export default Mixin.create({
       this.get('saveTableSettings').perform()
     }
   }).restartable(),
-
   // function should be overwritten if the table data has to be processed before it is used in the table
   processTableData (tableData) {
     return tableData
+  },
+
+  // function should be overwritten if you need to load additional data
+  // the function should return a promise ( eg hash)
+  loadExtraData () {
+    return new Promise(function (resolve, reject) {
+      resolve()
+    })
+  },
+  // function should be overwritten if the extra data has to be processed before it is used in the controller
+  processExtraData (extraData) {
+    return extraData
   },
 
   getAllParams: function (params) {
