@@ -5,8 +5,8 @@ import { isPresent, isEmpty, typeOf } from '@ember/utils'
 import { alias } from '@ember/object/computed'
 import { merge } from '@ember/polyfills'
 import { underscore } from '@ember/string'
-import { task, timeout, all } from 'ember-concurrency'
-import { promise } from 'rsvp'
+import { task, hash } from 'ember-concurrency'
+import { Promise } from 'rsvp'
 import Column from './column'
 
 /**
@@ -70,8 +70,11 @@ export default Mixin.create({
     const tableData = []
     const tableDataPromise = this.get('store').query(this.get('modelName'), allParams)
     const extraDataPromise = this.loadExtraData()
-    const results = yield all(tableDataPromise, extraDataPromise)
-    let records = results[0]
+    const results = yield hash({
+      tableData: tableDataPromise,
+      extraData: extraDataPromise
+    })
+    let records = results.tableData
     if (records) {
       tableData.pushObjects(records.toArray())
     }
@@ -80,8 +83,7 @@ export default Mixin.create({
     // store the result in tableData
     this.set('tableData', processedTableData)
     // process extra data
-    let extraData = results[1]
-    const processedExtraData = this.processExtraData(extraData)
+    const processedExtraData = this.processExtraData(results.extraData)
     // store the result in extraData
     this.set('extraData', processedExtraData)
 
@@ -113,15 +115,13 @@ export default Mixin.create({
   // the function should return a promise ( eg hash)
   loadExtraData () {
     return new Promise(function (resolve, reject) {
-      resolve(value)
+      resolve()
     })
   },
   // function should be overwritten if the extra data has to be processed before it is used in the controller
   processExtraData (extraData) {
     return extraData
   },
-
-
 
   getAllParams: function (params) {
 
