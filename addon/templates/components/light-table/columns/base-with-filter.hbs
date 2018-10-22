@@ -2,13 +2,16 @@
   {{component column.component column=column table=table tableActions=tableActions sortIcons=sortIcons}}
 {{else}}
     {{#if column.showIcon}}
-        <div class="table-header-icon">
+        <div class="table-header-icon" id={{concat 'col-' column.columnId}}>
             {{fa-icon column.showIcon class="table-header-icon"}}
         </div>
     {{else}}
-        <div class="table-header-label">
+        <div class="table-header-label" id={{concat 'col-' column.columnId}}>
             {{label}}
         </div>
+    {{/if}}
+    {{#if column.hoverText}}
+      {{#bs-popover triggerElement=(concat '#col-' column.columnId) triggerEvents="hover"}}{{column.hoverText}}{{/bs-popover}}
     {{/if}}
 
     {{#if column.sorted}}

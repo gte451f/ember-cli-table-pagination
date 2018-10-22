@@ -10,7 +10,11 @@
     {{/if}}
 {{/if}}
 {{#if tableActions.allowQuickSearch}}
-<a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters" class=" table-action-buttons">
+  {{log tableActions}}
+<a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters" class=" table-action-buttons" id="table-search-icon">
   <i class="fa fa-search"></i>
 </a>
+{{#if tableActions.searchHoverText}}
+  {{#bs-popover triggerElement='#table-search-icon' triggerEvents="hover"}}{{tableActions.searchHoverText}}{{/bs-popover}}
+{{/if}}
 {{/if}}
