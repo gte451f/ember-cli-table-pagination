@@ -61,6 +61,7 @@
 
 <div class="ember-cli-table-content table-container" style="overflow-y:auto;">
   {{#light-table table
+    extra=extra
     height=height
     tableClassNames='table table-bordered'
     responsive=true
@@ -84,6 +85,7 @@
         canExpand=enableExpandedRows
         multipleRowExpansion=false
         useVirtualScrollbar=true
+        extra=extra
         as |body|}}
 
       {{#body.expanded-row as |row|}}

@@ -8,6 +8,7 @@ import Table from 'ember-light-table'
 
 export default TablePagination.extend({
   layout: layout,
+  extra: null,
 
   // boxClasses: 'box box-top',
   box: true,
