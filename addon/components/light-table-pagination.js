@@ -8,6 +8,7 @@ import Table from 'ember-light-table'
 
 export default TablePagination.extend({
   layout: layout,
+  extra: null,
 
   // boxClasses: 'box box-top',
   box: true,
@@ -32,6 +33,7 @@ export default TablePagination.extend({
   hideActionsColumn: false,
 
   customSelectAll: false,
+  searchHoverText: null,
 
   hideHeader: false,
 
@@ -99,13 +101,14 @@ export default TablePagination.extend({
   /**
    * We let all the past individual actions be defined as always + user can define any number of custom actions via the extraActions parameter
    */
-  allActions: computed('extraActions', 'customSelectAll', 'selectAction', 'selectAllAction',
+  allActions: computed('extraActions', 'customSelectAll', 'searchHoverText', 'selectAction', 'selectAllAction',
       'linkPath', 'linkAction', 'linkCondition', 'editPath', 'editCondition', 'editAction',
       'deleteAction', 'deleteCondition', 'editFlag', 'allowQuickSearch', function () {
         const actions = {
           customSelectAll: this.get('customSelectAll'),
           selectAction: this.get('selectAction'),
           selectAllAction: this.get('selectAllAction'),
+          searchHoverText: this.get('searchHoverText'),
           linkPath: this.get('linkPath'),
           linkAction: this.get('linkAction'),
           linkCondition: this.get('linkCondition'),
@@ -147,6 +150,7 @@ export default TablePagination.extend({
         showIcon: (column.get('showIcon')) ? column.get('showIcon') : false,
         valuePath: column.get('fieldName'),
         sortable: !column.get('disableServerInteractions'),
+        hoverText: column.get('hoverText'),
         width: column.get('width'),
         cellComponent: column.get('cellComponent'),
         cellType: column.get('cellType') ? column.get('cellType') : 'base',
