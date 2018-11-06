@@ -11,7 +11,7 @@
 {{/if}}
 {{#if tableActions.allowQuickSearch}}
   {{log tableActions}}
-<a href="#" {{action 'toggleFilters' bubbles=false}} title="Toggle quick filters" class=" table-action-buttons" id="table-search-icon">
+<a href="#" {{action 'toggleFilters' bubbles=false}} title="{{if tableActions.searchHoverText '' 'Toggle quick filters'}}" class=" table-action-buttons" id="table-search-icon">
   <i class="fa fa-search"></i>
 </a>
 {{#if tableActions.searchHoverText}}
