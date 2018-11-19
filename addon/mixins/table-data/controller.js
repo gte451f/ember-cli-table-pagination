@@ -92,6 +92,7 @@ export default Mixin.create({
     // store properties on to controller
     this.set('currentParams', allParams)
     this.set('totalRecords', records.get('meta.total_record_count'))
+    this.set('totalPages', records.get('meta.total_pages'))
     let {sortField} = allParams
     if (sortField) {
       if (sortField.substring(0, 1) === '-') {
@@ -172,8 +173,6 @@ export default Mixin.create({
   pageList: [
     50, 100, 250
   ],
-
-  totalPages: alias('tableData.totalPages'),
 
   observingPerPage: observer('perPage', function () {
     this.set('page', 1)
