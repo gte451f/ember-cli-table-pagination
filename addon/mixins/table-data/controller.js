@@ -93,6 +93,7 @@ export default Mixin.create({
     this.set('currentParams', allParams)
     this.set('totalRecords', records.get('meta.total_record_count'))
     this.set('totalPages', records.get('meta.total_pages'))
+    this.set('selectedRows', tableData.filter(x => x.get('isSelected')))
     let {sortField} = allParams
     if (sortField) {
       if (sortField.substring(0, 1) === '-') {
