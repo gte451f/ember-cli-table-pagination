@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-table-pagination",
-  "version": "0.9.12",
+  "version": "0.9.14",
   "description": "An ember addon to add pagination to tables",
   "directories": {
     "doc": "doc",
