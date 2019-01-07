@@ -48,6 +48,8 @@ export default Mixin.create({
       // comes from another route, check saved params in db
       if (isPresent(ts)) {
         this.set('currentControllerState', JSON.parse(ts.get('state')))
+      } else {
+        this.customStateOnFirstLoad()
       }
       this.fromTableSettingsState(this.get('currentControllerState'))
       this.updateColumnsFromTableSettingState(this.get('currentControllerState'))
@@ -267,6 +269,14 @@ export default Mixin.create({
       columns: this.get('columns').map(mapColumn),
       additionalColumnsForFilter: this.get('additionalColumnsForFilter').map(mapColumn)
     }
+  },
+
+  /**
+   * what needs to happen when the user accesses the page for the first time
+   * (does not have any table-settings set for the page)
+   */
+  customStateOnFirstLoad () {
+
   },
 
   /**
