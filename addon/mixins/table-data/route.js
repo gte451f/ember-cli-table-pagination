@@ -114,12 +114,9 @@ export default Mixin.create(RouteMixin, {
 
     // take the extra parameters
     runAdvancedSearch (extraParams) {
-      if (this.controller.get('page') !== 1) {
-        this.controller.set('page', 1)
-      }
       this.controller.set('extraParams', extraParams)
       this.controller.set('filterParams', {})
-      this.refresh()
+      this.get('refreshAfterFilters').perform()
     },
 
     // general function to open a record from a paginated list
