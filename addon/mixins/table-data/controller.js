@@ -17,6 +17,9 @@ export default Mixin.create({
   // object with parameters used for table data loading
   loadDataParams: null,
 
+  // avoid setting up filter sync
+  syncFilters: true,
+
   useTableSettings: true,
   saveTableSettings: task(function * () {
     this.set('currentControllerState', this.toTableSettingsState())
@@ -84,7 +87,9 @@ export default Mixin.create({
     const processedExtraData = this.processExtraData(results.extraData)
 
     // hook the column filters observers
-    this.configureFilterObservers()
+    if (this.get('syncFilters')) {
+      this.configureFilterObservers()
+    }
 
     // store the result in tableData
     this.set('tableData', processedTableData)
@@ -155,7 +160,11 @@ export default Mixin.create({
     for (let fieldName in filterParams) {
       let filterValue = filterParams[fieldName]
       if (typeOf(filterValue) !== 'null' && isPresent(filterValue)) {
-        params[underscore(fieldName)] = '*' + filterValue + '*'
+        if (filterValue.indexOf('!=') === 0) {
+          params[underscore(fieldName)] = filterValue
+        } else {
+          params[underscore(fieldName)] = '*' + filterValue + '*'
+        }
       }
     }
     return allParams
